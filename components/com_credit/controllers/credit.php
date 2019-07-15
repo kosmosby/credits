@@ -40,7 +40,7 @@ class CreditControllerCredit extends JControllerForm
             echo "Произошла ошибка во время сохранения записи";
         }
 
-        $mainframe->Redirect('index.php?option=com_credit&view=credits',$msg);
+        $mainframe->Redirect('index.php?option=com_credit&view=employees',$msg);
     }
 
 }

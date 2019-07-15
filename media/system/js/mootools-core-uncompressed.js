@@ -1937,7 +1937,7 @@ local.setDocument = function(document){
 	};
 
 	// document order sorting
-	// credits to Sizzle (http://sizzlejs.com/)
+	// employees to Sizzle (http://sizzlejs.com/)
 
 	features.documentSorter = (root.compareDocumentPosition) ? function(a, b){
 		if (!a.compareDocumentPosition || !b.compareDocumentPosition) return 0;
@@ -2066,7 +2066,7 @@ local.search = function(context, expression, append, first){
 			var _expression = expression, _context = context;
 			if (!contextIsDocument){
 				// non-document rooted QSA
-				// credits to Andrew Dupont
+				// employees to Andrew Dupont
 				var currentId = _context.getAttribute('id'), slickid = 'slickid__';
 				_context.setAttribute('id', slickid);
 				_expression = '#' + slickid + ' ' + _expression;
@@ -4258,7 +4258,7 @@ description: Contains methods to work with size, scroll, or positioning of Eleme
 
 license: MIT-style license.
 
-credits:
+employees:
   - Element positioning based on the [qooxdoo](http://qooxdoo.org/) code and smart browser fixes, [LGPL License](http://www.gnu.org/licenses/lgpl.html).
   - Viewport dimensions based on [YUI](http://developer.yahoo.com/yui/) code, [BSD License](http://developer.yahoo.com/yui/license.html).
 
@@ -5081,7 +5081,7 @@ description: Contains a set of advanced transitions to be used with any of the F
 
 license: MIT-style license.
 
-credits:
+employees:
   - Easing Equations by Robert Penner, <http://www.robertpenner.com/easing/>, modified and optimized to be used with MooTools.
 
 requires: Fx
@@ -5686,7 +5686,7 @@ description: Class for creating, reading, and deleting browser Cookies.
 
 license: MIT-style license.
 
-credits:
+employees:
   - Based on the functions by Peter-Paul Koch (http://quirksmode.org).
 
 requires: [Options, Browser]
@@ -5869,7 +5869,7 @@ description: Wrapper for embedding SWF movies. Supports External Interface Commu
 
 license: MIT-style license.
 
-credits:
+employees:
   - Flash detection & Internet Explorer + Flash Player 9 fix inspired by SWFObject.
 
 requires: [Options, Object, Element]

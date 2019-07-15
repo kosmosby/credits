@@ -3,32 +3,60 @@
 /**
  * @package    Joomla.Platform
  *
- * @copyright  Copyright (C) 2005 - 2015 Open Source Matters, Inc. All rights reserved.
- * @license    GNU General Public License version 2 or later; see LICENSE
+ * @copyright  Copyright (C) 2005 - 2019 Open Source Matters, Inc. All rights reserved.
+ * @license    GNU General Public License version 2 or later; see LICENSE.txt
+ *
  */
 
-define('_JEXEC', 1);
-define('JPATH_BASE', dirname(__FILE__));
+// @deprecated  4.0  Deprecated without replacement
 
-// Load the Joomla! Platform
-require_once realpath('../libraries/import.php');
+// We are a valid entry point.
+define('_JEXEC', 1);
+
+// Load system defines
+if (file_exists(dirname(__DIR__) . '/defines.php'))
+{
+	require_once dirname(__DIR__) . '/defines.php';
+}
+
+if (!defined('_JDEFINES'))
+{
+	define('JPATH_BASE', dirname(__DIR__));
+	require_once JPATH_BASE . '/includes/defines.php';
+}
+
+// Get the framework.
+require_once JPATH_LIBRARIES . '/import.legacy.php';
+
+// Bootstrap the CMS libraries.
+require_once JPATH_LIBRARIES . '/cms.php';
+
+// Import the configuration.
+require_once JPATH_CONFIGURATION . '/configuration.php';
+
+// System configuration.
+$config = new JConfig;
+
+// Configure error reporting to maximum for CLI output.
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 /**
  * Keychain Manager.
  *
- * @since  12.3
+ * @since  3.1.4
  */
 class KeychainManager extends JApplicationCli
 {
 	/**
 	 * @var    boolean  A flag if the keychain has been updated to trigger saving the keychain
-	 * @since  12.3
+	 * @since  3.1.4
 	 */
 	protected $updated = false;
 
 	/**
 	 * @var    JKeychain  The keychain object being manipulated.
-	 * @since  12.3
+	 * @since  3.1.4
 	 */
 	protected $keychain = null;
 
@@ -37,7 +65,7 @@ class KeychainManager extends JApplicationCli
 	 *
 	 * @return  void
 	 *
-	 * @since   12.3
+	 * @since   3.1.4
 	 */
 	public function execute( )
 	{
@@ -103,7 +131,7 @@ class KeychainManager extends JApplicationCli
 	 *
 	 * @return  void
 	 *
-	 * @since   12.3
+	 * @since   3.1.4
 	 */
 	protected function loadKeychain()
 	{
@@ -132,7 +160,7 @@ class KeychainManager extends JApplicationCli
 	 *
 	 * @return  void
 	 *
-	 * @since   12.3
+	 * @since   3.1.4
 	 */
 	protected function saveKeychain()
 	{
@@ -154,7 +182,7 @@ class KeychainManager extends JApplicationCli
 	 *
 	 * @return  void
 	 *
-	 * @since   12.3
+	 * @since   3.1.4
 	 */
 	protected function initPassphraseFile()
 	{
@@ -189,7 +217,7 @@ class KeychainManager extends JApplicationCli
 	 *
 	 * @return  void
 	 *
-	 * @since   12.3
+	 * @since   3.1.4
 	 */
 	protected function create()
 	{
@@ -213,7 +241,7 @@ class KeychainManager extends JApplicationCli
 	 *
 	 * @return  void
 	 *
-	 * @since   12.3
+	 * @since   3.1.4
 	 */
 	protected function change()
 	{
@@ -232,7 +260,7 @@ class KeychainManager extends JApplicationCli
 	 *
 	 * @return  void
 	 *
-	 * @since   12.3
+	 * @since   3.1.4
 	 */
 	protected function read()
 	{
@@ -253,7 +281,7 @@ class KeychainManager extends JApplicationCli
 	 *
 	 * @return  string  The result of var_dump
 	 *
-	 * @since   12.3
+	 * @since   3.1.4
 	 */
 	private function dumpVar($var)
 	{
@@ -270,7 +298,7 @@ class KeychainManager extends JApplicationCli
 	 *
 	 * @return  void
 	 *
-	 * @since   12.3
+	 * @since   3.1.4
 	 */
 	protected function delete()
 	{
@@ -281,7 +309,7 @@ class KeychainManager extends JApplicationCli
 		}
 
 		$this->updated = true;
-		$this->keychain->deleteValue($this->input->args[1], null);
+		$this->keychain->deleteValue($this->input->args[1]);
 	}
 
 	/**
@@ -289,7 +317,7 @@ class KeychainManager extends JApplicationCli
 	 *
 	 * @return  void
 	 *
-	 * @since   12.3
+	 * @since   3.1.4
 	 */
 	protected function listEntries()
 	{
@@ -311,7 +339,7 @@ class KeychainManager extends JApplicationCli
 	 *
 	 * @return  void
 	 *
-	 * @since   12.3
+	 * @since   3.1.4
 	 */
 	protected function displayHelp()
 	{

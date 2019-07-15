@@ -54,8 +54,8 @@ class JConfig {
     public $sef_suffix = '0';
     public $unicodeslugs = '0';
     public $feed_limit = '10';
-    public $log_path = '/Users/kosmos/Documents/sites/credits/logs';
-    public $tmp_path = '/Users/kosmos/Documents/sites/credits/tmp';
+    public $log_path = '/Users/kosmos/Documents/sites/employees/logs';
+    public $tmp_path = '/Users/kosmos/Documents/sites/employees/tmp';
     public $lifetime = '15';
     public $session_handler = 'database';
     public $memcache_persist = '1';

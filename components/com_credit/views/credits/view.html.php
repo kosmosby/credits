@@ -45,7 +45,7 @@ class CreditViewCredits extends JViewLegacy
         $this->toolbar = $this->addToolbar();
 
 
-        $model	= $this->getModel('credits');
+        $model	= $this->getModel('employees');
         $this->items	= $model->getAdditionPaymentInfo($this->items);
 
 
@@ -70,7 +70,7 @@ class CreditViewCredits extends JViewLegacy
         $this->toolbar = JToolbar::getInstance();
 
         JToolbarHelper::addNew('credit.add','Создать');
-        JToolBarHelper::deleteList('', 'credits.delete', 'Удалить');
+        JToolBarHelper::deleteList('', 'employees.delete', 'Удалить');
 
         return $this->toolbar;
     }

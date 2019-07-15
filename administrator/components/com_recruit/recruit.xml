@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.2.0" method="upgrade">
+
+	<name>COM_RECRUIT</name>
+	<!-- The following elements are optional and free of formatting constraints -->
+	<creationDate>July 2019</creationDate>
+	<author>Yura Lapytsko</author>
+	<authorEmail>admin@effectiff.com</authorEmail>
+	<authorUrl>http://effectiff.com</authorUrl>
+	<copyright>Copyright Info</copyright>
+	<license>License Info</license>
+	<!--  The version string is recorded in the components table -->
+	<version>0.0.1</version>
+	<!-- The description is optional and defaults to the name -->
+	<description>Программа подбора персонала</description>
+	<!-- Site Main File Copy Section -->
+	<!-- Note the folder attribute: This attribute describes the folder
+		to copy FROM in the package to install therefore files copied
+		in this section are copied from /site/ in the package -->
+	<files folder="site">
+		<folder>controllers</folder>
+		<folder>helpers</folder>
+		<folder>models</folder>
+		<folder>views</folder>
+		<filename>index.html</filename>
+		<filename>controller.php</filename>
+		<filename>recruit.php</filename>
+	</files>
+
+
+
+	<media destination="com_recruit" folder="media">
+		<filename>index.html</filename>
+		<folder>images</folder>
+	</media>
+
+	<administration>
+		<!-- Administration Menu Section -->
+		<menu link='index.php?option=com_recruit' img="../media/com_credit/images/tux-16x16.png">Поиск персонала</menu>
+		<!-- Administration Main File Copy Section -->
+		<!-- Note the folder attribute: This attribute describes the folder
+			to copy FROM in the package to install therefore files copied
+			in this section are copied from /admin/ in the package -->
+		<files folder="admin">
+			<folder>controllers</folder>
+			<folder>helpers</folder>
+			<folder>models</folder>
+			<folder>sql</folder>
+			<folder>tables</folder>
+			<folder>views</folder>
+			<filename>index.html</filename>
+			<filename>controller.php</filename>
+			<filename>recruit.php</filename>
+			<filename>access.xml</filename>
+			<filename>config.xml</filename>
+		</files>
+	</administration>
+
+</extension>

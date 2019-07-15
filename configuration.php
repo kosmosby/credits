@@ -4,7 +4,7 @@ class JConfig {
 	public $offline_message = 'Сайт закрыт на техническое обслуживание.<br />Пожалуйста, зайдите позже.';
 	public $display_offline_message = '1';
 	public $offline_image = '';
-	public $sitename = 'Программа кредиты';
+	public $sitename = 'Подбор персонала';
 	public $editor = 'tinymce';
 	public $captcha = '0';
 	public $list_limit = '15';
@@ -14,8 +14,8 @@ class JConfig {
 	public $dbtype = 'mysqli';
 	public $host = 'localhost';
 	public $user = 'root';
-	public $password = 'password';
-	public $db = 'credits';
+	public $password = '';
+	public $db = 'recruit';
 	public $dbprefix = 'jos_';
 	public $live_site = '';
 	public $secret = 'urWxRl51FMg09dhI';
@@ -31,8 +31,8 @@ class JConfig {
 	public $offset = 'UTC';
 	public $mailonline = '1';
 	public $mailer = 'mail';
-	public $mailfrom = 'admin@medicine-prof.com';
-	public $fromname = 'кредиты';
+	public $mailfrom = 'admin@effectiff.com';
+	public $fromname = 'подбор персонала';
 	public $sendmail = '/usr/sbin/sendmail';
 	public $smtpauth = '0';
 	public $smtpuser = '';
@@ -54,8 +54,8 @@ class JConfig {
 	public $sef_suffix = '0';
 	public $unicodeslugs = '0';
 	public $feed_limit = '10';
-	public $log_path = '/Users/kosmos/Documents/sites/credits/logs';
-	public $tmp_path = '/Users/kosmos/Documents/sites/credits/tmp';
+	public $log_path = 'Z:\\home\\hr.tst\\www\\logs';
+	public $tmp_path = 'Z:\\home\\hr.tst\\www\\tmp';
 	public $lifetime = '15';
 	public $session_handler = 'database';
 	public $memcache_persist = '1';
@@ -89,4 +89,14 @@ class JConfig {
 	public $cookie_domain = '';
 	public $cookie_path = '';
 	public $asset_id = '1';
+	public $cache_platformprefix = '0';
+	public $debug_lang_const = '1';
+	public $replyto = '';
+	public $replytoname = '';
+	public $session_redis_persist = '1';
+	public $session_redis_server_host = 'localhost';
+	public $session_redis_server_port = '6379';
+	public $session_redis_server_auth = '';
+	public $session_redis_server_db = '0';
+	public $shared_session = '0';
 }

@@ -20,5 +20,5 @@ class CreditController extends JControllerLegacy
 
 
 
-    protected $default_view = 'credits';
+    protected $default_view = 'employees';
 }
