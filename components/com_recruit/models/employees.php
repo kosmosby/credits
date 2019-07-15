@@ -62,7 +62,7 @@ class RecruitModelEmployees extends JModelList
                 'a.*'
             )
         );
-        $query->from('#__credit AS a');
+        $query->from('#__recruit_employee AS a');
 
         // Filter: like / search
         $search = $this->getState('filter.search');
@@ -98,33 +98,33 @@ class RecruitModelEmployees extends JModelList
     }
 
 
-    public function getAdditionPaymentInfo($rows) {
-
-        JModelLegacy::addIncludePath(JPATH_ROOT.'/components/com_credit/models', 'CreditModel');
-        $payments_model = JModelLegacy::getInstance('payments', 'CreditModel', array('ignore_request' => true));
-
-        for($i=0;$i<count($rows);$i++) {
-
-            $rows[$i]->percent_all_time = $rows[$i]->percent * $payments_model->getCountMonths($rows[$i]);
-
-            switch($rows[$i]->credit_conditions) {
-                case 1:
-                    $rows[$i]->sum_in_month = $payments_model->getJustPercentForEachMonth($rows[$i]);
-                    break;
-                case 2:
-                    $rows[$i]->sum_in_month = $payments_model->getSumWithPercentForEachMonth($rows[$i]);
-                    break;
-            }
-
-
-            $rows[$i]->full_return_sum = $payments_model->getFullReturnSum($rows[$i]);
-            $rows[$i]->already_returned_sum = $payments_model->getAlreadyReturnedSum($rows[$i]);
-        }
-
-        return $rows;
-
-
-    }
+//    public function getAdditionPaymentInfo($rows) {
+//
+//        JModelLegacy::addIncludePath(JPATH_ROOT.'/components/com_credit/models', 'CreditModel');
+//        $payments_model = JModelLegacy::getInstance('payments', 'CreditModel', array('ignore_request' => true));
+//
+//        for($i=0;$i<count($rows);$i++) {
+//
+//            $rows[$i]->percent_all_time = $rows[$i]->percent * $payments_model->getCountMonths($rows[$i]);
+//
+//            switch($rows[$i]->credit_conditions) {
+//                case 1:
+//                    $rows[$i]->sum_in_month = $payments_model->getJustPercentForEachMonth($rows[$i]);
+//                    break;
+//                case 2:
+//                    $rows[$i]->sum_in_month = $payments_model->getSumWithPercentForEachMonth($rows[$i]);
+//                    break;
+//            }
+//
+//
+//            $rows[$i]->full_return_sum = $payments_model->getFullReturnSum($rows[$i]);
+//            $rows[$i]->already_returned_sum = $payments_model->getAlreadyReturnedSum($rows[$i]);
+//        }
+//
+//        return $rows;
+//
+//
+//    }
 
     protected function populateState($ordering = null, $direction = null)
     {
@@ -168,7 +168,7 @@ class RecruitModelEmployees extends JModelList
         return parent::getStoreId($id);
     }
 
-    public function getTable($type = 'Credit', $prefix = 'CreditTable', $config = array())
+    public function getTable($type = 'Employee', $prefix = 'RecruitTable', $config = array())
     {
         return JTable::getInstance($type, $prefix, $config);
     }

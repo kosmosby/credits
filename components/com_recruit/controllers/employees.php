@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
 
 class RecruitControllerEmployees extends JControllerAdmin
 {
-	public function getModel($name = 'Employee', $prefix = 'EmployeeModel')
+	public function getModel($name = 'Employee', $prefix = 'RecruitModel')
 	{
 		$model = parent::getModel($name, $prefix, array('ignore_request' => true));
 		return $model;

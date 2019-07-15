@@ -100,40 +100,40 @@ $listDirn      = $this->escape($this->filter_order_Dir);
                 <?php echo JHtml::_('grid.checkall'); ?>
             </th>
             <th>
-                <?php echo JHtml::_('grid.sort', 'фио/фирма', 'name', $listDirn, $listOrder); ?>
+                <?php echo JHtml::_('grid.sort', 'фио', 'name', $listDirn, $listOrder); ?>
             </th>
             <th>
-                <?php echo JHtml::_('grid.sort', 'сумма займа', 'sum', $listDirn, $listOrder); ?>
+                <?php //echo JHtml::_('grid.sort', 'сумма займа', 'sum', $listDirn, $listOrder); ?>
             </th>
             <th>
-                <?php echo JHtml::_('grid.sort', 'дата начала', 'start_date', $listDirn, $listOrder); ?>
+                <?php //echo JHtml::_('grid.sort', 'дата начала', 'start_date', $listDirn, $listOrder); ?>
             </th>
             <th>
-                <?php echo JHtml::_('grid.sort', 'дата окончания', 'end_date', $listDirn, $listOrder); ?>
+                <?php //echo JHtml::_('grid.sort', 'дата окончания', 'end_date', $listDirn, $listOrder); ?>
             </th>
             <th>
-                число платежа
+
             </th>
             <th>
-                % (месяц)
+
             </th>
             <th>
-                % за весь срок
+
             </th>
             <th>
-                % штраф (день)
+
             </th>
             <th>
-                сумма в месяц
+
             </th>
             <th>
-                должен вернуть
+
             </th>
             <th width="6%">
-                вернул
+
             </th>
             <th>
-                возвраты
+                
             </th>
 
         </tr>
@@ -148,7 +148,7 @@ $listDirn      = $this->escape($this->filter_order_Dir);
         <tbody>
         <?php if (!empty($this->items)) : ?>
             <?php foreach ($this->items as $i => $row) :
-                $link = JRoute::_('index.php?option=com_credit&task=credit.edit&id=' . $row->id);
+                $link = JRoute::_('index.php?option=com_recruit&task=employee.edit&id=' . $row->id);
                 ?>
                 <tr>
                     <td style="border-left: 1px solid #ddd;"><?php echo $this->pagination->getRowOffset($i); ?></td>
@@ -161,39 +161,39 @@ $listDirn      = $this->escape($this->filter_order_Dir);
                         </a>
                     </td>
                     <td align="center">
-                        <?php echo $row->currency; ?>
-                        <?php echo $row->sum; ?>
+                        <?php //echo $row->currency; ?>
+                        <?php //echo $row->sum; ?>
                     </td>
                     <td align="center">
-                        <?php echo $row->start_date; ?>
+                        <?php //echo $row->start_date; ?>
                     </td>
                     <td align="center">
-                        <?php echo $row->end_date; ?>
+                        <?php //echo $row->end_date; ?>
                     </td>
                     <td align="center">
-                        <?php echo $row->date_of_payment; ?>
+                        <?php //echo $row->date_of_payment; ?>
                     </td>
                     <td align="center">
-                        <?php echo $row->percent; ?>
+                        <?php //echo $row->percent; ?>
                     </td>
                     <td align="center">
-                        <?php echo $row->percent_all_time; ?>
+                        <?php //echo $row->percent_all_time; ?>
                     </td>
                     <td align="center">
-                        <?php echo $row->percent_fine_day; ?>
+                        <?php //echo $row->percent_fine_day; ?>
                     </td>
 
                     <td align="center">
-                        <?php echo $row->currency; ?>
-                        <?php echo $row->sum_in_month; ?>
+                        <?php //echo $row->currency; ?>
+                        <?php //echo $row->sum_in_month; ?>
                     </td>
                     <td align="center">
-                        <?php echo $row->currency; ?>
-                        <?php echo $row->full_return_sum; ?>
+                        <?php //echo $row->currency; ?>
+                        <?php //echo $row->full_return_sum; ?>
                     </td>
                     <td align="center">
-                        <?php echo $row->currency; ?>
-                        <?php echo $row->already_returned_sum; ?>
+                        <?php //echo $row->currency; ?>
+                        <?php //echo $row->already_returned_sum; ?>
                     </td>
                     <td align="center">
                         <button type="button" class="btn btn-default" onclick="document.location.href='index.php?option=com_credit&view=payments&id=<?php echo $row->id;?>'">Посмотреть</button>

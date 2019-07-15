@@ -48,7 +48,7 @@ class RecruitViewEmployees extends JViewLegacy
 
 
         $model	= $this->getModel('employees');
-        $this->items	= $model->getAdditionPaymentInfo($this->items);
+        //$this->items	= $model->getAdditionPaymentInfo($this->items);
 
 
 		// Check for errors.

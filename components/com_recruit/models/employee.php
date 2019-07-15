@@ -109,7 +109,7 @@ class RecruitModelEmployee extends JModelAdmin
         // Get the form.
         $form = $this->loadForm(
             'com_recruit.employee',
-            'recruit',
+            'employee',
             array(
                 'control' => 'jform',
                 'load_data' => $loadData
