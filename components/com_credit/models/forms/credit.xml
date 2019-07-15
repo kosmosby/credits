@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form
+
+>
+	<fieldset
+				name="details"
+
+	>
+		<field
+				name="id"
+				type="hidden"
+				/>
+		<field
+				name="name"
+				type="text"
+				label="1. ФИО"
+				description="Фамилия Имя Отчество"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+				/>
+
+        <field
+                type="calendar"
+                name="birthday"
+                label="2. Дата рождения"
+                format="%Y-%m-%d"
+                default="NOW"
+                />
+
+        <field
+                name="address"
+                type="text"
+                label="3. Адрес"
+                description="адрес"
+                size="40"
+                class="inputbox"
+                default=""
+                />
+
+        <field
+                name="phone"
+                type="tel"
+                label="4. Телефон"
+                description="телефон"
+                size="40"
+                class="inputbox"
+                default=""
+                />
+
+        <field
+                name="passport"
+                type="text"
+                label="5. Номер паспорта"
+                description="Номер паспорта"
+                size="40"
+                class="inputbox"
+                default=""
+                />
+
+        <field
+                name="sum"
+                type="text"
+                label="6. Сумма займа"
+                description="Сумма займа"
+                size="40"
+                class="inputbox"
+                required="true"
+                default=""
+                />
+
+        <field
+                name="currency"
+                type="list"
+                label="7. Тип валюты"
+                description="Тип валюты"
+                size="40"
+                class="inputbox"
+                default="$"
+                required="true"
+                >
+            <option value="$">$ (доллары)</option>
+            <option value="€">€ (евро)</option>
+            <option value="₽">₽ (российские рубли)</option>
+            <option value="Br">Br (белорусские рубли)</option>
+        </field>
+
+        <field
+                type="calendar"
+                name="start_date"
+                label="8. Дата начала"
+                format="%Y-%m-%d"
+                default="NOW"
+                required="true"
+                />
+
+        <field
+                type="calendar"
+                name="end_date"
+                label="9. Дата окончания"
+                format="%Y-%m-%d"
+                default="NOW"
+                required="true"
+                />
+
+        <field
+                name="percent"
+                type="text"
+                label="10. % в месяц"
+                description="% в месяц"
+                size="40"
+                class="inputbox"
+                required="true"
+                default=""
+                />
+
+        <field
+                name="date_of_payment"
+                type="integer"
+                label="11. Число очередного платежа"
+                description="Число очередного платежа"
+                class="inputbox"
+                required="true"
+                first="1"
+                last="28"
+                step="1"
+                />
+
+        <field
+                name="percent_fine_day"
+                type="text"
+                label="12. % штрафа в день"
+                description="% штрафа в день"
+                size="40"
+                class="inputbox"
+                required="true"
+                default=""
+                />
+
+        <field
+                name="documents"
+                type="text"
+                label="13. Документы"
+                description="документы"
+                size="40"
+                class="inputbox"
+                default=""
+                />
+        <field
+                name="credit_conditions"
+                type="list"
+                label="14. Условия платежа"
+                description="Условия платежа"
+                size="40"
+                class="inputbox"
+                default="1"
+                required="true"
+                >
+            <option value="1">только процент</option>
+            <option value="2">процент + тело кредита</option>
+        </field>
+
+
+	</fieldset>
+
+
+
+
+
+		<fieldset
+				name="params"
+				label="Приложить документы"
+		>
+
+            <field
+                type="media"
+                name="attach1"
+                label="документ"
+                directory="credits"
+                preview="true"
+                preview_width="400"
+                preview_height="400"
+                />
+
+            <field
+                    type="media"
+                    name="attach2"
+                    label=""
+                    directory="credits"
+                    preview="true"
+                    />
+
+            <field
+                    type="media"
+                    name="attach3"
+                    label=""
+                    directory="credits"
+                    preview="true"
+                    />
+
+            <field
+                    type="media"
+                    name="attach4"
+                    label=""
+                    directory="credits"
+                    preview="true"
+                    />
+
+            <field
+                    type="media"
+                    name="attach5"
+                    label=""
+                    directory="credits"
+                    preview="true"
+                    />
+
+            <field
+                    type="media"
+                    name="attach6"
+                    label=""
+                    directory="credits"
+                    preview="true"
+                    />
+
+            <field
+                    type="media"
+                    name="attach7"
+                    label=""
+                    directory="credits"
+                    preview="true"
+                    />
+
+            <field
+                    type="media"
+                    name="attach8"
+                    label=""
+                    directory="credits"
+                    preview="true"
+                    />
+
+            <field
+                    type="media"
+                    name="attach9"
+                    label=""
+                    directory="credits"
+                    preview="true"
+                    />
+
+            <field
+                    type="media"
+                    name="attach10"
+                    label=""
+                    directory="credits"
+                    preview="true"
+                    />
+
+		</fieldset>
+
+</form>
