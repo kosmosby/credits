@@ -93,49 +93,15 @@ $listDirn      = $this->escape($this->filter_order_Dir);
     <table class="table table-striped table-hover" id="credits_table">
         <thead>
         <tr>
-            <th style="border-left: 1px solid #ddd;">
+            <th style="border-left: 1px solid #ddd;" width="5%">
                 №
             </th>
-            <th>
+            <th width="5%">
                 <?php echo JHtml::_('grid.checkall'); ?>
             </th>
             <th>
-                <?php echo JHtml::_('grid.sort', 'фио', 'name', $listDirn, $listOrder); ?>
+                <?php echo JHtml::_('grid.sort', 'Имя', 'name', $listDirn, $listOrder); ?>
             </th>
-            <th>
-                <?php //echo JHtml::_('grid.sort', 'сумма займа', 'sum', $listDirn, $listOrder); ?>
-            </th>
-            <th>
-                <?php //echo JHtml::_('grid.sort', 'дата начала', 'start_date', $listDirn, $listOrder); ?>
-            </th>
-            <th>
-                <?php //echo JHtml::_('grid.sort', 'дата окончания', 'end_date', $listDirn, $listOrder); ?>
-            </th>
-            <th>
-
-            </th>
-            <th>
-
-            </th>
-            <th>
-
-            </th>
-            <th>
-
-            </th>
-            <th>
-
-            </th>
-            <th>
-
-            </th>
-            <th width="6%">
-
-            </th>
-            <th>
-                
-            </th>
-
         </tr>
         </thead>
         <tfoot>
@@ -160,45 +126,6 @@ $listDirn      = $this->escape($this->filter_order_Dir);
                             <?php echo $row->name; ?>
                         </a>
                     </td>
-                    <td align="center">
-                        <?php //echo $row->currency; ?>
-                        <?php //echo $row->sum; ?>
-                    </td>
-                    <td align="center">
-                        <?php //echo $row->start_date; ?>
-                    </td>
-                    <td align="center">
-                        <?php //echo $row->end_date; ?>
-                    </td>
-                    <td align="center">
-                        <?php //echo $row->date_of_payment; ?>
-                    </td>
-                    <td align="center">
-                        <?php //echo $row->percent; ?>
-                    </td>
-                    <td align="center">
-                        <?php //echo $row->percent_all_time; ?>
-                    </td>
-                    <td align="center">
-                        <?php //echo $row->percent_fine_day; ?>
-                    </td>
-
-                    <td align="center">
-                        <?php //echo $row->currency; ?>
-                        <?php //echo $row->sum_in_month; ?>
-                    </td>
-                    <td align="center">
-                        <?php //echo $row->currency; ?>
-                        <?php //echo $row->full_return_sum; ?>
-                    </td>
-                    <td align="center">
-                        <?php //echo $row->currency; ?>
-                        <?php //echo $row->already_returned_sum; ?>
-                    </td>
-                    <td align="center">
-                        <button type="button" class="btn btn-default" onclick="document.location.href='index.php?option=com_credit&view=payments&id=<?php echo $row->id;?>'">Посмотреть</button>
-                    </td>
-
                 </tr>
             <?php endforeach; ?>
         <?php endif; ?>

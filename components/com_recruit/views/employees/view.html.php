@@ -71,7 +71,7 @@ class RecruitViewEmployees extends JViewLegacy
 
         $this->toolbar = JToolbar::getInstance();
 
-        JToolbarHelper::addNew('employee.add','Создать');
+        JToolbarHelper::addNew('employee.add','Создать сотрудника');
         JToolBarHelper::deleteList('', 'employees.delete', 'Удалить');
 
         return $this->toolbar;
