@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset name="details"
+	>
+		<field
+				name="id"
+				type="hidden"
+				/>
+		<field
+				name="typeemployee_id"
+				type="sql"
+				default="10"
+				label="тип сотрудников"
+				query="SELECT id AS value, name AS typeemployee_id  FROM #__recruit_typeemployee"
+		/>
+
+		<field
+				name="norm"
+				type="text"
+				label="количество недель"
+				description="количество недель"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+		/>
+
+	</fieldset>
+</form>

@@ -67,12 +67,12 @@ $listDirn      = $this->escape($this->filter_order_Dir);
 
     <div style="float: right;">
         <div class="filter-search btn-group pull-left">
-            <label for="filter_search" class="element-invisible"><?php echo JText::_('COM_TAGS_ITEMS_SEARCH_FILTER');?></label>
-            <input type="text" name="filter_search" id="filter_search" placeholder="<?php echo JText::_('JSEARCH_FILTER'); ?>" value="<?php echo $this->escape($this->state->get('filter.search')); ?>" class="hasTooltip" title="Поиск по имени" />
+<!--            <label for="filter_search" class="element-invisible">--><?php //echo JText::_('COM_TAGS_ITEMS_SEARCH_FILTER');?><!--</label>-->
+<!--            <input type="text" name="filter_search" id="filter_search" placeholder="--><?php //echo JText::_('JSEARCH_FILTER'); ?><!--" value="--><?php //echo $this->escape($this->state->get('filter.search')); ?><!--" class="hasTooltip" title="Поиск по имени" />-->
         </div>
         <div class="btn-group">
-            <button type="submit" class="btn hasTooltip" title="<?php echo JHtml::tooltipText('JSEARCH_FILTER_SUBMIT'); ?>"><span class="icon-search"></span></button>
-            <button type="button" class="btn hasTooltip" title="<?php echo JHtml::tooltipText('JSEARCH_FILTER_CLEAR'); ?>" onclick="document.getElementById('filter_search').value='';this.form.submit();"><span class="icon-remove"></span></button>
+<!--            <button type="submit" class="btn hasTooltip" title="--><?php //echo JHtml::tooltipText('JSEARCH_FILTER_SUBMIT'); ?><!--"><span class="icon-search"></span></button>-->
+<!--            <button type="button" class="btn hasTooltip" title="--><?php //echo JHtml::tooltipText('JSEARCH_FILTER_CLEAR'); ?><!--" onclick="document.getElementById('filter_search').value='';this.form.submit();"><span class="icon-remove"></span></button>-->
         </div>
 <!--        <div class="btn-group pull-right hidden-phone">-->
 <!--            <label for="limit" class="element-invisible">--><?php //echo JText::_('JFIELD_PLG_SEARCH_SEARCHLIMIT_DESC');?><!--</label>-->
@@ -100,7 +100,7 @@ $listDirn      = $this->escape($this->filter_order_Dir);
                 <?php echo JHtml::_('grid.checkall'); ?>
             </th>
             <th>
-                <?php echo JHtml::_('grid.sort', 'Имя', 'name', $listDirn, $listOrder); ?>
+                Название
             </th>
         </tr>
         </thead>

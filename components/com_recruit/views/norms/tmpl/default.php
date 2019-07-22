@@ -114,7 +114,7 @@ $listDirn      = $this->escape($this->filter_order_Dir);
         <tbody>
         <?php if (!empty($this->items)) : ?>
             <?php foreach ($this->items as $i => $row) :
-                $link = JRoute::_('index.php?option=com_recruit&task=type.edit&id=' . $row->id);
+                $link = JRoute::_('index.php?option=com_recruit&task=norm.edit&id=' . $row->id);
                 ?>
                 <tr>
                     <td style="border-left: 1px solid #ddd;"><?php echo $this->pagination->getRowOffset($i); ?></td>
@@ -123,7 +123,7 @@ $listDirn      = $this->escape($this->filter_order_Dir);
                     </td>
                     <td>
                         <a href="<?php echo $link; ?>" title="Редактировать">
-                            <?php echo $row->name; ?>
+                            <?php echo $row->typeemployee_name; ?> - <?php echo $row->norm; ?> недели(я)
                         </a>
                     </td>
                 </tr>
