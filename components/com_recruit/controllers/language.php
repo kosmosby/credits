@@ -8,7 +8,7 @@ jimport('joomla.application.component.controllerform');
 /**
  * flexpaper Controller
  */
-class RecruitControllerType extends JControllerForm
+class RecruitControllerLanguage extends JControllerForm
 {
 
     public function getModel($name = '', $prefix = '', $config = array('ignore_request' => true))
@@ -25,7 +25,7 @@ class RecruitControllerType extends JControllerForm
 
         // Initialise variables.
         $app	= JFactory::getApplication();
-        $model	= $this->getModel('type');
+        $model	= $this->getModel('language');
 
         // Get the data from the form POST
         $data = JRequest::getVar('jform', array(), 'post', 'array');
@@ -40,7 +40,7 @@ class RecruitControllerType extends JControllerForm
             echo "Произошла ошибка во время сохранения записи";
         }
 
-        $mainframe->Redirect('index.php?option=com_recruit&view=types',$msg);
+        $mainframe->Redirect('index.php?option=com_recruit&view=languages',$msg);
     }
 
 }

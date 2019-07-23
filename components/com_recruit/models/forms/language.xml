@@ -9,8 +9,8 @@
 		<field
 				name="name"
 				type="text"
-				label="тип заявки"
-				description="тип заявки"
+				label="название языка"
+				description="название языка"
 				size="40"
 				class="inputbox"
 				required="true"

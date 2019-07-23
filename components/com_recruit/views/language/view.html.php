@@ -15,7 +15,7 @@ defined('_JEXEC') or die('Restricted access');
  *
  * @since  0.0.1
  */
-class RecruitViewType extends JViewLegacy
+class RecruitViewLanguage extends JViewLegacy
 {
 	/**
 	 * Display the Hello World view
@@ -67,8 +67,8 @@ class RecruitViewType extends JViewLegacy
 
         $document->setTitle($title);
 
-        JToolBarHelper::cancel('type.cancel','Вернуться');
-        JToolbarHelper::addNew('type.submit','Сохранить');
+        JToolBarHelper::cancel('language.cancel','Вернуться');
+        JToolbarHelper::addNew('language.submit','Сохранить');
 
 
         return $this->toolbar;

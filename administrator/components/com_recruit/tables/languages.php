@@ -14,7 +14,7 @@ defined('_JEXEC') or die('Restricted access');
  *
  * @since  0.0.1
  */
-class RecruitTableTypes extends JTable
+class RecruitTablelanguages extends JTable
 {
 	/**
 	 * Constructor
@@ -23,7 +23,7 @@ class RecruitTableTypes extends JTable
 	 */
 	function __construct(&$db)
 	{
-		parent::__construct('#__recruit_types', 'id', $db);
+		parent::__construct('#__recruit_languages', 'id', $db);
 	}
 
 }

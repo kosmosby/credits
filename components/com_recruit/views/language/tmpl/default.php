@@ -41,9 +41,9 @@ JHtml::_('formbehavior.chosen', 'select');
 <script type="text/javascript">
     Joomla.submitbutton = function(task)
     {
-        if (task == 'employee.cancel' || document.formvalidator.isValid(document.id('employee-form')))
+        if (task == 'language.cancel' || document.formvalidator.isValid(document.id('language-form')))
         {
-            Joomla.submitform(task, document.getElementById('employee-form'));
+            Joomla.submitform(task, document.getElementById('language-form'));
         }
     }
 </script>
@@ -51,7 +51,7 @@ JHtml::_('formbehavior.chosen', 'select');
 <?php echo ($this->item->id == 0)?"<h2>Создание новой записи</h2>":"<h2>Редактирование записи</h2>";?>
 
 <form action="<?php echo JRoute::_('index.php');?>"
-      method="post" name="employee-form" id="employee-form" class="form-validate">
+      method="post" name="language-form" id="language-form" class="form-validate">
     <div class="form-horizontal">
         <?php foreach ($this->form->getFieldsets() as $name => $fieldset): ?>
             <fieldset class="adminform">
@@ -70,6 +70,6 @@ JHtml::_('formbehavior.chosen', 'select');
         <?php endforeach; ?>
     </div>
     <input type="hidden" name="option" value="com_recruit" />
-    <input type="hidden" name="task" value="employee.submit" />
+    <input type="hidden" name="task" value="language.submit" />
     <?php echo JHtml::_('form.token'); ?>
 </form>

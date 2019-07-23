@@ -16,7 +16,7 @@ defined('_JEXEC') or die('Restricted access');
  *
  * @since  0.0.1
  */
-class RecruitViewTypes extends JViewLegacy
+class RecruitViewLanguages extends JViewLegacy
 {
 	/**
 	 * Display the Hello World view
@@ -47,7 +47,7 @@ class RecruitViewTypes extends JViewLegacy
         $this->toolbar = $this->addToolbar();
 
 
-        $model	= $this->getModel('types');
+        $model	= $this->getModel('languages');
         //$this->items	= $model->getAdditionPaymentInfo($this->items);
 
 
@@ -71,8 +71,8 @@ class RecruitViewTypes extends JViewLegacy
 
         $this->toolbar = JToolbar::getInstance();
 
-        JToolbarHelper::addNew('type.add','Создать тип');
-        JToolBarHelper::deleteList('', 'type.delete', 'Удалить');
+        JToolbarHelper::addNew('language.add','Добавить язык');
+        JToolBarHelper::deleteList('', 'language.delete', 'Удалить');
 
         return $this->toolbar;
     }
