@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset name="details">
+		<field
+				name="id"
+				type="hidden"
+				/>
+
+		<field
+				name="language_id"
+				type="sql"
+				default="10"
+				label="язык"
+				query="SELECT id AS value, name AS language_id FROM #__recruit_languages"
+				multiple="true"
+				required="true"
+		/>
+
+		<field
+				name="theme_id"
+				type="sql"
+				default="10"
+				label="тематика"
+				query="SELECT id AS value, name AS theme_id FROM #__recruit_themes"
+				required="true"
+		/>
+
+		<field name="level" type="list" default="" required="true" label="Уровень сложности" description="">
+			<option value="">Выберите из списка</option>
+			<option value="1">первый</option>
+			<option value="2">второй</option>
+			<option value="3">третий</option>
+			<option value="4">четвертый</option>
+			<option value="5">пятый</option>
+			<option value="6">шестой</option>
+			<option value="7">седьмой</option>
+			<option value="8">восьмой</option>
+			<option value="9">девятый</option>
+			<option value="10">десятый</option>
+		</field>
+
+		<field
+				name="point"
+				type="text"
+				label="Баллы"
+				description="Баллы"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+				/>
+	</fieldset>
+</form>
