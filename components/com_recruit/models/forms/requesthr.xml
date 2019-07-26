@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset name="details"
+	>
+		<field
+				name="id"
+				type="hidden"
+				/>
+		<field
+				name="type_id"
+				type="sql"
+				default="10"
+				label="тип заявки"
+				query="SELECT id AS value, name AS type_id  FROM #__recruit_types"
+				required="true"
+		/>
+
+		<field
+				name="employee_id"
+				type="sql"
+				default="10"
+				label="ФИО сотрудника"
+				query="SELECT id AS value, name AS employee_id  FROM #__recruit_employee"
+				required="true"
+		/>
+
+		<field
+				name="typeemployee_id"
+				type="sql"
+				default="10"
+				label="тип сотрудника"
+				query="SELECT id AS value, name AS typeemployee_id  FROM #__recruit_typeemployee"
+				required="true"
+		/>
+
+		<field
+				name="count"
+				type="text"
+				label="количество специалистов"
+				description="количество специалистов"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+				rows="10"
+				cols="50"
+		/>
+
+		<field name="description"
+			   type="editor"
+			   label="описание задачи"
+			   description="описание задачи"
+		/>
+
+	</fieldset>
+</form>
