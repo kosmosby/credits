@@ -31,7 +31,7 @@ class RecruitControllerRequesthr extends JControllerForm
         // Get the data from the form POST
         $data = JRequest::getVar('jform', array(), 'post', 'array');
 
-        $data['estimate_date'] = $model->estimate($data['type_id'], $data['employee_id'], $data['typeemployee_id'], $data['count']);
+        $data['estimate_date'] = $model->estimate($data['type_id'], $data['employee_id'], $data['typeemployee_id'], $data['count'], $data['start_date']);
 
         // Now update the loaded data to the database via a function in the model
         $upditem	= $model->updItem($data);
@@ -48,13 +48,15 @@ class RecruitControllerRequesthr extends JControllerForm
 
     public function estimate() {
 
-        $type_id = JRequest::getInt('type_id');
+        $type_id = JRequest::getInt('type');
         $employee_id = JRequest::getInt('jform_employee_id');
         $typeemployee_id = JRequest::getInt('jform_typeemployee_id');
         $count = JRequest::getInt('jform_count');
+        $start_date = JRequest::getString('jform_start_date');
+
 
         $model	= $this->getModel('requesthr');
-        $result = $model->estimate($type_id, $employee_id, $typeemployee_id, $count);
+        $result = $model->estimate($type_id, $employee_id, $typeemployee_id, $count, $start_date);
 
         echo $result;
         exit;

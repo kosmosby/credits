@@ -46,11 +46,20 @@
 				cols="50"
 		/>
 
+		<field name="start_date"
+			   type="calendar"
+			   default="NOW"
+			   label="дата размещения"
+		/>
+
 		<field name="description"
 			   type="editor"
 			   label="описание задачи"
 			   description="описание задачи"
 		/>
+
+
+
 
 	</fieldset>
 </form>

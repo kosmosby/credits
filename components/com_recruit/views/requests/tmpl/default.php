@@ -106,13 +106,16 @@ $listDirn      = $this->escape($this->filter_order_Dir);
                 Сотрудник
             </th>
             <th>
-                Тип сотрудника
+                Тип
             </th>
             <th>
-                Количество
+                Кол-во
             </th>
             <th>
-                Дата закрытия
+                Дата разм.
+            </th>
+            <th>
+                Дата закр.
             </th>
         </tr>
         </thead>
@@ -146,6 +149,9 @@ $listDirn      = $this->escape($this->filter_order_Dir);
                     </td>
                     <td>
                         <?php echo $row->count; ?>
+                    </td>
+                    <td>
+                        <?php echo $row->start_date; ?>
                     </td>
                     <td>
                         <?php echo $row->estimate_date; ?>

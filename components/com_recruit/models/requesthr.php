@@ -161,29 +161,27 @@ class RecruitModelRequesthr extends JModelAdmin
 
     }
 
-    public function estimate($type_id,$jform_employee_id,$jform_typeemployee_id, $jform_count) {
+    public function estimate($type_id,$jform_employee_id,$jform_typeemployee_id, $jform_count_employee, $start_date) {
 
+        $db = JFactory::getDbo();
 
         $estimate_date = '';
+
+
+
         switch ($type_id) {
             case 1:
-                switch ($jform_typeemployee_id) {
-                    case 1:
-                        $estimate_date = date("Y-m-d", strtotime('+2 weeks'));
-                    break;
-                    case 2:
-                        $estimate_date = date("Y-m-d", strtotime('+3 weeks'));
-                    break;
-                    case 3:
-                        $estimate_date = date("Y-m-d", strtotime('+4 weeks'));
-                        break;
-                    case 4:
-                        $estimate_date = date("Y-m-d", strtotime('+6 weeks'));
-                        break;
-                    default:
-                        $estimate_date = '';
-                }
+                $query = $db->getQuery(true);
+                $query->select(array('norm'));
+                $query->from('#__recruit_norms');
+                $query->where('typeemployee_id = '.$jform_typeemployee_id);
+                $db->setQuery($query);
+                $norm = $db->loadResult();
 
+                $index = $jform_count_employee - 1;
+                $days = $norm * 7 + ($norm*7)/2 * $index;
+
+                $estimate_date = date("Y-m-d", strtotime($start_date.'+'.$days.' days'));
             break;
             case 2:
                 $estimate_date = '';
