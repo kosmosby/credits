@@ -188,7 +188,7 @@ class RecruitModelRequesthr extends JModelAdmin
                 $index = $jform_count_employee - 1;
                 $days = $norm * 7 + ($norm*7)/2 * $index;
 
-                
+
 
                 $estimate_date = date("Y-m-d", strtotime($start_date.'+'.$days.' days'));
 
@@ -211,8 +211,8 @@ class RecruitModelRequesthr extends JModelAdmin
         $query->select(array('id', 'start_date', 'estimate_date'));
         $query->from('#__recruit_requests');
         $query->where('employee_id = '.$employee_id);
-        $query->where('start_date < \''.$start_date.'\'');
-        $query->where('estimate_date > \''.$start_date.'\'');
+        $query->where('start_date <= \''.$start_date.'\'');
+        $query->where('estimate_date >= \''.$start_date.'\'');
 
         if($id) {
             $query->where('id != '.$id);

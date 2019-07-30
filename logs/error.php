@@ -8,3 +8,4 @@
 2019-07-19T12:17:50+00:00	INFO 127.0.0.1	joomlafailure	Username and password do not match or you do not have an account yet.
 2019-07-25T13:45:49+00:00	INFO 127.0.0.1	cookiefailure	Пустой пароль не допускается
 2019-07-26T08:31:11+00:00	INFO 127.0.0.1	cookiefailure	Пустой пароль не допускается
+2019-07-30T14:10:00+00:00	INFO 127.0.0.1	cookiefailure	Пустой пароль не допускается
