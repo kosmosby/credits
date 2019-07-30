@@ -18,7 +18,7 @@ defined('_JEXEC') or die('Restricted access');
 
 //jimport('joomla.application.component.modelitem');
 
-class RecruitModelRequesthr extends JModelAdmin
+class RecruitModelRequest extends JModelAdmin
 {
 	/**
 	 * @var object item
@@ -42,7 +42,7 @@ class RecruitModelRequesthr extends JModelAdmin
 		// Get the message id
 		$jinput = JFactory::getApplication()->input;
 		$id     = $jinput->get('id', 1, 'INT');
-		$this->setState('requesthr.id', $id);
+		$this->setState('request.id', $id);
 
 		// Load the parameters.
 		$this->setState('params', JFactory::getApplication()->getParams());
@@ -108,8 +108,8 @@ class RecruitModelRequesthr extends JModelAdmin
 
         // Get the form.
         $form = $this->loadForm(
-            'com_recruit.requesthr',
-            'requesthr',
+            'com_recruit.request',
+            'request',
             array(
                 'control' => 'jform',
                 'load_data' => $loadData
@@ -128,7 +128,7 @@ class RecruitModelRequesthr extends JModelAdmin
     {
         // Check the session for previously entered form data.
         $data = JFactory::getApplication()->getUserState(
-            'com_recruit.edit.requesthr.data',
+            'com_recruit.edit.request.data',
             array()
         );
 
@@ -143,7 +143,8 @@ class RecruitModelRequesthr extends JModelAdmin
 
     public function updItem($data)
     {
-        $row =& JTable::getInstance('Requests', 'RecruitTable');
+
+        $row =& JTable::getInstance('requests', 'RecruitTable');
 
         if(!$row->bind($data))
         {
@@ -158,73 +159,4 @@ class RecruitModelRequesthr extends JModelAdmin
         return true;
 
     }
-
-    public function estimate($type_id,$jform_employee_id,$jform_typeemployee_id, $jform_count_employee, $start_date, $id) {
-
-        $db = JFactory::getDbo();
-
-        $estimate_date = '';
-
-        switch ($type_id) {
-            case 1:
-
-                $prev_date = $this->findPreviousRequest($jform_employee_id, $id, $start_date);
-
-                if(count($prev_date)) {
-
-                    $half_all_count_days = (strtotime($prev_date->estimate_date) - strtotime($prev_date->start_date))/2;
-                    $start_date_seconds = strtotime($prev_date->start_date) + $half_all_count_days;
-
-                    $start_date = date("Y-m-d",$start_date_seconds);
-                }
-
-                $query = $db->getQuery(true);
-                $query->select(array('norm'));
-                $query->from('#__recruit_norms');
-                $query->where('typeemployee_id = '.$jform_typeemployee_id);
-                $db->setQuery($query);
-                $norm = $db->loadResult();
-
-                $index = $jform_count_employee - 1;
-                $days = $norm * 7 + ($norm*7)/2 * $index;
-
-                
-
-                $estimate_date = date("Y-m-d", strtotime($start_date.'+'.$days.' days'));
-
-
-            break;
-            case 2:
-                $estimate_date = '';
-            break;
-
-            default:
-                $estimate_date = '';
-        }
-        return $estimate_date;
-    }
-
-    public function findPreviousRequest ($employee_id, $id, $start_date) {
-
-        $db = JFactory::getDbo();
-        $query = $db->getQuery(true);
-        $query->select(array('id', 'start_date', 'estimate_date'));
-        $query->from('#__recruit_requests');
-        $query->where('employee_id = '.$employee_id);
-        $query->where('start_date < \''.$start_date.'\'');
-        $query->where('estimate_date > \''.$start_date.'\'');
-
-        if($id) {
-            $query->where('id != '.$id);
-        }
-
-        $query->order('start_date DESC ');
-        $query->setlimit(1);
-        $db->setQuery($query);
-        $row = $db->loadObject();
-
-        return $row;
-    }
-
-
 }

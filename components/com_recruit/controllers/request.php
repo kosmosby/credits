@@ -8,7 +8,7 @@ jimport('joomla.application.component.controllerform');
 /**
  * flexpaper Controller
  */
-class RecruitControllerRequesthr extends JControllerForm
+class RecruitControllerRequest extends JControllerForm
 {
 
     public function getModel($name = '', $prefix = '', $config = array('ignore_request' => true))
@@ -18,7 +18,6 @@ class RecruitControllerRequesthr extends JControllerForm
 
     public function submit()
     {
-
         $mainframe =& JFactory::getApplication();
 
         // Check for request forgeries.
@@ -26,12 +25,10 @@ class RecruitControllerRequesthr extends JControllerForm
 
         // Initialise variables.
         $app	= JFactory::getApplication();
-        $model	= $this->getModel('requesthr');
+        $model	= $this->getModel('request');
 
         // Get the data from the form POST
         $data = JRequest::getVar('jform', array(), 'post', 'array');
-
-        $data['estimate_date'] = $model->estimate($data['type_id'], $data['employee_id'], $data['typeemployee_id'], $data['count'], $data['start_date'], $data['id']);
 
         // Now update the loaded data to the database via a function in the model
         $upditem	= $model->updItem($data);
@@ -46,21 +43,33 @@ class RecruitControllerRequesthr extends JControllerForm
         $mainframe->Redirect('index.php?option=com_recruit&view=requests',$msg);
     }
 
-    public function estimate() {
+    public function delete() {
 
-        $id = JRequest::getInt('jform_id');
-        $type_id = JRequest::getInt('type');
-        $employee_id = JRequest::getInt('jform_employee_id');
-        $typeemployee_id = JRequest::getInt('jform_typeemployee_id');
-        $count = JRequest::getInt('jform_count');
-        $start_date = JRequest::getString('jform_start_date');
+        $mainframe =& JFactory::getApplication();
 
+        $cids = implode(',', $_REQUEST['cid']);
 
-        $model	= $this->getModel('requesthr');
-        $result = $model->estimate($type_id, $employee_id, $typeemployee_id, $count, $start_date, $id);
+        $db = JFactory::getDbo();
+        $query = $db->getQuery(true);
 
-        echo $result;
-        exit;
+        $conditions = array(
+            $db->quoteName('id') . ' IN ( '.$cids.' ) ',
+        );
+
+        $query->delete($db->quoteName('#__recruit_requests'));
+        $query->where($conditions);
+
+        $db->setQuery($query);
+
+        $result = $db->execute();
+
+        if ($result) {
+            $msg = "Записть успешно удалена";
+        } else {
+            echo "Произошла ошибка во время сохранения записи";
+        }
+        $mainframe->Redirect('index.php?option=com_recruit&view=requests',$msg);
+
     }
 
 }

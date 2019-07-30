@@ -49,7 +49,13 @@ JHtml::script(Juri::base() . 'components/com_recruit/js/recruit.js');
     {
         if (task == 'requesthr.cancel' || document.formvalidator.isValid(document.id('requesthr-form')))
         {
-            Joomla.submitform(task, document.getElementById('requesthr-form'));
+
+            if(task == 'requesthr.cancel') {
+                Joomla.submitform('requests.cancel', document.getElementById('requesthr-form'));
+            }
+            else {
+                Joomla.submitform(task, document.getElementById('requesthr-form'));
+            }
         }
     }
 </script>

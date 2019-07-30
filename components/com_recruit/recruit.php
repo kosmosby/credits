@@ -18,6 +18,9 @@ $controller = JControllerLegacy::getInstance('recruit');
 $input = JFactory::getApplication()->input;
 $controller->execute($input->getCmd('task'));
 
+
+
+
 //
 //echo "<pre>";
 //print_r($_REQUEST); die;
