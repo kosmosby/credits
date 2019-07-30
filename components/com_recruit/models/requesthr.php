@@ -215,7 +215,7 @@ class RecruitModelRequesthr extends JModelAdmin
         $query->where('estimate_date >= \''.$start_date.'\'');
 
         if($id) {
-            $query->where('id != '.$id);
+            $query->where('id < '.$id);
         }
 
         $query->order('start_date DESC ');

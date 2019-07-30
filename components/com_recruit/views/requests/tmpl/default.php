@@ -99,6 +99,7 @@ $listDirn      = $this->escape($this->filter_order_Dir);
             <th width="5%">
                 <?php echo JHtml::_('grid.checkall'); ?>
             </th>
+            Б
             <th>
                 Тип заявки
             </th>
