@@ -100,7 +100,7 @@ $listDirn      = $this->escape($this->filter_order_Dir);
                 <?php echo JHtml::_('grid.checkall'); ?>
             </th>
             <th>
-
+                Описание
             </th>
             <th>
                 Тип заявки
@@ -138,6 +138,9 @@ $listDirn      = $this->escape($this->filter_order_Dir);
                     <td style="border-left: 1px solid #ddd;"><?php echo $this->pagination->getRowOffset($i); ?></td>
                     <td>
                         <?php echo JHtml::_('grid.id', $i, $row->id); ?>
+                    </td>
+                    <td>
+                        <?php echo $row->description; ?>
                     </td>
                     <td>
                         <?php echo $row->type_name; ?>
