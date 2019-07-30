@@ -63,4 +63,11 @@ class RecruitControllerRequesthr extends JControllerForm
         exit;
     }
 
+    public function cancel() {
+
+        $mainframe =& JFactory::getApplication();
+        $mainframe->Redirect('index.php?option=com_recruit&view=requests');
+
+    }
+
 }
