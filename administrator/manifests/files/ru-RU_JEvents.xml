@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension version="1.6" type="file" client="site" method="upgrade">
+<name>Russian translation for JEvents</name>
+<tag>ru-RU</tag>
+<packagename>ru-RU JEvents</packagename>
+<version>3.20160826</version>
+<creationDate>2016.08.26</creationDate>
+<author>maxbasmanov</author>
+<authoremail>
+</authoremail>
+<authorurl>
+</authorurl>
+<copyright>
+</copyright>
+<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+<description>Russian language package for JEvents</description>
+<scriptfile>install.php</scriptfile>
+<fileset>
+<files folder="admin" target="administrator/language/ru-RU">
+	<filename>ru-RU.com_jevents.ini</filename>
+	<filename>ru-RU.com_jevents.menu.ini</filename>
+	<filename>ru-RU.com_jevents.sys.ini</filename>
+	<filename>ru-RU.mod_jevents_latest.ini</filename>
+	<filename>ru-RU.pkg_jevents.sys.ini</filename>
+	<filename>ru-RU.plg_content_jevents.ini</filename>
+	<filename>ru-RU.plg_content_jevents.sys.ini</filename>
+	<filename>ru-RU.plg_finder_jevents.ini</filename>
+	<filename>ru-RU.plg_finder_jevents.sys.ini</filename>
+	<filename>ru-RU.plg_search_eventsearch.ini</filename>
+	<filename>ru-RU.plg_system_gwejson.ini</filename>
+	<filename>ru-RU.plg_system_gwejson.sys.ini</filename>
+</files>
+<files folder="site" target="language/ru-RU">
+	<filename>ru-RU.com_jevents.ini</filename>
+	<filename>ru-RU.mod_jevents_cal.ini</filename>
+	<filename>ru-RU.mod_jevents_custom.ini</filename>
+	<filename>ru-RU.mod_jevents_detail.ini</filename>
+	<filename>ru-RU.mod_jevents_latest.ini</filename>
+</files>
+</fileset>
+</extension>
