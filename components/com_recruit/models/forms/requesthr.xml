@@ -58,7 +58,10 @@
 			   description="описание задачи"
 		/>
 
-
+		<field
+				name="evid"
+				type="hidden"
+		/>
 
 
 	</fieldset>

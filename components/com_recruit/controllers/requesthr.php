@@ -33,9 +33,6 @@ class RecruitControllerRequesthr extends JControllerForm
 
         $data['estimate_date'] = $model->estimate($data['type_id'], $data['employee_id'], $data['typeemployee_id'], $data['count'], $data['start_date'], $data['id']);
 
-        // Now update the loaded data to the database via a function in the model
-        $upditem	= $model->updItem($data);
-
         include_once(JPATH_ADMINISTRATOR . "/components/com_jevents/jevents.defines.php");
 
         $cfg = & JEVConfig::getInstance();
@@ -51,7 +48,14 @@ class RecruitControllerRequesthr extends JControllerForm
 
             $row = new jIcalEventDB($event);
 
+            if($event->ev_id) {
+                $data['evid'] = $event->ev_id;
+            }
         }
+
+        // Now update the loaded data to the database via a function in the model
+        $upditem	= $model->updItem($data);
+
 
         // check if ok and display appropriate message.  This can also have a redirect if desired.
         if ($upditem) {
@@ -101,13 +105,13 @@ class RecruitControllerRequesthr extends JControllerForm
         $array['month'] = date('n',strtotime($item['start_date']));
         $array['day'] = date('j',strtotime($item['start_date']));
         $array['state'] = 1;
-        $array['evid'] = 0;
+        $array['evid'] = $item['evid'];
         $array['valid_dates'] = 1;
-        $array['title'] = 'Иванов И.И.';
+        $array['title'] = $this->getUser($item['employee_id']). ' ' .strip_tags($item['description']);
         $array['priority'] = 0;
         $array['jev_creatorid'] = -1;
         $array['ics_id'] = 1;
-        $array['catid'] = 10;
+        $array['catid'] = $this->getjEventsCategory($item['type_id']);
         $array['access'] = 1;
 
         $array['jevcontent'] = '';
@@ -151,5 +155,35 @@ class RecruitControllerRequesthr extends JControllerForm
 
         return $array;
     }
+
+
+    public function getjEventsCategory($type_id) {
+
+        $db = JFactory::getDbo();
+        $query = $db->getQuery(true);
+        $query->select(array('cat_id'));
+        $query->from('#__recruit_types');
+        $query->where('id = '.$type_id);
+
+        $db->setQuery($query);
+        $row = $db->loadResult();
+
+        return $row;
+    }
+
+    public function getUser($employee_id) {
+
+        $db = JFactory::getDbo();
+        $query = $db->getQuery(true);
+        $query->select(array('name'));
+        $query->from('#__recruit_employee');
+        $query->where('id = '.$employee_id);
+
+        $db->setQuery($query);
+        $row = $db->loadResult();
+
+        return $row;
+    }
+
 
 }

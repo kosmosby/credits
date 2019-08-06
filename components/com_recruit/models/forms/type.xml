@@ -16,5 +16,15 @@
 				required="true"
 				default=""
 				/>
+
+		<field
+				name="cat_id"
+				type="sql"
+				default=""
+				label="категория"
+				query="SELECT id AS value, title AS cat_id  FROM #__categories WHERE extension = 'com_jevents' AND published = 1"
+				required="true"
+		/>
+
 	</fieldset>
 </form>

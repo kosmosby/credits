@@ -18,7 +18,7 @@ defined('_JEXEC') or die('Restricted access');
 
 //jimport('joomla.application.component.modelitem');
 
-class RecruitModelLanguage extends JModelAdmin
+class RecruitModelType extends JModelAdmin
 {
 	/**
 	 * @var object item
@@ -42,7 +42,7 @@ class RecruitModelLanguage extends JModelAdmin
 		// Get the message id
 		$jinput = JFactory::getApplication()->input;
 		$id     = $jinput->get('id', 1, 'INT');
-		$this->setState('language.id', $id);
+		$this->setState('type.id', $id);
 
 		// Load the parameters.
 		$this->setState('params', JFactory::getApplication()->getParams());
@@ -60,7 +60,7 @@ class RecruitModelLanguage extends JModelAdmin
 	 *
 	 * @since   1.6
 	 */
-	public function getTable($type = 'Languages', $prefix = 'RecruitTable', $config = array())
+	public function getTable($type = 'Types', $prefix = 'RecruitTable', $config = array())
 	{
 		return JTable::getInstance($type, $prefix, $config);
 	}
@@ -109,7 +109,7 @@ class RecruitModelLanguage extends JModelAdmin
         // Get the form.
         $form = $this->loadForm(
             'com_recruit.type',
-            'language',
+            'type',
             array(
                 'control' => 'jform',
                 'load_data' => $loadData
@@ -128,7 +128,7 @@ class RecruitModelLanguage extends JModelAdmin
     {
         // Check the session for previously entered form data.
         $data = JFactory::getApplication()->getUserState(
-            'com_recruit.edit.language.data',
+            'com_recruit.edit.type.data',
             array()
         );
 
@@ -144,7 +144,7 @@ class RecruitModelLanguage extends JModelAdmin
     public function updItem($data)
     {
 
-        $row =& JTable::getInstance('languages', 'RecruitTable');
+        $row =& JTable::getInstance('types', 'RecruitTable');
 
         if(!$row->bind($data))
         {
