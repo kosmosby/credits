@@ -46,10 +46,15 @@ list.admin.request";
         //$input->set('hidemainmenu', true);
         $this->toolbar = $this->addToolbar();
 
-
-        $model	= $this->getModel('requests');
         //$this->items	= $model->getAdditionPaymentInfo($this->items);
 
+        JModelLegacy::addIncludePath(JPATH_ROOT.'/components/com_recruit/models', 'RecruitModel');
+        $levels_model = JModelLegacy::getInstance('requestvr', 'RecruitModel', array('ignore_request' => true));
+
+        $this->items = $levels_model->LevelsById($this->items);
+
+//        echo "<pre>";
+//        print_r($this->items); die;
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors')))
@@ -62,7 +67,6 @@ list.admin.request";
 		// Display the view
 		parent::display($tpl);
 
-
 	}
 
     protected function addToolBar()
@@ -72,6 +76,7 @@ list.admin.request";
         $this->toolbar = JToolbar::getInstance();
 
         JToolbarHelper::addNew('requesthr.add','Создать заявку HR');
+        JToolbarHelper::addNew('requestvr.add','Создать заявку VR');
         JToolBarHelper::deleteList('', 'request.delete', 'Удалить');
 
         return $this->toolbar;

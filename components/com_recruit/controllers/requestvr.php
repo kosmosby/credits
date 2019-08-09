@@ -8,7 +8,7 @@ jimport('joomla.application.component.controllerform');
 /**
  * flexpaper Controller
  */
-class RecruitControllerRequesthr extends JControllerForm
+class RecruitControllerRequestvr extends JControllerForm
 {
 
     public function getModel($name = '', $prefix = '', $config = array('ignore_request' => true))
@@ -31,7 +31,7 @@ class RecruitControllerRequesthr extends JControllerForm
         // Get the data from the form POST
         $data = JRequest::getVar('jform', array(), 'post', 'array');
 
-        $data['estimate_date'] = $model->estimate($data['type_id'], $data['employee_id'], $data['typeemployee_id'], $data['count'], $data['start_date'], $data['id']);
+        $data['estimate_date'] = $model->estimate($data['type_id'], $data['employee_id'], $data['typeemployee_id'], $data['count'], $data['start_date'], $data['id'], $data['level_id']);
 
         include_once(JPATH_ADMINISTRATOR . "/components/com_jevents/jevents.defines.php");
 
@@ -75,11 +75,10 @@ class RecruitControllerRequesthr extends JControllerForm
         $typeemployee_id = JRequest::getInt('jform_typeemployee_id');
         $count = JRequest::getInt('jform_count');
         $start_date = JRequest::getString('jform_start_date');
-        $level_id = JRequest::getString('jform_level_id');
 
 
         $model	= $this->getModel('requesthr');
-        $result = $model->estimate($type_id, $employee_id, $typeemployee_id, $count, $start_date, $id, $level_id);
+        $result = $model->estimate($type_id, $employee_id, $typeemployee_id, $count, $start_date, $id);
 
         echo $result;
         exit;

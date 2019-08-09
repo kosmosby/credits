@@ -54,6 +54,10 @@ $listDirn      = $this->escape($this->filter_order_Dir);
         background: #f6f6f6;
     }
 
+    .btn-toolbar .btn-wrapper {
+        padding-right: 10px;
+    }
+
 </style>
 <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
 
@@ -132,7 +136,21 @@ $listDirn      = $this->escape($this->filter_order_Dir);
         <tbody>
         <?php if (!empty($this->items)) : ?>
             <?php foreach ($this->items as $i => $row) :
-                $link = JRoute::_('index.php?option=com_recruit&task=requesthr.edit&id=' . $row->id);
+
+
+                switch($row->type_id) {
+                    case 1:
+                        $link = JRoute::_('index.php?option=com_recruit&task=requesthr.edit&id=' . $row->id);
+                    break;
+                    case 2:
+                        $link = JRoute::_('index.php?option=com_recruit&task=requestvr.edit&id=' . $row->id);
+                    break;
+                    default:
+                        $link = JRoute::_('index.php?option=com_recruit&task=requesthr.edit&id=' . $row->id);
+                    break;
+                }
+
+                //$link = JRoute::_('index.php?option=com_recruit&task=requesthr.edit&id=' . $row->id);
                 ?>
                 <tr>
                     <td style="border-left: 1px solid #ddd;"><?php echo $this->pagination->getRowOffset($i); ?></td>
@@ -151,7 +169,19 @@ $listDirn      = $this->escape($this->filter_order_Dir);
                         </a>
                     </td>
                     <td>
-                        <?php echo $row->typeemployee_name; ?>
+                        <?php
+
+                            switch($row->type_id) {
+                                case 1:
+                                    echo $row->typeemployee_name;
+                                    break;
+                                case 2:
+                                    echo $row->languages.' - '.$row->theme_name;
+                                break;
+                            }
+
+
+                            ?>
                     </td>
                     <td>
                         <?php echo $row->count; ?>

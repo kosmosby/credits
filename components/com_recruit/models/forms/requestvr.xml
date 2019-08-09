@@ -8,7 +8,7 @@
 				/>
 
 		<field
-				name="level_id"
+				name="typeemployee_id"
 				type="hidden"
 				default="0"
 		/>
@@ -32,11 +32,11 @@
 		/>
 
 		<field
-				name="typeemployee_id"
+				name="level_id"
 				type="sql"
 				default="10"
-				label="тип сотрудника"
-				query="SELECT id AS value, name AS typeemployee_id  FROM #__recruit_typeemployee"
+				label="уровни сложности"
+				query="SELECT id AS value, languages AS level_id  FROM #__recruit_levels_tmp"
 				required="true"
 		/>
 

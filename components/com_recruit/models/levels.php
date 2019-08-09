@@ -96,7 +96,6 @@ class RecruitModelLevels extends JModelList
 
     public function getLanguages($rows) {
 
-
         $db = JFactory::getDbo();
 
         for($i=0;$i<count($rows);$i++) {
@@ -104,7 +103,6 @@ class RecruitModelLevels extends JModelList
             $registry = new JRegistry;
             $registry->loadString($rows[$i]->language_id);
             $string = implode(',',$registry->toArray());
-
 
             $query = $db->getQuery(true);
             $query

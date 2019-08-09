@@ -60,7 +60,7 @@ class RecruitModelRequests extends JModelList
             )
         );
 
-        $query->from('#__recruit_requests AS a, #__recruit_employee as b, #__recruit_types as c, #__recruit_typeemployee as d WHERE a.employee_id = b.id AND a.type_id = c.id AND a.typeemployee_id = d.id');
+        $query->from('#__recruit_employee as b, #__recruit_types as c, #__recruit_requests AS a LEFT JOIN #__recruit_typeemployee as d ON a.typeemployee_id = d.id WHERE a.employee_id = b.id AND a.type_id = c.id');
 
         // Filter: like / search
         $search = $this->getState('filter.search');

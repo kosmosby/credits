@@ -18,12 +18,13 @@ defined('_JEXEC') or die('Restricted access');
 
 //jimport('joomla.application.component.modelitem');
 
-class RecruitModelRequesthr extends JModelAdmin
+class RecruitModelRequestvr extends JModelAdmin
 {
 	/**
 	 * @var object item
 	 */
 	protected $item;
+	protected $select;
 
 	/**
 	 * Method to auto-populate the model state.
@@ -42,7 +43,7 @@ class RecruitModelRequesthr extends JModelAdmin
 		// Get the message id
 		$jinput = JFactory::getApplication()->input;
 		$id     = $jinput->get('id', 1, 'INT');
-		$this->setState('requesthr.id', $id);
+		$this->setState('requestvr.id', $id);
 
 		// Load the parameters.
 		$this->setState('params', JFactory::getApplication()->getParams());
@@ -108,8 +109,8 @@ class RecruitModelRequesthr extends JModelAdmin
 
         // Get the form.
         $form = $this->loadForm(
-            'com_recruit.requesthr',
-            'requesthr',
+            'com_recruit.requestvr',
+            'requestvr',
             array(
                 'control' => 'jform',
                 'load_data' => $loadData
@@ -121,6 +122,9 @@ class RecruitModelRequesthr extends JModelAdmin
             return false;
         }
 
+//        echo "<pre>";
+//        print_r($form); die;
+
         return $form;
     }
 
@@ -128,7 +132,7 @@ class RecruitModelRequesthr extends JModelAdmin
     {
         // Check the session for previously entered form data.
         $data = JFactory::getApplication()->getUserState(
-            'com_recruit.edit.requesthr.data',
+            'com_recruit.edit.requestvr.data',
             array()
         );
 
@@ -159,7 +163,7 @@ class RecruitModelRequesthr extends JModelAdmin
 
     }
 
-    public function estimate($type_id,$jform_employee_id,$jform_typeemployee_id, $jform_count_employee, $start_date, $id, $level_id) {
+    public function estimate($type_id,$jform_employee_id,$jform_typeemployee_id, $jform_count_employee, $start_date, $id) {
 
         $db = JFactory::getDbo();
 
@@ -167,7 +171,8 @@ class RecruitModelRequesthr extends JModelAdmin
 
         switch ($type_id) {
             case 1:
-                $prev_date = $this->findPreviousRequest($jform_employee_id, $id, $start_date, $type_id);
+
+                $prev_date = $this->findPreviousRequest($jform_employee_id, $id, $start_date);
 
                 if(count($prev_date)) {
 
@@ -187,42 +192,14 @@ class RecruitModelRequesthr extends JModelAdmin
                 $index = $jform_count_employee - 1;
                 $days = $norm * 7 + ($norm*7)/2 * $index;
 
+
+
                 $estimate_date = date("Y-m-d", strtotime($start_date.'+'.$days.' days'));
+
 
             break;
             case 2:
-                $prev_date = $this->findPreviousRequest($jform_employee_id, $id, $start_date, $type_id);
-
-//                echo "<pre>";
-//                print_r($prev_date);
-//                die;
-
-                if(count($prev_date)) {
-
-                    $half_all_count_days = (strtotime($prev_date->estimate_date) - strtotime($prev_date->start_date))/2;
-
-                    $start_date_seconds = strtotime($prev_date->start_date) + $half_all_count_days;
-
-                    $start_date = date("Y-m-d",$start_date_seconds);
-                }
-
-                $query = $db->getQuery(true);
-                $query->select(array('point'));
-                $query->from('#__recruit_levels');
-                $query->where('id = '.$level_id);
-                $db->setQuery($query);
-                $point = $db->loadResult();
-
-                //$index = $jform_count_employee - 1;
-                //echo $point; die;
-
-                $index = round((($jform_count_employee-1)*$point)/2);
-
-                //echo round($index); die;
-                $days = 3 + $point  + $index;
-//                echo $start_date; die;
-
-                $estimate_date = date("Y-m-d", strtotime($start_date.'+'.$days.' weekdays'));
+                $estimate_date = '';
             break;
 
             default:
@@ -231,7 +208,7 @@ class RecruitModelRequesthr extends JModelAdmin
         return $estimate_date;
     }
 
-    public function findPreviousRequest ($employee_id, $id, $start_date, $type_id) {
+    public function findPreviousRequest ($employee_id, $id, $start_date) {
 
         $db = JFactory::getDbo();
         $query = $db->getQuery(true);
@@ -240,7 +217,6 @@ class RecruitModelRequesthr extends JModelAdmin
         $query->where('employee_id = '.$employee_id);
         $query->where('start_date <= \''.$start_date.'\'');
         $query->where('estimate_date >= \''.$start_date.'\'');
-        $query->where('type_id = \''.$type_id.'\'');
 
         if($id) {
             $query->where('id < '.$id);
@@ -250,6 +226,123 @@ class RecruitModelRequesthr extends JModelAdmin
         $query->setlimit(1);
         $db->setQuery($query);
         $row = $db->loadObject();
+
+        return $row;
+    }
+
+    public function getLevels() {
+
+        $db = JFactory::getDbo();
+        $query = $db->getQuery(true);
+        $query->select(array('*'));
+        $query->from('#__recruit_levels');
+//        $query->where('employee_id = '.$employee_id);
+//        $query->where('start_date <= \''.$start_date.'\'');
+//        $query->where('estimate_date >= \''.$start_date.'\'');
+//
+//        if($id) {
+//            $query->where('id < '.$id);
+//        }
+//
+//        $query->order('start_date DESC ');
+//        $query->setlimit(1);
+        $db->setQuery($query);
+        $rows = $db->loadObjectList();
+
+        JModelLegacy::addIncludePath(JPATH_ROOT.'/components/com_recruit/models', 'RecruitModel');
+        $levels_model = JModelLegacy::getInstance('Levels', 'RecruitModel', array('ignore_request' => true));
+
+        $rows = $levels_model->getLanguages($rows);
+
+        $rows = $this->getLevelsNames($rows);
+
+
+        $db =& JFactory::getDBO();
+        $sql = "CREATE TEMPORARY TABLE `#__recruit_levels_tmp` (
+  `id` int(11) NOT NULL,
+  `languages` varchar(255) NOT NULL
+)";
+        $db->setQuery($sql);
+        $db->query();
+        //$options = $db->loadObjectList();
+        //return $options;
+        for($i=0;$i<count($rows); $i++) {
+            // Create and populate an object.
+            $obj = new stdClass();
+            $obj->id = $rows[$i]->id;
+            $obj->languages = $rows[$i]->languages. ' - ' . $rows[$i]->level_name;
+
+// Insert the object into the user profile table.
+            $result = JFactory::getDbo()->insertObject('#__recruit_levels_tmp', $obj);
+        }
+        //return $rows;
+
+    }
+
+    public function getLevelsNames($rows) {
+
+        $db = JFactory::getDbo();
+
+        for($i=0;$i<count($rows);$i++) {
+            $query = $db->getQuery(true);
+            $query->select(array('name'));
+            $query->from('#__recruit_themes');
+            $query->where('id = '.$rows[$i]->theme_id);
+            $db->setQuery($query);
+            $level_name = $db->loadResult();
+
+            $rows[$i]->level_name = $level_name;
+        }
+        return $rows;
+    }
+
+    public function LevelsById($rows) {
+
+        for($i=0;$i<count($rows);$i++) {
+
+            if(isset($rows[$i]->level_id) && $rows[$i]->level_id) {
+
+                $obj = $this->getLevelObject($rows[$i]->level_id);
+                $rows[$i]->theme_name = $obj->theme_name;
+                $rows[$i]->languages = $obj->languages;
+
+            }
+        }
+
+        return $rows;
+
+    }
+
+
+    public function getLevelObject($id) {
+
+        $db = JFactory::getDbo();
+
+        $query = $db->getQuery(true);
+        $query->select(array('a.*', 'b.name as theme_name'));
+        $query->from('#__recruit_levels as a, #__recruit_themes as b');
+        $query->where('a.id = '.$id.' AND b.id = a.theme_id');
+        $db->setQuery($query);
+        $row = $db->loadObject();
+
+        $registry = new JRegistry;
+        $registry->loadString($row->language_id);
+        $string = implode(',',$registry->toArray());
+
+        $query = $db->getQuery(true);
+        $query
+            ->select('a.name')
+            ->from('#__recruit_languages as a')
+            ->where('a.id IN( '.$string.')');
+
+        $db->setQuery($query);
+        $results = $db->loadObjectList();
+
+        $array = array();
+        for($j=0;$j<count($results);$j++) {
+            $array[] = $results[$j]->name;
+        }
+        $row->languages = implode(',',$array);
 
         return $row;
     }
