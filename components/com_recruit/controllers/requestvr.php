@@ -31,7 +31,10 @@ class RecruitControllerRequestvr extends JControllerForm
         // Get the data from the form POST
         $data = JRequest::getVar('jform', array(), 'post', 'array');
 
-        $data['estimate_date'] = $model->estimate($data['type_id'], $data['employee_id'], $data['typeemployee_id'], $data['count'], $data['start_date'], $data['id'], $data['level_id']);
+        if(!isset($data['manual'])) {
+            $data['estimate_date'] = $model->estimate($data['type_id'], $data['employee_id'], $data['typeemployee_id'], $data['count'], $data['start_date'], $data['id'], $data['level_id']);
+            $data['manual'] = 0;
+        }
 
         include_once(JPATH_ADMINISTRATOR . "/components/com_jevents/jevents.defines.php");
 

@@ -62,6 +62,7 @@ class RecruitModelRequests extends JModelList
 
         $query->from('#__recruit_employee as b, #__recruit_types as c, #__recruit_requests AS a LEFT JOIN #__recruit_typeemployee as d ON a.typeemployee_id = d.id WHERE a.employee_id = b.id AND a.type_id = c.id');
 
+        $query->order('a.start_date DESC');
         // Filter: like / search
         $search = $this->getState('filter.search');
 
@@ -85,8 +86,8 @@ class RecruitModelRequests extends JModelList
 //        }
 
         // Add the list ordering clause.
-        $orderCol	= $this->state->get('list.ordering', 'b.name');
-        $orderDirn 	= $this->state->get('list.direction', 'asc');
+        $orderCol	= $this->state->get('list.ordering', 'a.start_date');
+        $orderDirn 	= $this->state->get('list.direction', 'desc');
 
 
         $query->order($db->escape($orderCol) . ' ' . $db->escape($orderDirn));

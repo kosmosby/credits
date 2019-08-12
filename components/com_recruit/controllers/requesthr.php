@@ -16,6 +16,7 @@ class RecruitControllerRequesthr extends JControllerForm
         return parent::getModel($name, $prefix, array('ignore_request' => false));
     }
 
+
     public function submit()
     {
 
@@ -31,7 +32,14 @@ class RecruitControllerRequesthr extends JControllerForm
         // Get the data from the form POST
         $data = JRequest::getVar('jform', array(), 'post', 'array');
 
-        $data['estimate_date'] = $model->estimate($data['type_id'], $data['employee_id'], $data['typeemployee_id'], $data['count'], $data['start_date'], $data['id']);
+//        echo "<pre>";
+//        print_r($data); die;
+
+        if(!isset($data['manual'])) {
+            $data['estimate_date'] = $model->estimate($data['type_id'], $data['employee_id'], $data['typeemployee_id'], $data['count'], $data['start_date'], $data['id']);
+            $data['manual'] = 0;
+        }
+
 
         include_once(JPATH_ADMINISTRATOR . "/components/com_jevents/jevents.defines.php");
 
