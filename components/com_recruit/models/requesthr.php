@@ -165,6 +165,7 @@ class RecruitModelRequesthr extends JModelAdmin
 
         $estimate_date = '';
 
+
         switch ($type_id) {
             case 1:
                 $prev_date = $this->findPreviousRequest($jform_employee_id, $id, $start_date, $type_id);
@@ -233,14 +234,18 @@ class RecruitModelRequesthr extends JModelAdmin
 
     public function findPreviousRequest ($employee_id, $id, $start_date, $type_id) {
 
+//        echo $employee_id; die;
+
         $db = JFactory::getDbo();
         $query = $db->getQuery(true);
         $query->select(array('id', 'start_date', 'estimate_date'));
         $query->from('#__recruit_requests');
         $query->where('employee_id = '.$employee_id);
-        $query->where('start_date <= \''.$start_date.'\'');
+        $query->where('start_date <= \''.$start_date.'\' OR start_data');
         $query->where('estimate_date >= \''.$start_date.'\'');
         $query->where('type_id = \''.$type_id.'\'');
+
+        echo $query->__toString(); die;
 
         if($id) {
             $query->where('id < '.$id);
@@ -250,6 +255,9 @@ class RecruitModelRequesthr extends JModelAdmin
         $query->setlimit(1);
         $db->setQuery($query);
         $row = $db->loadObject();
+
+
+
 
         return $row;
     }

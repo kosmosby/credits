@@ -59,7 +59,7 @@ class RecruitViewRequestvr extends JViewLegacy
 
         $this->toolbar = JToolbar::getInstance();
 
-        $document =& JFactory::getDocument();
+        $document = JFactory::getDocument();
 
         $isNew = ($this->item->id == 0);
 

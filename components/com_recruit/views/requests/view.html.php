@@ -76,7 +76,7 @@ list.admin.request";
         $this->toolbar = JToolbar::getInstance();
 
         JToolbarHelper::addNew('requesthr.add','Создать заявку HR');
-        JToolbarHelper::addNew('requestvr.add','Создать заявку VR');
+        JToolbarHelper::addNew('requestvr.add','Создать заявку VM');
         JToolBarHelper::deleteList('', 'request.delete', 'Удалить');
 
         return $this->toolbar;

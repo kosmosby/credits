@@ -124,6 +124,9 @@ $listDirn      = $this->escape($this->filter_order_Dir);
             <th>
                 Дата закр.
             </th>
+            <th>
+                id
+            </th>
         </tr>
         </thead>
         <tfoot>
@@ -191,6 +194,9 @@ $listDirn      = $this->escape($this->filter_order_Dir);
                     </td>
                     <td>
                         <?php echo $row->estimate_date; ?>
+                    </td>
+                    <td>
+                        <?php echo $row->id; ?>
                     </td>
                 </tr>
             <?php endforeach; ?>

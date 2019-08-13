@@ -257,7 +257,7 @@ class RecruitModelRequestvr extends JModelAdmin
         $rows = $this->getLevelsNames($rows);
 
 
-        $db =& JFactory::getDBO();
+        $db = JFactory::getDBO();
         $sql = "CREATE TEMPORARY TABLE `#__recruit_levels_tmp` (
   `id` int(11) NOT NULL,
   `languages` varchar(255) NOT NULL
