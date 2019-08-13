@@ -45,7 +45,7 @@ class RecruitControllerRequest extends JControllerForm
 
     public function delete() {
 
-        $mainframe =& JFactory::getApplication();
+        $mainframe = JFactory::getApplication();
 
         $cids = implode(',', $_REQUEST['cid']);
 
@@ -53,12 +53,26 @@ class RecruitControllerRequest extends JControllerForm
         $query = $db->getQuery(true);
 
         $conditions = array(
-            $db->quoteName('id') . ' IN ( '.$cids.' ) ',
+            $db->quoteName('ev_id') . ' IN ( SELECT evid FROM #__recruit_requests WHERE ID IN ('.$cids.') ) ',
+        );
+
+        $query->delete('#__jevents_vevent');
+        $query->where($conditions);
+
+        //echo($query->__toString()); die;
+        $db->setQuery($query);
+        $result = $db->execute();
+
+
+
+        $query = $db->getQuery(true);
+
+        $conditions = array(
+            $db->quoteName('id') . ' IN ('.$cids.')'
         );
 
         $query->delete($db->quoteName('#__recruit_requests'));
         $query->where($conditions);
-
         $db->setQuery($query);
 
         $result = $db->execute();
