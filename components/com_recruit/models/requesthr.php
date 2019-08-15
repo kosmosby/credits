@@ -166,45 +166,54 @@ class RecruitModelRequesthr extends JModelAdmin
         $estimate_date = '';
 
 
+
+        $public_date = $start_date;
+
         switch ($type_id) {
             case 1:
                 $prev_date = $this->findPreviousRequest($jform_employee_id, $id, $start_date, $type_id);
 
                 if(count($prev_date)) {
 
-                    $half_all_count_days = (strtotime($prev_date->estimate_date) - strtotime($prev_date->start_date))/2;
-                    $start_date_seconds = strtotime($prev_date->start_date) + $half_all_count_days;
+                    $half_all_count_days = (strtotime($prev_date->estimate_date) - strtotime($prev_date->public_date))/2;
 
-                    $start_date = date("Y-m-d",$start_date_seconds);
+                    $half_date = strtotime($prev_date->public_date) + $half_all_count_days;
+
+                    if(strtotime($start_date) < $half_date) {
+                        $start_date_seconds = strtotime($prev_date->public_date) + $half_all_count_days;
+                        $public_date = date("Y-m-d", $start_date_seconds);
+                    }
                 }
 
                 $query = $db->getQuery(true);
                 $query->select(array('norm'));
                 $query->from('#__recruit_norms');
                 $query->where('typeemployee_id = '.$jform_typeemployee_id);
+
+                //echo $query->__toString(); die;
+
                 $db->setQuery($query);
                 $norm = $db->loadResult();
 
                 $index = $jform_count_employee - 1;
                 $days = $norm * 7 + ($norm*7)/2 * $index;
 
-                $estimate_date = date("Y-m-d", strtotime($start_date.'+'.$days.' days'));
+                $estimate_date = date("Y-m-d", strtotime($public_date.'+'.$days.' days'));
 
             break;
             case 2:
                 $prev_date = $this->findPreviousRequest($jform_employee_id, $id, $start_date, $type_id);
 
-//                echo "<pre>";
-//                print_r($prev_date);
-//                die;
-
                 if(count($prev_date)) {
 
-                    $half_all_count_days = (strtotime($prev_date->estimate_date) - strtotime($prev_date->start_date))/2;
+                    $half_all_count_days = (strtotime($prev_date->estimate_date) - strtotime($prev_date->public_date))/2;
 
-                    $start_date_seconds = strtotime($prev_date->start_date) + $half_all_count_days;
+                    $half_date = strtotime($prev_date->public_date) + $half_all_count_days;
 
-                    $start_date = date("Y-m-d",$start_date_seconds);
+                    if(strtotime($start_date) < $half_date) {
+                        $start_date_seconds = strtotime($prev_date->public_date) + $half_all_count_days;
+                        $public_date = date("Y-m-d", $start_date_seconds);
+                    }
                 }
 
                 $query = $db->getQuery(true);
@@ -223,13 +232,19 @@ class RecruitModelRequesthr extends JModelAdmin
                 $days = 3 + $point  + $index;
 //                echo $start_date; die;
 
-                $estimate_date = date("Y-m-d", strtotime($start_date.'+'.$days.' weekdays'));
+                $estimate_date = date("Y-m-d", strtotime($public_date.'+'.$days.' weekdays'));
             break;
 
             default:
                 $estimate_date = '';
         }
-        return $estimate_date;
+
+        $arr = array();
+        $arr['public_date'] = $public_date;
+        $arr['estimate_date'] = $estimate_date;
+
+
+        return $arr;
     }
 
     public function findPreviousRequest ($employee_id, $id, $start_date, $type_id) {
@@ -238,11 +253,11 @@ class RecruitModelRequesthr extends JModelAdmin
 
         $db = JFactory::getDbo();
         $query = $db->getQuery(true);
-        $query->select(array('id', 'start_date', 'estimate_date'));
+        $query->select(array('id', 'public_date', 'estimate_date'));
         $query->from('#__recruit_requests');
         $query->where('employee_id = '.$employee_id);
-        $query->where('start_date <= \''.$start_date.'\' OR start_data');
-        $query->where('estimate_date >= \''.$start_date.'\'');
+        //$query->where('start_date <= \''.$start_date.'\'');
+        //$query->where('estimate_date >= \''.$start_date.'\'');
         $query->where('type_id = \''.$type_id.'\'');
 
         //echo $query->__toString(); die;
@@ -251,13 +266,13 @@ class RecruitModelRequesthr extends JModelAdmin
             $query->where('id < '.$id);
         }
 
-        $query->order('start_date DESC ');
+        $query->order('id DESC ');
         $query->setlimit(1);
         $db->setQuery($query);
         $row = $db->loadObject();
 
-
-
+//        echo "<pre>";
+//        print_r($row); die;
 
         return $row;
     }

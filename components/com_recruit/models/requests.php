@@ -56,7 +56,7 @@ class RecruitModelRequests extends JModelList
         $query->select(
             $this->getState(
                 'list.select',
-                'a.*, b.name, c.name as type_name, d.name as typeemployee_name'
+                'a.*, b.name as employee_name, c.name as type_name, d.name as typeemployee_name'
             )
         );
 
@@ -65,7 +65,6 @@ class RecruitModelRequests extends JModelList
         $query->order('a.id DESC');
         // Filter: like / search
         $search = $this->getState('filter.search');
-
 
         if (!empty($search))
         {
@@ -89,9 +88,7 @@ class RecruitModelRequests extends JModelList
         $orderCol	= $this->state->get('list.ordering', 'a.start_date');
         $orderDirn 	= $this->state->get('list.direction', 'desc');
 
-
         $query->order($db->escape($orderCol) . ' ' . $db->escape($orderDirn));
-
 
         return $query;
     }

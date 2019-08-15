@@ -104,7 +104,7 @@ $listDirn      = $this->escape($this->filter_order_Dir);
                 <?php echo JHtml::_('grid.checkall'); ?>
             </th>
             <th>
-                Описание
+                Название
             </th>
             <th>
                 Тип заявки
@@ -119,10 +119,10 @@ $listDirn      = $this->escape($this->filter_order_Dir);
                 Кол-во
             </th>
             <th>
-                Дата разм.
+                Откр.
             </th>
             <th>
-                Дата закр.
+                Закр.
             </th>
             <th>
                 id
@@ -161,15 +161,15 @@ $listDirn      = $this->escape($this->filter_order_Dir);
                         <?php echo JHtml::_('grid.id', $i, $row->id); ?>
                     </td>
                     <td>
-                        <?php echo $row->description; ?>
+                        <a href="<?php echo $link; ?>" title="Редактировать">
+                            <?php echo $row->name; ?>
+                        </a>
                     </td>
                     <td>
                         <?php echo $row->type_name; ?>
                     </td>
                     <td>
-                        <a href="<?php echo $link; ?>" title="Редактировать">
-                            <?php echo $row->name; ?>
-                        </a>
+                        <?php echo $row->employee_name; ?>
                     </td>
                     <td>
                         <?php
@@ -190,7 +190,7 @@ $listDirn      = $this->escape($this->filter_order_Dir);
                         <?php echo $row->count; ?>
                     </td>
                     <td>
-                        <?php echo $row->start_date; ?>
+                        <?php echo $row->public_date; ?>
                     </td>
                     <td>
                         <?php echo $row->estimate_date; ?>

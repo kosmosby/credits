@@ -20,7 +20,7 @@ class RecruitControllerRequesthr extends JControllerForm
     public function submit()
     {
 
-        $mainframe =& JFactory::getApplication();
+        $mainframe = JFactory::getApplication();
 
         // Check for request forgeries.
         JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
@@ -32,11 +32,17 @@ class RecruitControllerRequesthr extends JControllerForm
         // Get the data from the form POST
         $data = JRequest::getVar('jform', array(), 'post', 'array');
 
-//        echo "<pre>";
-//        print_r($data); die;
 
         if(!isset($data['manual'])) {
-            $data['estimate_date'] = $model->estimate($data['type_id'], $data['employee_id'], $data['typeemployee_id'], $data['count'], $data['start_date'], $data['id']);
+
+            $return = $model->estimate($data['type_id'], $data['employee_id'], $data['typeemployee_id'], $data['count'], $data['start_date'], $data['id'], $data['level_id']);
+
+            $data['estimate_date'] = $return['estimate_date'];
+            $data['public_date'] = $return['public_date'];
+
+//            echo "<pre>";
+//            print_r($data); die;
+
             $data['manual'] = 0;
         }
 
@@ -89,7 +95,7 @@ class RecruitControllerRequesthr extends JControllerForm
         $model	= $this->getModel('requesthr');
         $result = $model->estimate($type_id, $employee_id, $typeemployee_id, $count, $start_date, $id, $level_id);
 
-        echo $result;
+        echo json_encode($result);
         exit;
     }
 
@@ -110,9 +116,9 @@ class RecruitControllerRequesthr extends JControllerForm
 
         $array['jevtype'] = 'icaldb';
         $array['rp_id'] = -1;
-        $array['year'] = date('Y',strtotime($item['start_date']));
-        $array['month'] = date('n',strtotime($item['start_date']));
-        $array['day'] = date('j',strtotime($item['start_date']));
+        $array['year'] = date('Y',strtotime($item['public_date']));
+        $array['month'] = date('n',strtotime($item['public_date']));
+        $array['day'] = date('j',strtotime($item['public_date']));
         $array['state'] = 1;
         $array['evid'] = $item['evid'];
         $array['valid_dates'] = 1;
@@ -130,8 +136,8 @@ class RecruitControllerRequesthr extends JControllerForm
         $array['contact_info'] = '';
         $array['extra_info'] = '' ;
         $array['view12Hour'] = 0;
-        $array['publish_up'] = date('Y-n-d',strtotime($item['start_date']));
-        $array['publish_up2'] = date('Y-m-j',strtotime($item['start_date']));
+        $array['publish_up'] = date('Y-n-d',strtotime($item['public_date']));
+        $array['publish_up2'] = date('Y-m-j',strtotime($item['public_date']));
         $array['start_time'] = '00:00';
         $array['start_12h'] = '00:00';
         $array['start_ampm'] = 'none';
@@ -147,10 +153,10 @@ class RecruitControllerRequesthr extends JControllerForm
         $array['count'] = 1;
         $array['until'] = date('Y-n-d',strtotime($item['estimate_date']));
         $array['until2'] = date('Y-m-j',strtotime($item['estimate_date']));
-        $array['byyearday'] = date('z',strtotime($item['start_date']));
-        $array['bymonth'] = date('n',strtotime($item['start_date']));
-        $array['byweekno'] = date('w',strtotime($item['start_date']));
-        $array['bymonthday'] = date('j',strtotime($item['start_date']));
+        $array['byyearday'] = date('z',strtotime($item['public_date']));
+        $array['bymonth'] = date('n',strtotime($item['public_date']));
+        $array['byweekno'] = date('w',strtotime($item['public_date']));
+        $array['bymonthday'] = date('j',strtotime($item['public_date']));
         $array['weekdays'] = array(0=>0);
         $array['boxchecked'] = 0;
         $array['updaterepeats'] = 0;

@@ -37,7 +37,6 @@ JHtml::script(Juri::base() . 'components/com_recruit/js/recruit.js');
 </style>
 
 
-
 <?php echo $this->toolbar->render(); ?>
 
 <div style="clear: both;"></div>
@@ -93,3 +92,5 @@ JHtml::script(Juri::base() . 'components/com_recruit/js/recruit.js');
     <input type="hidden" name="task" value="requestvr.submit" />
     <?php echo JHtml::_('form.token'); ?>
 </form>
+
+<div style="display: none;" id="view"><?php echo JRequest::getString('view');?></div>

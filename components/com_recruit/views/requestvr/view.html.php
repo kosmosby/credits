@@ -36,6 +36,7 @@ class RecruitViewRequestvr extends JViewLegacy
 
         $this->toolbar = $this->addToolbar();
 
+
 //        $document = JFactory::getDocument();
 //        $document->addScript('/components/com_recruit/js/recruit.js\'');
 

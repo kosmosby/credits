@@ -93,3 +93,5 @@ JHtml::script(Juri::base() . 'components/com_recruit/js/recruit.js');
     <input type="hidden" name="task" value="requesthr.submit" />
     <?php echo JHtml::_('form.token'); ?>
 </form>
+
+<div style="display: none;" id="view"><?php echo JRequest::getString('view');?></div>
