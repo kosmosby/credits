@@ -80,7 +80,7 @@ $listDirn      = $this->escape($this->filter_order_Dir);
 		
 	
 <div style="width: 100%; overflow-x: scroll;">
-<div style="width: 4060px;" >
+<div style="width: 4100px;" >
 
     <table class="table table-striped table-hover" id="credits_table">
         <thead>
