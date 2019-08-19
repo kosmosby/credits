@@ -125,7 +125,10 @@ $listDirn      = $this->escape($this->filter_order_Dir);
 						<?php echo $this->pagination->getRowOffset($i); ?>
 					</td>
                     <td> 
-						<?php echo $row->name; ?>	
+						<?php 
+						$link = "index.php?option=com_recruit&view=requesthr&layout=edit&id=".$row->id;
+						
+						echo "<a href='".$link."'>".$row->name."</a>"; ?>	
                     </td>
 					
 					<?php foreach($this->months as $n=>$m) {?>							
