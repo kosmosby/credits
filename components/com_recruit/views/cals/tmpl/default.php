@@ -14,6 +14,13 @@ JHtml::_('bootstrap.tooltip');
 JHtml::_('behavior.multiselect');
 JHtml::_('formbehavior.chosen', 'select');
 
+JFormHelper::addFieldPath(JPATH_COMPONENT . '/models/fields');
+
+$types = JFormHelper::loadFieldType('Type', false);
+$typeOptions=$types->getOptions();
+
+$employees = JFormHelper::loadFieldType('Employee', false);
+$employeeOptions=$employees->getOptions();
 
 $listOrder     = $this->escape($this->filter_order);
 $listDirn      = $this->escape($this->filter_order_Dir);
@@ -63,7 +70,7 @@ $listDirn      = $this->escape($this->filter_order_Dir);
 
 <form action="index.php" method="post" name="adminForm" id="adminForm">
 
-    <div style="float: right;">
+    <div style="float: right; margin-bottom: 20px;">
         <div class="filter-search btn-group pull-left">
 <!--            <label for="filter_search" class="element-invisible">--><?php //echo JText::_('COM_TAGS_ITEMS_SEARCH_FILTER');?><!--</label>-->
 <!--            <input type="text" name="filter_search" id="filter_search" placeholder="--><?php //echo JText::_('JSEARCH_FILTER'); ?><!--" value="--><?php //echo $this->escape($this->state->get('filter.search')); ?><!--" class="hasTooltip" title="Поиск по имени" />-->
@@ -76,8 +83,21 @@ $listDirn      = $this->escape($this->filter_order_Dir);
 <!--            <label for="limit" class="element-invisible">--><?php //echo JText::_('JFIELD_PLG_SEARCH_SEARCHLIMIT_DESC');?><!--</label>-->
 <!--            --><?php //echo $this->pagination->getLimitBox(); ?>
 <!--        </div>-->
+
+        <div class="filter-select fltrt">
+            <select name="filter_type" class="inputbox" onchange="this.form.submit()">
+                <option value=""> - Типы заявок - </option>
+                <?php echo JHtml::_('select.options', $typeOptions, 'value', 'text', $this->state->get('filter.type'));?>
+            </select>
+
+            <select name="filter_employee" class="inputbox" onchange="this.form.submit()">
+                <option value=""> - Сотрудники - </option>
+                <?php echo JHtml::_('select.options', $employeeOptions, 'value', 'text', $this->state->get('filter.employee'));?>
+            </select>
+        </div>
+
     </div>
-		
+
 	
 <div style="width: 100%; overflow-x: scroll;">
 <div style="width: 4100px;" >
@@ -118,8 +138,8 @@ $listDirn      = $this->escape($this->filter_order_Dir);
 		
 		
         <tbody>
-        <?php if (!empty($this->requests)) : ?>
-            <?php foreach ($this->requests as $i => $row) :?>
+        <?php if (!empty($this->items)) : ?>
+            <?php foreach ($this->items as $i => $row) :?>
                 <tr>
                     <td style="border-left: 1px solid #ddd;">
 						<?php echo $this->pagination->getRowOffset($i); ?>
@@ -178,7 +198,7 @@ $listDirn      = $this->escape($this->filter_order_Dir);
 </div>
 
 
-<!--    <input type="hidden" name="view" value="credit" />-->
+    <input type="hidden" name="view" value="cals" />
     <input type="hidden" name="task" value="" />
     <input type="hidden" name="boxchecked" value="0" />
     <input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>"/>

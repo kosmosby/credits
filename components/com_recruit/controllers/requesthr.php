@@ -99,7 +99,7 @@ class RecruitControllerRequesthr extends JControllerForm
         exit;
     }
 
-    public function cancel($key = NUL) {
+    public function cancel($key = NULL) {
 
         $mainframe =& JFactory::getApplication();
         $mainframe->Redirect('index.php?option=com_recruit&view=requests');

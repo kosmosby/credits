@@ -37,10 +37,11 @@ class RecruitViewCals extends JViewLegacy
         $this->items			= $this->get('Items');
         $this->pagination		= $this->get('Pagination');
         $this->state			= $this->get('State');
-        $this->filter_order 	= $app->getUserStateFromRequest($context.'filter_order', 'filter_order', 'name', 'cmd');
+        $this->filter_order 	= $app->getUserStateFromRequest($context.'filter_order', 'filter_order', 'id', 'cmd');
         $this->filter_order_Dir = $app->getUserStateFromRequest($context.'filter_order_Dir', 'filter_order_Dir', 'asc', 'cmd');
         //$this->filterForm    	= $this->get('FilterForm');
         $this->activeFilters 	= $this->get('ActiveFilters');
+        $this->searchterms	= $this->state->get('filter.search');
 
         // Set the toolbar
         //$input->set('hidemainmenu', true);
@@ -52,7 +53,11 @@ class RecruitViewCals extends JViewLegacy
 		$model->showCal();
 		
 		$this->months = $model->getMonths();
-		$this->requests = $model->getRequests();
+//		$this->requests = $model->getRequests();
+
+//		echo "<pre>";
+//		print_r($this->items); die;
+
         //$this->items	= $model->getAdditionPaymentInfo($this->items);
 
 

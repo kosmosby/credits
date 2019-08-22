@@ -19,7 +19,7 @@ class RecruitControllerRequestvr extends JControllerForm
     public function submit()
     {
 
-        $mainframe =& JFactory::getApplication();
+        $mainframe = JFactory::getApplication();
 
         // Check for request forgeries.
         JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
@@ -32,9 +32,14 @@ class RecruitControllerRequestvr extends JControllerForm
         $data = JRequest::getVar('jform', array(), 'post', 'array');
 
         if(!isset($data['manual'])) {
-            $data['estimate_date'] = $model->estimate($data['type_id'], $data['employee_id'], $data['typeemployee_id'], $data['count'], $data['start_date'], $data['id'], $data['level_id']);
+            $return  = $model->estimate($data['type_id'], $data['employee_id'], $data['typeemployee_id'], $data['count'], $data['start_date'], $data['id'], $data['level_id']);
+
+            $data['estimate_date'] = $return['estimate_date'];
+            $data['public_date'] = $return['public_date'];
+
             $data['manual'] = 0;
         }
+
 
         include_once(JPATH_ADMINISTRATOR . "/components/com_jevents/jevents.defines.php");
 
@@ -87,7 +92,7 @@ class RecruitControllerRequestvr extends JControllerForm
         exit;
     }
 
-    public function cancel() {
+    public function cancel($key = NULL) {
 
         $mainframe =& JFactory::getApplication();
         $mainframe->Redirect('index.php?option=com_recruit&view=requests');

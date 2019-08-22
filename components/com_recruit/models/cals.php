@@ -34,7 +34,7 @@ class RecruitModelCals extends JModelList
         {
             $config['filter_fields'] = array(
                 'id','a.id',
-                'name','a.name'
+                'name','a.name', 'a.type_id', 'a.employee_id'
             );
         }
         parent::__construct($config);
@@ -59,12 +59,23 @@ class RecruitModelCals extends JModelList
                 'a.*'
             )
         );
-        $query->from('#__recruit_types AS a');
+        $query->from('#__recruit_requests AS a');
+
+
+        // Filter company
+        $type= $db->escape($this->getState('filter.type'));
+        if (!empty($type)) {
+            $query->where('(a.type_id='.$type.')');
+        }
+
+        // Filter company
+        $employee= $db->escape($this->getState('filter.employee'));
+        if (!empty($employee)) {
+            $query->where('(a.employee_id='.$employee.')');
+        }
 
         // Filter: like / search
         $search = $this->getState('filter.search');
-
-
         if (!empty($search))
         {
             $like = $db->quote('%' . $search . '%');
@@ -84,8 +95,8 @@ class RecruitModelCals extends JModelList
 //        }
 
         // Add the list ordering clause.
-        $orderCol	= $this->state->get('list.ordering', 'a.name');
-        $orderDirn 	= $this->state->get('list.direction', 'asc');
+        $orderCol	= $this->state->get('list.ordering', 'a.id');
+        $orderDirn 	= $this->state->get('list.direction', 'DESC');
 
 
         $query->order($db->escape($orderCol) . ' ' . $db->escape($orderDirn));
@@ -133,6 +144,14 @@ class RecruitModelCals extends JModelList
         $search = $this->getUserStateFromRequest($context . '.search', 'filter_search');
         $this->setState('filter.search', $search);
 
+        //Filter (dropdown) company
+        $type= $app->getUserStateFromRequest($this->context.'.filter.type', 'filter_type', '', 'string');
+        $this->setState('filter.type', $type);
+
+        //Filter (dropdown) company
+        $employee= $app->getUserStateFromRequest($this->context.'.filter.employee', 'filter_employee', '', 'string');
+        $this->setState('filter.employee', $employee);
+
 //        $level = $this->getUserStateFromRequest($context . '.filter.level', 'filter_level', 0, 'int');
 //        $this->setState('filter.level', $level);
 
@@ -154,7 +173,7 @@ class RecruitModelCals extends JModelList
         //$this->getPagination()->set('limitstart',$limitstart);
 
         // List state information.
-        parent::populateState('a.name', 'asc');
+        parent::populateState('a.id', 'ASC');
     }
 
     protected function getStoreId($id = '')
