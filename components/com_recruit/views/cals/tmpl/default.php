@@ -108,7 +108,7 @@ $listDirn      = $this->escape($this->filter_order_Dir);
             <th style="border-left: 1px solid #ddd;" width="10px">
                 №
             </th>
-            <th width="350px;">
+            <th width="280px;">
                 Название вакансии
             </th>
 			
