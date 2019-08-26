@@ -170,9 +170,17 @@ $listDirn      = $this->escape($this->filter_order_Dir);
 								
 								$request_public = strtotime($row->public_date);
 								$request_estimate = strtotime($row->estimate_date);
-								
+
+								$request_archive = $row->archive;
+
 								if($current >= $request_public && $current <= $request_estimate) {
-									echo "<div style='float: left; border: 1px solid #ddd; width: 15px; height: 32px; background-color: #ffff00;'>&nbsp;</div>";	
+
+								    if($request_archive) {
+                                        echo "<div style='float: left; border: 1px solid #ddd; width: 15px; height: 32px; background-color: green;'>&nbsp;</div>";
+                                    }
+								    else {
+                                        echo "<div style='float: left; border: 1px solid #ddd; width: 15px; height: 32px; background-color: yellow;'>&nbsp;</div>";
+                                    }
 								}
 								else {
 									echo "<div style='float: left; border: 1px solid #ddd; width: 15px; height: 32px;'>&nbsp;</div>";

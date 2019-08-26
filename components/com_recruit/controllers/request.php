@@ -16,6 +16,8 @@ class RecruitControllerRequest extends JControllerForm
         return parent::getModel($name, $prefix, array('ignore_request' => false));
     }
 
+
+
     public function submit()
     {
         $mainframe =& JFactory::getApplication();

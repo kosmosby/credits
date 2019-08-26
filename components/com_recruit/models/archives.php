@@ -16,7 +16,7 @@ defined('_JEXEC') or die('Restricted access');
  */
 jimport('joomla.application.component.modellist');
 
-class RecruitModelRequests extends JModelList
+class RecruitModelArchives extends JModelList
 {
     /**
      * Constructor.
@@ -60,7 +60,7 @@ class RecruitModelRequests extends JModelList
             )
         );
 
-        $query->from('#__recruit_employee as b, #__recruit_types as c, #__recruit_requests AS a LEFT JOIN #__recruit_typeemployee as d ON a.typeemployee_id = d.id WHERE a.employee_id = b.id AND a.type_id = c.id AND a.archive = 0');
+        $query->from('#__recruit_employee as b, #__recruit_types as c, #__recruit_requests AS a LEFT JOIN #__recruit_typeemployee as d ON a.typeemployee_id = d.id WHERE a.employee_id = b.id AND a.type_id = c.id AND a.archive = 1');
 
         $query->order('a.id DESC');
         // Filter: like / search

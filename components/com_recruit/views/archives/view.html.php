@@ -16,7 +16,7 @@ defined('_JEXEC') or die('Restricted access');
  *
  * @since  0.0.1
  */
-class RecruitViewRequests extends JViewLegacy
+class RecruitViewArchives extends JViewLegacy
 {
 	/**
 * Display the Hello World view
@@ -75,11 +75,11 @@ list.admin.request";
 
         $this->toolbar = JToolbar::getInstance();
 
-        JToolbarHelper::addNew('requesthr.add','Создать заявку HR');
-        JToolbarHelper::addNew('requestvr.add','Создать заявку VM');
+//        JToolbarHelper::addNew('requesthr.add','Создать заявку HR');
+//        JToolbarHelper::addNew('requestvr.add','Создать заявку VM');
         JToolbarHelper::spacer('10px');
 
-        JToolbarHelper::archiveList('requesthr.archive','В архив');
+        JToolbarHelper::archiveList('archives.unarchive','Достать из архива');
         JToolBarHelper::deleteList('', 'request.delete', 'Удалить');
 
         return $this->toolbar;

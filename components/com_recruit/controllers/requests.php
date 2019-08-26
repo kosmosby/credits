@@ -21,4 +21,5 @@ class RecruitControllerRequests extends JControllerAdmin
 	}
 
 
+
 }

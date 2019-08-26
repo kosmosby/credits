@@ -17,6 +17,41 @@ class RecruitControllerRequesthr extends JControllerForm
     }
 
 
+    public function archive() {
+
+        $mainframe = JFactory::getApplication();
+
+        $cids = implode(',', $_REQUEST['cid']);
+
+        $db = JFactory::getDbo();
+        $query = $db->getQuery(true);
+
+        $conditions = array(
+            $db->quoteName('id') . ' IN ( '.$cids.' ) '
+        );
+
+        $fields = array(
+            $db->quoteName('archive') . ' = 1'
+        );
+
+        $query->update('#__recruit_requests');
+        $query->set($fields);
+        $query->where($conditions);
+
+        //echo($query->__toString()); die;
+        $db->setQuery($query);
+        $result = $db->execute();
+
+        if ($result) {
+            $msg = "Заявка добавлена в архив";
+        } else {
+            echo "Произошла ошибка во время добавления в архив";
+        }
+
+        $mainframe->Redirect('index.php?option=com_recruit&view=requests',$msg);
+    }
+
+
     public function submit()
     {
 
