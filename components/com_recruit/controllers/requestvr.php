@@ -31,6 +31,8 @@ class RecruitControllerRequestvr extends JControllerForm
         // Get the data from the form POST
         $data = JRequest::getVar('jform', array(), 'post', 'array');
 
+        $model = $this->getModel('requesthr');
+
         if(!isset($data['manual'])) {
             $return  = $model->estimate($data['type_id'], $data['employee_id'], $data['typeemployee_id'], $data['count'], $data['start_date'], $data['id'], $data['level_id']);
 
@@ -40,7 +42,14 @@ class RecruitControllerRequestvr extends JControllerForm
             $data['manual'] = 0;
         }
 
+        if($model->ifRearrangeRequest($data['id'], $data['employee_id'])) {
+            if($model->delRecord($data['id'])){
+                $data['id'] = '';
+            }
+        }
 
+
+        /*
         include_once(JPATH_ADMINISTRATOR . "/components/com_jevents/jevents.defines.php");
 
         $cfg = & JEVConfig::getInstance();
@@ -60,6 +69,7 @@ class RecruitControllerRequestvr extends JControllerForm
                 $data['evid'] = $event->ev_id;
             }
         }
+        */
 
         // Now update the loaded data to the database via a function in the model
         $upditem	= $model->updItem($data);

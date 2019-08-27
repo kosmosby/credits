@@ -161,11 +161,13 @@ class RecruitModelRequesthr extends JModelAdmin
 
     public function estimate($type_id,$jform_employee_id,$jform_typeemployee_id, $jform_count_employee, $start_date, $id, $level_id) {
 
+        if($this->ifRearrangeRequest($id, $jform_employee_id)) {
+            $id='';
+        }
+
         $db = JFactory::getDbo();
 
         $estimate_date = '';
-
-
 
         $public_date = $start_date;
 
@@ -246,6 +248,44 @@ class RecruitModelRequesthr extends JModelAdmin
 
         return $arr;
     }
+
+    public function ifRearrangeRequest ($id, $employee_id) {
+
+       $db = JFactory::getDbo();
+        $query = $db->getQuery(true);
+        $query->select(array('employee_id'));
+        $query->from('#__recruit_requests');
+        $query->where('id = '.$id);
+        $db->setQuery($query);
+        $row = $db->loadResult();
+
+        if($row != $employee_id) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public function delRecord($id) {
+
+        $db = JFactory::getDbo();
+        $query = $db->getQuery(true);
+
+        $conditions = array(
+            $db->quoteName('id') . ' = '.$id
+        );
+
+        $query->delete($db->quoteName('#__recruit_requests'));
+        $query->where($conditions);
+
+        $db->setQuery($query);
+
+        $result = $db->execute();
+
+        return $result;
+    }
+
 
     public function findPreviousRequest ($employee_id, $id, $start_date, $type_id) {
 
