@@ -132,7 +132,7 @@ $listDirn      = $this->escape($this->filter_order_Dir);
 		
         <tfoot>
             <td colspan="9" style="border-top: 1px solid #ddd; border-right: 0px; background: none;">
-                <?php //echo $this->pagination->getListFooter(); ?>
+                <?php echo $this->pagination->getListFooter(); ?>
             </td>
         </tfoot>
 		

@@ -100,7 +100,8 @@ class RecruitModelCals extends JModelList
 
 
         $query->order($db->escape($orderCol) . ' ' . $db->escape($orderDirn));
-
+//
+//        echo $query->__toString(); die;
 
         return $query;
     }

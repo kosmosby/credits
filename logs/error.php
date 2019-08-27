@@ -5,3 +5,4 @@
 
 #Fields: datetime	priority clientip	category	message
 2019-08-22T16:49:28+00:00	INFO 127.0.0.1	cookiefailure	Пустой пароль не допускается
+2019-08-27T07:47:39+00:00	INFO 127.0.0.1	cookiefailure	Пустой пароль не допускается
