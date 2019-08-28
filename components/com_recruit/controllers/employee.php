@@ -18,7 +18,7 @@ class RecruitControllerEmployee extends JControllerForm
 
     public function submit()
     {
-        $mainframe =& JFactory::getApplication();
+        $mainframe = JFactory::getApplication();
 
         // Check for request forgeries.
         JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));

@@ -37,7 +37,13 @@ class RecruitViewRequesthr extends JViewLegacy
 //        $document = JFactory::getDocument();
 //        $document->addScript('/components/com_recruit/js/recruit.js\'');
 
+        $user = JFactory::getUser();
+        $status = $user->guest;
 
+        $mainframe = JFactory::getApplication();
+        if($status = 1){
+            $mainframe->Redirect('index.php','Нобходима авторизация');
+        }
         //JHtml::script(Juri::base() . 'components/com_recruit/js/recruit.js');
 
 		// Check for errors.
