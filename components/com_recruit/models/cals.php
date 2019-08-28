@@ -99,9 +99,9 @@ class RecruitModelCals extends JModelList
         $orderDirn 	= $this->state->get('list.direction', 'DESC');
 
 
-        $query->order($db->escape($orderCol) . ' ' . $db->escape($orderDirn));
+        $query->order('a.priority DESC, '.$db->escape($orderCol) . ' ' . $db->escape($orderDirn));
 //
-//        echo $query->__toString(); die;
+        //echo $query->__toString(); die;
 
         return $query;
     }

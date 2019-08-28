@@ -62,6 +62,7 @@ $listDirn      = $this->escape($this->filter_order_Dir);
         float: left;
     }
 
+
 </style>
 <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
 
@@ -158,24 +159,26 @@ $listDirn      = $this->escape($this->filter_order_Dir);
                 }
 
                 //$link = JRoute::_('index.php?option=com_recruit&task=requesthr.edit&id=' . $row->id);
+
+                $highPriority = $row->priority;
                 ?>
-                <tr>
-                    <td style="border-left: 1px solid #ddd;"><?php echo $this->pagination->getRowOffset($i); ?></td>
-                    <td>
+                <tr >
+                    <td style="border-left: 1px solid #ddd; <?php echo ($highPriority)?'background-color: mistyrose;':'';?>" ><?php echo $this->pagination->getRowOffset($i); ?></td>
+                    <td <?php echo ($highPriority)?'style="background-color: mistyrose;"':'';?>>
                         <?php echo JHtml::_('grid.id', $i, $row->id); ?>
                     </td>
-                    <td>
+                    <td <?php echo ($highPriority)?'style="background-color: mistyrose;"':'';?>>
                         <a href="<?php echo $link; ?>" title="Редактировать">
                             <?php echo $row->name; ?>
                         </a>
                     </td>
-                    <td>
+                    <td <?php echo ($highPriority)?'style="background-color: mistyrose;"':'';?>>
                         <?php echo $row->type_name; ?>
                     </td>
-                    <td>
+                    <td <?php echo ($highPriority)?'style="background-color: mistyrose;"':'';?>>
                         <?php echo $row->employee_name; ?>
                     </td>
-                    <td>
+                    <td <?php echo ($highPriority)?'style="background-color: mistyrose;"':'';?>>
                         <?php
 
                             switch($row->type_id) {
@@ -190,16 +193,16 @@ $listDirn      = $this->escape($this->filter_order_Dir);
 
                             ?>
                     </td>
-                    <td>
+                    <td <?php echo ($highPriority)?'style="background-color: mistyrose;"':'';?>>
                         <?php echo $row->count; ?>
                     </td>
-                    <td>
+                    <td <?php echo ($highPriority)?'style="background-color: mistyrose;"':'';?>>
                         <?php echo $row->public_date; ?>
                     </td>
-                    <td>
+                    <td <?php echo ($highPriority)?'style="background-color: mistyrose;"':'';?>>
                         <?php echo $row->estimate_date; ?>
                     </td>
-                    <td>
+                    <td <?php echo ($highPriority)?'style="background-color: mistyrose;"':'';?>>
                         <?php echo $row->id; ?>
                     </td>
                 </tr>

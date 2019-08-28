@@ -175,6 +175,9 @@ $listDirn      = $this->escape($this->filter_order_Dir);
 
 								$now = strtotime("now");
 
+								$highPriority =  $row->priority;
+
+
 								if($current >= $request_public && $current <= $request_estimate) {
 
 								    if($request_archive) {
@@ -182,6 +185,9 @@ $listDirn      = $this->escape($this->filter_order_Dir);
                                     }
 								    else if($request_estimate < $now) {
                                         echo "<div style='float: left; border: 1px solid #ddd; width: 15px; height: 32px; background-color: orange;'>&nbsp;</div>";
+                                    }
+								    else if($highPriority) {
+                                        echo "<div style='float: left; border: 1px solid #ddd; width: 15px; height: 32px; background-color: red;'>&nbsp;</div>";
                                     }
 								    else {
                                         echo "<div style='float: left; border: 1px solid #ddd; width: 15px; height: 32px; background-color: yellow;'>&nbsp;</div>";
