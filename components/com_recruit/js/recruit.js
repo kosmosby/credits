@@ -40,4 +40,12 @@ jQuery( document ).ready(function() {
          break;
          default:
      }
+
+
+     var isSuperUser = jQuery('#isSuperUser').html();
+
+     if(!isSuperUser) {
+        jQuery('.superuser').parents('.control-group').hide();
+     }
+
 });

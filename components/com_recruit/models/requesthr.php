@@ -143,7 +143,7 @@ class RecruitModelRequesthr extends JModelAdmin
 
     public function updItem($data)
     {
-        $row =& JTable::getInstance('Requests', 'RecruitTable');
+        $row = JTable::getInstance('Requests', 'RecruitTable');
 
         if(!$row->bind($data))
         {
@@ -155,7 +155,7 @@ class RecruitModelRequesthr extends JModelAdmin
             return false;
         }
 
-        return true;
+        return $row;
 
     }
 
@@ -313,6 +313,94 @@ class RecruitModelRequesthr extends JModelAdmin
 
 //        echo "<pre>";
 //        print_r($row); die;
+
+        return $row;
+    }
+
+    public function _mail( $body, $subject, $recipient) {
+
+        $mailer = JFactory::getMailer();
+
+        $config = JFactory::getConfig();
+        $sender = array(
+            $config->get( 'mailfrom' ),
+            $config->get( 'fromname' )
+        );
+
+        $mailer->setSender($sender);
+
+//        $user = JFactory::getUser();
+//        $recipient = $user->email;
+
+
+        $mailer->isHtml(true);
+        $mailer->addRecipient($recipient);
+
+        //$body   = "Your body string\nin double quotes if you want to parse the \nnewlines etc";
+        $mailer->setSubject($subject);
+        $mailer->setBody($body);
+
+        $send = $mailer->Send();
+        if ( $send !== true ) {
+            echo 'Error sending email: ';
+        } else {
+            echo 'Mail sent';
+        }
+
+    }
+
+    public function _bodyRequestCreation($data) {
+
+
+        $str = "Запрос от ".JFactory::getUser()->name."<br/><br />";
+
+        $str .= "название вакансии: ".$data->name."<br/>";
+        $str .= "тип заявки: ".$this->getTypebyId($data->type_id)."<br/>";
+        $str .= "тип сотрудника: ".$this->getTypeEmployebyId($data->typeemployee_id)."<br/>";
+        $str .= "количество специалистов: ".$data->count."<br/>";
+        $str .= "описание задачи: ".$data->description."<br/>";
+        $str .= "приоритетность: ";
+        $str .= (!$data->priority)?"нормальная<br/><br/>":"высокая<br/><br/>";
+
+        $uri =JURI::base();
+
+        $type=($data->type_id==1)?"requesthr":"requestvr";
+
+        $uri .= 'index.php?option=com_recruit&view='.$type.'&layout=edit&id='.$data->id;
+
+        $str .= "ссылка на заявку: <a href='".$uri."' target='_blank'>".$uri."</a>";
+
+        return $str;
+
+//        echo "<pre>";
+//        print_r($str); die;
+
+    }
+
+    public function getTypebyId($id) {
+
+        $db = JFactory::getDbo();
+        $query = $db->getQuery(true);
+        $query->select(array('name'));
+        $query->from('#__recruit_types');
+        $query->where('id = '.$id);
+
+        $db->setQuery($query);
+        $row = $db->loadResult();
+
+        return $row;
+    }
+
+    public function getTypeEmployebyId($id) {
+
+        $db = JFactory::getDbo();
+        $query = $db->getQuery(true);
+        $query->select(array('name'));
+        $query->from('#__recruit_typeemployee');
+        $query->where('id = '.$id);
+
+        $db->setQuery($query);
+        $row = $db->loadResult();
 
         return $row;
     }

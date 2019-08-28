@@ -70,20 +70,28 @@ class RecruitControllerRequesthr extends JControllerForm
 
         $model = $this->getModel('requesthr');
 
-        if(!isset($data['manual'])) {
+//        echo "<pre>";
+//        print_r($data); die;
+        $isSuperUser = JFactory::getUser()->authorise('core.admin');
+        if(!$isSuperUser) {
+            $data['created_by'] = JFactory::getUser()->id;
+
+
+        }
+
+
+        if(!isset($data['manual']) && $isSuperUser) {
+
 
             $return = $model->estimate($data['type_id'], $data['employee_id'], $data['typeemployee_id'], $data['count'], $data['start_date'], $data['id'], $data['level_id']);
 
             $data['estimate_date'] = $return['estimate_date'];
             $data['public_date'] = $return['public_date'];
 
-//            echo "<pre>";
-//            print_r($data); die;
-
             $data['manual'] = 0;
         }
 
-        if($model->ifRearrangeRequest($data['id'], $data['employee_id'])) {
+        if($isSuperUser && $model->ifRearrangeRequest($data['id'], $data['employee_id'])) {
             if($model->delRecord($data['id'])){
                 $data['id'] = '';
             }
@@ -111,16 +119,26 @@ class RecruitControllerRequesthr extends JControllerForm
         }
     */
 
-
-
-
-
         // Now update the loaded data to the database via a function in the model
         $upditem	= $model->updItem($data);
 
 
         // check if ok and display appropriate message.  This can also have a redirect if desired.
         if ($upditem) {
+
+//
+//            echo "<pre>";
+//            print_r($upditem); die;
+
+
+            if(!$isSuperUser) {
+                $user = JFactory::getUser(928);
+                $recipient=$user->get('email');
+
+                $body = $model->_bodyRequestCreation($upditem);
+                $model->_mail( $body, 'Запрос на размещение заявки', $recipient);
+            }
+
             $msg = "Записть успешно сохранена";
         } else {
             echo "Произошла ошибка во время сохранения записи";

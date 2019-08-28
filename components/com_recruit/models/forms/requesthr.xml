@@ -27,7 +27,7 @@
 		<field
 				name="type_id"
 				type="sql"
-				default="10"
+				default=""
 				label="тип заявки"
 				query="SELECT id AS value, name AS type_id  FROM #__recruit_types"
 				required="true"
@@ -36,10 +36,11 @@
 		<field
 				name="employee_id"
 				type="sql"
-				default="10"
+				default=""
 				label="ФИО сотрудника"
 				query="SELECT id AS value, name AS employee_id  FROM #__recruit_employee"
-				required="true"
+				header="Выберите опцию"
+				class="superuser"
 		/>
 
 		<field
@@ -68,6 +69,7 @@
 			   type="calendar"
 			   default="NOW"
 			   label="дата открытия"
+			   class="superuser"
 		/>
 
 		<field name="description"
@@ -91,7 +93,7 @@
 				label="заработная плата"
 				description="заработная плата"
 				size="40"
-				class="inputbox"
+				class="superuser"
 				default=""
 				rows="10"
 				cols="50"
@@ -101,20 +103,29 @@
 			   type="checkbox"
 			   label="расчет вручную"
 			   description="отключение автоматического расчета"
-			   value="1" />
+			   value="1"
+			   class="superuser"
+		/>
 
 		<field name="public_date"
 			   type="calendar"
 			   label="дата размещения"
+			   class="superuser"
 		/>
 
 		<field name="estimate_date"
 			   type="calendar"
 			   label="расчетная дата"
+			   class="superuser"
 		/>
 
 		<field
 				name="evid"
+				type="hidden"
+		/>
+
+		<field
+				name="created_by"
 				type="hidden"
 		/>
 

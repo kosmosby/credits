@@ -18,7 +18,7 @@ defined('_JEXEC') or die('Restricted access');
 class RecruitController extends JControllerLegacy
 {
 
-    protected $default_view = 'employees';
+    protected $default_view = 'requests';
 
 
 

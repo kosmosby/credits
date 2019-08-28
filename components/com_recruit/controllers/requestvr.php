@@ -33,7 +33,13 @@ class RecruitControllerRequestvr extends JControllerForm
 
         $model = $this->getModel('requesthr');
 
-        if(!isset($data['manual'])) {
+
+        $isSuperUser = JFactory::getUser()->authorise('core.admin');
+        if(!$isSuperUser) {
+            $data['created_by'] = JFactory::getUser()->id;
+        }
+
+        if(!isset($data['manual']) && $isSuperUser) {
             $return  = $model->estimate($data['type_id'], $data['employee_id'], $data['typeemployee_id'], $data['count'], $data['start_date'], $data['id'], $data['level_id']);
 
             $data['estimate_date'] = $return['estimate_date'];
@@ -42,7 +48,7 @@ class RecruitControllerRequestvr extends JControllerForm
             $data['manual'] = 0;
         }
 
-        if($model->ifRearrangeRequest($data['id'], $data['employee_id'])) {
+        if($isSuperUser && $model->ifRearrangeRequest($data['id'], $data['employee_id'])) {
             if($model->delRecord($data['id'])){
                 $data['id'] = '';
             }

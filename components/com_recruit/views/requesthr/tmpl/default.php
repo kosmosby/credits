@@ -80,7 +80,7 @@ JHtml::script(Juri::base() . 'components/com_recruit/js/recruit.js');
                 <div class="span6">
                     <div class="control-group">
                         <div class="control-label">расчет срока закрытия</div>
-                        <div class="controls">
+                        <div class="controls superuser">
                             <button class="btn btn-small button-new btn-success" id="estimate">
                                 <span class="icon-apply icon-white" aria-hidden="true"></span>
                                 Рассчитать</button>
@@ -95,3 +95,4 @@ JHtml::script(Juri::base() . 'components/com_recruit/js/recruit.js');
 </form>
 
 <div style="display: none;" id="view"><?php echo JRequest::getString('view');?></div>
+<div style="display: none;" id="isSuperUser"><?php echo JFactory::getUser()->authorise('core.admin');?></div>

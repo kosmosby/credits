@@ -60,7 +60,9 @@ class RecruitModelRequests extends JModelList
             )
         );
 
-        $query->from('#__recruit_employee as b, #__recruit_types as c, #__recruit_requests AS a LEFT JOIN #__recruit_typeemployee as d ON a.typeemployee_id = d.id WHERE a.employee_id = b.id AND a.type_id = c.id AND a.archive = 0');
+        $query->from('#__recruit_types as c, #__recruit_requests AS a LEFT JOIN #__recruit_typeemployee as d ON a.typeemployee_id = d.id LEFT JOIN #__recruit_employee as b ON a.employee_id = b.id');
+        $query->where('a.type_id = c.id');
+        $query->where('a.archive = 0');
 
         //$query->order('a.id DESC');
         // Filter: like / search
@@ -70,6 +72,12 @@ class RecruitModelRequests extends JModelList
         {
             $like = $db->quote('%' . $search . '%');
             $query->where('b.name LIKE ' . $like);
+        }
+
+        $isSuperUser = JFactory::getUser()->authorise('core.admin');
+        if(!$isSuperUser) {
+            $created_by = JFactory::getUser()->id;
+            $query->where('a.created_by = ' . $created_by);
         }
 
         // Filter by published state

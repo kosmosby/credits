@@ -79,8 +79,12 @@ list.admin.request";
         JToolbarHelper::addNew('requestvr.add','Создать заявку VM');
         JToolbarHelper::spacer('10px');
 
-        JToolbarHelper::archiveList('requesthr.archive','В архив');
-        JToolBarHelper::deleteList('', 'request.delete', 'Удалить');
+        $isSuperUser = JFactory::getUser()->authorise('core.admin');
+
+        if($isSuperUser) {
+            JToolbarHelper::archiveList('requesthr.archive', 'В архив');
+            JToolBarHelper::deleteList('', 'request.delete', 'Удалить');
+        }
 
         return $this->toolbar;
     }
