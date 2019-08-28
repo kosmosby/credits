@@ -53,7 +53,12 @@ list.admin.request";
 
         $this->items = $levels_model->LevelsById($this->items);
 
-
+        $user = JFactory::getUser();
+        $status = $user->guest;
+        $mainframe = JFactory::getApplication();
+        if($status == 1){
+            $mainframe->Redirect('index.php?option=com_users&view=login&Itemid=105','Нобходима авторизация');
+        }
 //        echo "<pre>";
 //        print_r($this->items); die;
 

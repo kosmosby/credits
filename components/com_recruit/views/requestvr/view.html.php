@@ -37,7 +37,7 @@ class RecruitViewRequestvr extends JViewLegacy
         $this->toolbar = $this->addToolbar();
 
         $mainframe = JFactory::getApplication();
-        if($status = 1){
+        if($status == 1){
             $mainframe->Redirect('index.php','Нобходима авторизация');
         }
 //        $document = JFactory::getDocument();

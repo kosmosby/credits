@@ -41,7 +41,7 @@ class RecruitViewRequesthr extends JViewLegacy
         $status = $user->guest;
 
         $mainframe = JFactory::getApplication();
-        if($status = 1){
+        if($status == 1){
             $mainframe->Redirect('index.php','Нобходима авторизация');
         }
         //JHtml::script(Juri::base() . 'components/com_recruit/js/recruit.js');
