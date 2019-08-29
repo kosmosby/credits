@@ -88,6 +88,23 @@ class RecruitControllerRequestvr extends JControllerForm
             $model->_mail( $body, 'Запрос на размещение заявки', $recipient);
         }
 
+        if($isSuperUser && isset($data['employee_id'])) {
+
+
+            $user = JFactory::getUser($data['created_by']);
+            $recipient_created_by=$user->get('email');
+
+            $user = JFactory::getUser($model->getEmployeeUser_id($data['employee_id']));
+            $recipient_assign_to=$user->get('email');
+
+            $recipient = array( $recipient_created_by, $recipient_assign_to);
+
+            $body = $model->_bodyRequestCreation($upditem);
+            $model->_mail( $body, 'Присвоение исполнителя на заявку', $recipient);
+
+
+        }
+
         // check if ok and display appropriate message.  This can also have a redirect if desired.
         if ($upditem) {
             $msg = "Записть успешно сохранена";

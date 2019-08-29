@@ -6,6 +6,7 @@
 				name="id"
 				type="hidden"
 				/>
+
 		<field
 				name="name"
 				type="text"
@@ -15,6 +16,16 @@
 				class="inputbox"
 				required="true"
 				default=""
-				/>
+		/>
+
+		<field
+				name="user_id"
+				type="sql"
+				default="10"
+				label="Имя в системе"
+				query="SELECT id AS value, name AS user_id  FROM #__users"
+				header="Выберите опцию"
+				required="true"
+		/>
 	</fieldset>
 </form>

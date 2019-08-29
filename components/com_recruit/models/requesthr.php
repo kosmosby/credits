@@ -357,6 +357,10 @@ class RecruitModelRequesthr extends JModelAdmin
         $str .= "название вакансии: ".$data->name."<br/>";
         $str .= "тип заявки: ".$this->getTypebyId($data->type_id)."<br/>";
 
+        if($data->employee_id) {
+            $str .= "исполнитель: " . $this->getEmployeeName($data->employee_id) . "<br/>";
+        }
+
         if($data->type_id == 2) {
             $obj = $this->getLevelbyId($data->level_id);
             $str .= "уровень сложности: ".$obj->languages." - ".$obj->theme_name."<br/>";
@@ -366,24 +370,26 @@ class RecruitModelRequesthr extends JModelAdmin
             $str .= "тип сотрудника: " . $this->getTypeEmployebyId($data->typeemployee_id) . "<br/>";
         }
 
-
         $str .= "количество специалистов: ".$data->count."<br/>";
         $str .= "описание задачи: ".$data->description."<br/>";
         $str .= "приоритетность: ";
-        $str .= (!$data->priority)?"нормальная<br/><br/>":"высокая<br/><br/>";
+        $str .= (!$data->priority)?"нормальная<br/>":"высокая<br/>";
 
         if($data->type_id == 2) {
             $str .= "тип переводчика: ".$this->getTypeInterpreterbyId($data->interpreter_type)."<br/>";
         }
 
-        $uri =JURI::base();
+        if($data->start_date != '0000-00-00' && $data->estimate_date != '0000-00-00') {
+            $str .= "дата размещения заявки: ".$data->start_date."<br/>";
+            $str .= "дата окончания заявки: ".$data->estimate_date."<br/>";
+        }
 
-        $type=($data->type_id==1)?"requesthr":"requestvr";
-
-        $uri .= 'index.php?option=com_recruit&view='.$type.'&layout=edit&id='.$data->id;
-
-        $str .= "ссылка на заявку: <a href='".$uri."' target='_blank'>".$uri."</a>";
-
+        if(!$data->employee_id) {
+            $uri =JURI::base();
+            $type=($data->type_id==1)?"requesthr":"requestvr";
+            $uri .= 'index.php?option=com_recruit&view=' . $type . '&layout=edit&id=' . $data->id;
+            $str .= "ссылка на заявку: <a href='" . $uri . "' target='_blank'>" . $uri . "</a>";
+        }
 //        echo "<pre>";
 //        print_r($str); die;
 
@@ -444,6 +450,34 @@ class RecruitModelRequesthr extends JModelAdmin
         $query = $db->getQuery(true);
         $query->select(array('name'));
         $query->from('#__recruit_typeemployee');
+        $query->where('id = '.$id);
+
+        $db->setQuery($query);
+        $row = $db->loadResult();
+
+        return $row;
+    }
+
+    public function getEmployeeUser_id($employee_id) {
+
+        $db = JFactory::getDbo();
+        $query = $db->getQuery(true);
+        $query->select(array('user_id'));
+        $query->from('#__recruit_employee');
+        $query->where('id = '.$employee_id);
+
+        $db->setQuery($query);
+        $row = $db->loadResult();
+
+        return $row;
+    }
+
+    public function getEmployeeName($id) {
+
+        $db = JFactory::getDbo();
+        $query = $db->getQuery(true);
+        $query->select(array('name'));
+        $query->from('#__recruit_employee');
         $query->where('id = '.$id);
 
         $db->setQuery($query);

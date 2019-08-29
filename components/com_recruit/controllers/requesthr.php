@@ -43,6 +43,17 @@ class RecruitControllerRequesthr extends JControllerForm
         $result = $db->execute();
 
         if ($result) {
+            $rows = $this->getRequestByCids($cids);
+
+            for($i=0;$i<count($rows);$i++) {
+                $model = $this->getModel('requesthr');
+                $user = JFactory::getUser($rows[$i]->created_by);
+                $recipient=$user->get('email');
+
+                $body = $model->_bodyRequestCreation($rows[$i]);
+                $model->_mail( $body, 'Письмо о закрытии вакансии', $recipient);
+            }
+
             $msg = "Заявка добавлена в архив";
         } else {
             echo "Произошла ошибка во время добавления в архив";
@@ -126,17 +137,25 @@ class RecruitControllerRequesthr extends JControllerForm
         // check if ok and display appropriate message.  This can also have a redirect if desired.
         if ($upditem) {
 
-//
-//            echo "<pre>";
-//            print_r($upditem); die;
-
-
             if(!$isSuperUser) {
                 $user = JFactory::getUser(928);
                 $recipient=$user->get('email');
 
                 $body = $model->_bodyRequestCreation($upditem);
                 $model->_mail( $body, 'Запрос на размещение заявки', $recipient);
+            }
+            if($isSuperUser && isset($data['employee_id'])) {
+
+                $user = JFactory::getUser($data['created_by']);
+                $recipient_created_by=$user->get('email');
+
+                $user = JFactory::getUser($model->getEmployeeUser_id($data['employee_id']));
+                $recipient_assign_to=$user->get('email');
+
+                $recipient = array( $recipient_created_by, $recipient_assign_to);
+
+                $body = $model->_bodyRequestCreation($upditem);
+                $model->_mail( $body, 'Присвоение исполнителя на заявку', $recipient);
             }
 
             $msg = "Записть успешно сохранена";
@@ -266,5 +285,19 @@ class RecruitControllerRequesthr extends JControllerForm
         return $row;
     }
 
+
+    public function getRequestByCids($cids) {
+
+        $db = JFactory::getDbo();
+        $query = $db->getQuery(true);
+        $query->select(array('*'));
+        $query->from('#__recruit_requests');
+        $query->where('id IN ('.$cids.')');
+
+        $db->setQuery($query);
+        $rows = $db->loadObjectList();
+
+        return $rows;
+    }
 
 }
