@@ -356,11 +356,25 @@ class RecruitModelRequesthr extends JModelAdmin
 
         $str .= "название вакансии: ".$data->name."<br/>";
         $str .= "тип заявки: ".$this->getTypebyId($data->type_id)."<br/>";
-        $str .= "тип сотрудника: ".$this->getTypeEmployebyId($data->typeemployee_id)."<br/>";
+
+        if($data->type_id == 2) {
+            $obj = $this->getLevelbyId($data->level_id);
+            $str .= "уровень сложности: ".$obj->languages." - ".$obj->theme_name."<br/>";
+        }
+
+        if($data->type_id == 1) {
+            $str .= "тип сотрудника: " . $this->getTypeEmployebyId($data->typeemployee_id) . "<br/>";
+        }
+
+
         $str .= "количество специалистов: ".$data->count."<br/>";
         $str .= "описание задачи: ".$data->description."<br/>";
         $str .= "приоритетность: ";
         $str .= (!$data->priority)?"нормальная<br/><br/>":"высокая<br/><br/>";
+
+        if($data->type_id == 2) {
+            $str .= "тип переводчика: ".$this->getTypeInterpreterbyId($data->interpreter_type)."<br/>";
+        }
 
         $uri =JURI::base();
 
@@ -370,12 +384,26 @@ class RecruitModelRequesthr extends JModelAdmin
 
         $str .= "ссылка на заявку: <a href='".$uri."' target='_blank'>".$uri."</a>";
 
-        return $str;
-
 //        echo "<pre>";
 //        print_r($str); die;
 
+        return $str;
     }
+
+    public function getLevelbyId($id) {
+
+        $rows = array();
+        $rows[0] = new stdClass();
+        $rows[0]->level_id = $id;
+
+        JModelLegacy::addIncludePath(JPATH_ROOT.'/components/com_recruit/models', 'RecruitModel');
+        $levels_model = JModelLegacy::getInstance('requestvr', 'RecruitModel', array('ignore_request' => true));
+
+        $level = $levels_model->LevelsById($rows);
+
+        return $level[0];
+    }
+
 
     public function getTypebyId($id) {
 
@@ -387,6 +415,25 @@ class RecruitModelRequesthr extends JModelAdmin
 
         $db->setQuery($query);
         $row = $db->loadResult();
+
+        return $row;
+    }
+
+
+    public function getTypeInterpreterbyId($id) {
+
+        switch ($id) {
+            case 0:
+                $row = 'письменный';
+            break;
+            case 1:
+                $row = 'устный';
+            break;
+            case 2:
+                $row = 'верстальщик';
+            break;
+            default:
+        }
 
         return $row;
     }

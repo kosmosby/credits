@@ -348,4 +348,6 @@ class RecruitModelRequestvr extends JModelAdmin
     }
 
 
+
+
 }
