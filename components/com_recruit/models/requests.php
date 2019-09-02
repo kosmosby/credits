@@ -56,11 +56,16 @@ class RecruitModelRequests extends JModelList
         $query->select(
             $this->getState(
                 'list.select',
-                'a.*, b.name as employee_name, c.name as type_name, d.name as typeemployee_name'
+                'a.*, b.name as employee_name, c.name as type_name, d.name as typeemployee_name, e.name as created_name'
             )
         );
 
-        $query->from('#__recruit_types as c, #__recruit_requests AS a LEFT JOIN #__recruit_typeemployee as d ON a.typeemployee_id = d.id LEFT JOIN #__recruit_employee as b ON a.employee_id = b.id');
+        $query->from('#__recruit_types as c, #__recruit_requests AS a');
+		
+        $query->join('LEFT', $db->quoteName('#__recruit_typeemployee','d') . ' ON (a.typeemployee_id = d.id)' );
+		$query->join('LEFT', $db->quoteName('#__recruit_employee','b') . ' ON (a.employee_id = b.id)' );
+		$query->join('LEFT', $db->quoteName('#__users','e') . ' ON (a.created_by = e.id)' );
+                         
         $query->where('a.type_id = c.id');
         $query->where('a.archive = 0');
 

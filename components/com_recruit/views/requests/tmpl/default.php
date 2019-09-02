@@ -111,6 +111,9 @@ $listDirn      = $this->escape($this->filter_order_Dir);
             <th>
                 Название
             </th>
+			<th>
+				Создано
+			</th>	
             <th>
                 Тип заявки
             </th>
@@ -136,7 +139,7 @@ $listDirn      = $this->escape($this->filter_order_Dir);
         </thead>
         <tfoot>
         <tr>
-            <td colspan="14" style="border-top: 1px solid #ddd; border-right: 0px; background: none;">
+            <td colspan="15" style="border-top: 1px solid #ddd; border-right: 0px; background: none;">
                 <?php echo $this->pagination->getListFooter(); ?>
             </td>
         </tr>
@@ -172,6 +175,9 @@ $listDirn      = $this->escape($this->filter_order_Dir);
                             <?php echo $row->name; ?>
                         </a>
                     </td>
+					<td>
+						<?php echo $row->created_name;?>
+					</td>	
                     <td <?php echo ($highPriority)?'style="background-color: mistyrose;"':'';?>>
                         <?php echo $row->type_name; ?>
                     </td>
