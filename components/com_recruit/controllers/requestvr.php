@@ -35,7 +35,7 @@ class RecruitControllerRequestvr extends JControllerForm
 
 
         $isSuperUser = JFactory::getUser()->authorise('core.admin');
-        if(!$isSuperUser) {
+        if(!$data['created_by']) {
             $data['created_by'] = JFactory::getUser()->id;
         }
 
@@ -48,12 +48,11 @@ class RecruitControllerRequestvr extends JControllerForm
             $data['manual'] = 0;
         }
 
-        if($isSuperUser && $model->ifRearrangeRequest($data['id'], $data['employee_id'])) {
+        if($isSuperUser && $data['id'] && $data['employee_id'] && $model->ifRearrangeRequest($data['id'], $data['employee_id'])) {
             if($model->delRecord($data['id'])){
                 $data['id'] = '';
             }
         }
-
 
         /*
         include_once(JPATH_ADMINISTRATOR . "/components/com_jevents/jevents.defines.php");

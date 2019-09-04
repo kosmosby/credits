@@ -161,8 +161,10 @@ class RecruitModelRequesthr extends JModelAdmin
 
     public function estimate($type_id,$jform_employee_id,$jform_typeemployee_id, $jform_count_employee, $start_date, $id, $level_id) {
 
-        if($this->ifRearrangeRequest($id, $jform_employee_id)) {
-            $id='';
+        if($id && $jform_employee_id) {
+            if ($this->ifRearrangeRequest($id, $jform_employee_id)) {
+                $id = '';
+            }
         }
 
         $db = JFactory::getDbo();
@@ -170,6 +172,7 @@ class RecruitModelRequesthr extends JModelAdmin
         $estimate_date = '';
 
         $public_date = $start_date;
+
 
         switch ($type_id) {
             case 1:
@@ -251,7 +254,7 @@ class RecruitModelRequesthr extends JModelAdmin
 
     public function ifRearrangeRequest ($id, $employee_id) {
 
-       $db = JFactory::getDbo();
+        $db = JFactory::getDbo();
         $query = $db->getQuery(true);
         $query->select(array('employee_id'));
         $query->from('#__recruit_requests');

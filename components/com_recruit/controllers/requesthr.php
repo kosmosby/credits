@@ -80,15 +80,16 @@ class RecruitControllerRequesthr extends JControllerForm
 
 
         $model = $this->getModel('requesthr');
-
+//
 //        echo "<pre>";
 //        print_r($data); die;
         $isSuperUser = JFactory::getUser()->authorise('core.admin');
-        if(!$isSuperUser) {
+
+
+        if(!$data['created_by']) {
             $data['created_by'] = JFactory::getUser()->id;
-
-
         }
+
 
 
         if(!isset($data['manual']) && $isSuperUser) {
@@ -102,7 +103,9 @@ class RecruitControllerRequesthr extends JControllerForm
             $data['manual'] = 0;
         }
 
-        if($isSuperUser && $model->ifRearrangeRequest($data['id'], $data['employee_id'])) {
+
+
+        if($isSuperUser && $data['id'] && $data['employee_id'] && $model->ifRearrangeRequest($data['id'], $data['employee_id'])) {
             if($model->delRecord($data['id'])){
                 $data['id'] = '';
             }
