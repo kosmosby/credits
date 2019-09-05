@@ -179,13 +179,13 @@ class RecruitModelRequesthr extends JModelAdmin
                 $prev_date = $this->findPreviousRequest($jform_employee_id, $id, $start_date, $type_id);
 
                 if(count($prev_date)) {
-
                     $half_all_count_days = (strtotime($prev_date->estimate_date) - strtotime($prev_date->public_date))/2;
+                    $count_days = round($half_all_count_days/60/60/24);
 
-                    $half_date = strtotime($prev_date->public_date) + $half_all_count_days;
+                    $half_date = strtotime($prev_date->public_date."+".$count_days." days");
 
                     if(strtotime($start_date) < $half_date) {
-                        $start_date_seconds = strtotime($prev_date->public_date) + $half_all_count_days;
+                        $start_date_seconds = strtotime($prev_date->public_date."+".$count_days." days");
                         $public_date = date("Y-m-d", $start_date_seconds);
                     }
                 }
@@ -210,13 +210,13 @@ class RecruitModelRequesthr extends JModelAdmin
                 $prev_date = $this->findPreviousRequest($jform_employee_id, $id, $start_date, $type_id);
 
                 if(count($prev_date)) {
-
                     $half_all_count_days = (strtotime($prev_date->estimate_date) - strtotime($prev_date->public_date))/2;
+                    $count_days = round($half_all_count_days/60/60/24);
 
-                    $half_date = strtotime($prev_date->public_date) + $half_all_count_days;
+                    $half_date = strtotime($prev_date->public_date."+".$count_days." days");
 
                     if(strtotime($start_date) < $half_date) {
-                        $start_date_seconds = strtotime($prev_date->public_date) + $half_all_count_days;
+                        $start_date_seconds = strtotime($prev_date->public_date."+".$count_days." days");
                         $public_date = date("Y-m-d", $start_date_seconds);
                     }
                 }

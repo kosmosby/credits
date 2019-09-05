@@ -165,7 +165,9 @@ $listDirn      = $this->escape($this->filter_order_Dir);
 								//print_r($row); die;
 								
 								$current = strtotime($y ." ".str_replace(","," ",$n));
-								
+
+                                $weekday= date("l", $current );
+
 								//echo date("Y-m-d", $current); die;
 								
 								$request_public = strtotime($row->public_date);
@@ -194,6 +196,9 @@ $listDirn      = $this->escape($this->filter_order_Dir);
                                     }
 								}
 
+								else if ($weekday =="Saturday" OR $weekday =="Sunday") {
+                                    echo "<div style='float: left; border: 1px solid #ddd; width: 15px; height: 32px; background-color: #ededed;'>&nbsp;</div>";
+                                }
 								else {
 									echo "<div style='float: left; border: 1px solid #ddd; width: 15px; height: 32px;'>&nbsp;</div>";
 								}
