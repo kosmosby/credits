@@ -254,6 +254,7 @@ class RecruitModelRequesthr extends JModelAdmin
 
     public function ifRearrangeRequest ($id, $employee_id) {
 
+
         $db = JFactory::getDbo();
         $query = $db->getQuery(true);
         $query->select(array('employee_id'));

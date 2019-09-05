@@ -39,6 +39,12 @@ class RecruitControllerRequestvr extends JControllerForm
             $data['created_by'] = JFactory::getUser()->id;
         }
 
+        if($isSuperUser && $data['id'] && $data['employee_id'] && $model->ifRearrangeRequest($data['id'], $data['employee_id'])) {
+            if($model->delRecord($data['id'])){
+                $data['id'] = '';
+            }
+        }
+
         if(!isset($data['manual']) && $isSuperUser) {
             $return  = $model->estimate($data['type_id'], $data['employee_id'], $data['typeemployee_id'], $data['count'], $data['start_date'], $data['id'], $data['level_id']);
 
@@ -46,12 +52,6 @@ class RecruitControllerRequestvr extends JControllerForm
             $data['public_date'] = $return['public_date'];
 
             $data['manual'] = 0;
-        }
-
-        if($isSuperUser && $data['id'] && $data['employee_id'] && $model->ifRearrangeRequest($data['id'], $data['employee_id'])) {
-            if($model->delRecord($data['id'])){
-                $data['id'] = '';
-            }
         }
 
         /*
