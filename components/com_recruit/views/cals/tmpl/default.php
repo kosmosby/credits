@@ -145,8 +145,19 @@ $listDirn      = $this->escape($this->filter_order_Dir);
 						<?php echo $this->pagination->getRowOffset($i); ?>
 					</td>
                     <td> 
-						<?php 
-						$link = "index.php?option=com_recruit&view=requesthr&layout=edit&id=".$row->id;
+						<?php
+
+                        switch ($row->type_id) {
+                            case 1:
+                                $link = "index.php?option=com_recruit&view=requesthr&layout=edit&id=".$row->id;
+                            break;
+                            case 2:
+                                $link = "index.php?option=com_recruit&view=requestvr&layout=edit&id=".$row->id;
+                            break;
+
+                        }
+
+						//$link = "index.php?option=com_recruit&view=requesthr&layout=edit&id=".$row->id;
 						
 						echo "<a href='".$link."'>".$row->name."</a>"; ?>	
                     </td>
