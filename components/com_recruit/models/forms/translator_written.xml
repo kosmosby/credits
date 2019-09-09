@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset name="details"
+	>
+		<field
+				name="id"
+				type="hidden"
+				/>
+
+		<field
+				name="level_id"
+				type="hidden"
+				default="0"
+		/>
+
+		<field
+				name="name"
+				type="text"
+				label="название вакансии"
+				description="название вакансии"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+		/>
+
+		<field
+				name="type_id"
+				type="sql"
+				default=""
+				label="тип заявки"
+				query="SELECT id AS value, name AS type_id  FROM #__recruit_types"
+				required="true"
+		/>
+
+		<field
+				name="employee_id"
+				type="sql"
+				default=""
+				label="ФИО сотрудника"
+				query="SELECT id AS value, name AS employee_id  FROM #__recruit_employee"
+				header="Выберите опцию"
+				class="superuser"
+		/>
+
+		<field
+				name="typeemployee_id"
+				type="sql"
+				default="10"
+				label="тип сотрудника"
+				query="SELECT id AS value, name AS typeemployee_id  FROM #__recruit_typeemployee"
+				required="true"
+		/>
+
+		<field
+				name="count"
+				type="text"
+				label="количество специалистов"
+				description="количество специалистов"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+				rows="10"
+				cols="50"
+		/>
+
+		<field name="start_date"
+			   type="calendar"
+			   default="NOW"
+			   label="дата открытия"
+			   class="superuser"
+		/>
+
+		<field name="description"
+			   type="textarea"
+			   label="описание задачи"
+			   description="описание задачи"
+			   required="true"
+			   rows="10"
+			   cols="5"
+		/>
+
+		<field name="priority" type="list" default="" required="true" label="приоритетность" description="">
+			<option value="">Выберите опцию</option>
+			<option value="0">нормальная</option>
+			<option value="1">высокая</option>
+		</field>
+
+		<field
+				name="salary"
+				type="text"
+				label="заработная плата"
+				description="заработная плата"
+				size="40"
+				class="superuser"
+				default=""
+				rows="10"
+				cols="50"
+		/>
+
+		<field name="manual"
+			   type="checkbox"
+			   label="расчет вручную"
+			   description="отключение автоматического расчета"
+			   value="1"
+			   class="superuser"
+		/>
+
+		<field name="public_date"
+			   type="calendar"
+			   label="дата размещения"
+			   class="superuser"
+		/>
+
+		<field name="estimate_date"
+			   type="calendar"
+			   label="расчетная дата"
+			   class="superuser"
+		/>
+
+		<field
+				name="evid"
+				type="hidden"
+		/>
+
+		<field
+				name="created_by"
+				type="hidden"
+		/>
+
+
+	</fieldset>
+</form>

@@ -236,6 +236,11 @@ class RecruitControllerRequestvr extends JControllerForm
         echo "<pre>";
         print_r($_REQUEST);
 
+
+        $translator_writtenForm = new JForm('translator_written');
+
+        $translator_writtenForm->loadFile(JPATH_ROOT.'/components/com_request/models/forms/translator_written.xml');
+
         exit;
     }
 
