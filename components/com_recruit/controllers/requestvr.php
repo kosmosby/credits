@@ -232,5 +232,12 @@ class RecruitControllerRequestvr extends JControllerForm
         return $row;
     }
 
+    public function loadform () {
+        echo "<pre>";
+        print_r($_REQUEST);
+
+        exit;
+    }
+
 
 }

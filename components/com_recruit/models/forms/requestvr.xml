@@ -87,7 +87,7 @@
 			<option value="1">высокая</option>
 		</field>
 
-		<field name="interpreter_type" type="list" default="" required="true" label="тип переводчика" description="">
+		<field name="interpreter_type" type="list" default="" required="true" label="тип переводчика" description="" class="interpreter_type">
 			<option value="">Выберите опцию</option>
 			<option value="0">письменный</option>
 			<option value="1">устный</option>

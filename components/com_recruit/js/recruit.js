@@ -48,4 +48,25 @@ jQuery( document ).ready(function() {
         jQuery('.superuser').parents('.control-group').hide();
      }
 
+
+    jQuery(".interpreter_type").on('change', function(ret) {
+        var int_type = ret.target.value;
+
+        switch (int_type) {
+            case '0':
+                jQuery.post( "index.php?option=com_recruit&task=requestvr.loadform&inttype="+int_type , function(response) {
+                    console.log('responce: ', response);
+                });
+            break;
+            case '1':
+
+            break;
+
+            case '2':
+
+            break;
+            default:
+        }
+    });
+
 });
