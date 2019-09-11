@@ -28,10 +28,14 @@ class RecruitControllerRequestvr extends JControllerForm
         $app	= JFactory::getApplication();
         $model	= $this->getModel('requesthr');
 
+
         // Get the data from the form POST
         $data = JRequest::getVar('jform', array(), 'post', 'array');
 
         $model = $this->getModel('requesthr');
+
+
+
 
 
         $isSuperUser = JFactory::getUser()->authorise('core.admin');
@@ -45,14 +49,21 @@ class RecruitControllerRequestvr extends JControllerForm
             }
         }
 
+
+
         if(!isset($data['manual']) && $isSuperUser) {
             $return  = $model->estimate($data['type_id'], $data['employee_id'], $data['typeemployee_id'], $data['count'], $data['start_date'], $data['id'], $data['level_id']);
+
+//            echo "<pre>";
+//            print_r($_REQUEST); die;
 
             $data['estimate_date'] = $return['estimate_date'];
             $data['public_date'] = $return['public_date'];
 
             $data['manual'] = 0;
         }
+
+
 
         /*
         include_once(JPATH_ADMINISTRATOR . "/components/com_jevents/jevents.defines.php");
@@ -233,13 +244,27 @@ class RecruitControllerRequestvr extends JControllerForm
     }
 
     public function loadform () {
-        echo "<pre>";
-        print_r($_REQUEST);
+
+        $form = JRequest::getVar('form');
+
+        $view = $this->getView( 'requestvr', 'html' );
+        $model	= $this->getModel('requestvr');
+
+        $xml = $model->loadAdditionFormData($form);
 
 
-        $translator_writtenForm = new JForm('translator_written');
+//        echo "<pre>";
+//        print_r($xml);
+//
+//
+//        die;
 
-        $translator_writtenForm->loadFile(JPATH_ROOT.'/components/com_request/models/forms/translator_written.xml');
+
+//        echo "<pre>";
+//        print_r($form);
+//        die;
+
+        $view->showAdditionForm($form, $xml);
 
         exit;
     }

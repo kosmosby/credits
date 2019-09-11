@@ -86,4 +86,18 @@ class RecruitViewRequestvr extends JViewLegacy
 
         return $this->toolbar;
     }
+
+    function showAdditionForm($tpl, $xml) {
+
+
+        $this->additionForm = $xml;
+
+//        echo "<pre>";
+//        print_r($this->additionForm);
+//        die;
+
+        // Display the view
+        parent::display($tpl);
+    }
+
 }

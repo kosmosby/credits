@@ -94,6 +94,9 @@
 			<option value="2">верстальщик</option>
 		</field>
 
+
+		<field name="contaiter1" type="note" label=" " description=" " class="container1" close="" />
+
 		<field name="manual"
 			   type="checkbox"
 			   label="расчет вручную"

@@ -25,6 +25,7 @@ class RecruitModelRequestvr extends JModelAdmin
 	 */
 	protected $item;
 	protected $select;
+	//public $additionForm;
 
 	/**
 	 * Method to auto-populate the model state.
@@ -347,6 +348,16 @@ class RecruitModelRequestvr extends JModelAdmin
         return $row;
     }
 
+    public function loadAdditionFormData($tpl) {
+
+
+        $additionForm = new JForm($tpl);
+        $additionForm->loadFile(JPATH_ROOT.'/components/com_recruit/models/forms/'.$tpl.'.xml');
+
+
+        return $additionForm;
+
+    }
 
 
 

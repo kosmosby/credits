@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset name="details"
+	>
+
+		<field
+				name="additionform[language_pair]"
+				type="text"
+				label="Языковая пара"
+				description="Языковая пара"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+		/>
+
+		<field
+				name="additionform[theme]"
+				type="text"
+				label="Тематика"
+				description="Тематика"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+		/>
+
+		<field
+				name="additionform[size]"
+				type="text"
+				label="Объем"
+				description="Объем"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+		/>
+
+		<field
+				name="additionform[period]"
+				type="text"
+				label="Сроки"
+				description="Сроки"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+		/>
+
+		<field
+				name="additionform[price_for_customer]"
+				type="text"
+				label="Цена для заказчика"
+				description="Цена для заказчика"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+		/>
+
+		<field
+				name="additionform[AM]"
+				type="text"
+				label="АМ"
+				description="АМ"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+		/>
+
+		<field
+				name="additionform[customer_type]"
+				type="text"
+				label="Тип клиента"
+				description="Тип клиента"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+		/>
+
+		<field
+				name="additionform[request_or_approved_order]"
+				type="text"
+				label="Запрос или утвержденный заказ?"
+				description="Запрос или утвержденный заказ?"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+		/>
+
+		<field
+				name="additionform[request_id]"
+				type="hidden"
+		/>
+
+
+	</fieldset>
+</form>

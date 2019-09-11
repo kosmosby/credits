@@ -209,6 +209,7 @@ class RecruitModelRequesthr extends JModelAdmin
             case 2:
                 $prev_date = $this->findPreviousRequest($jform_employee_id, $id, $start_date, $type_id);
 
+
                 if(count($prev_date)) {
                     $half_all_count_days = (strtotime($prev_date->estimate_date) - strtotime($prev_date->public_date))/2;
                     $count_days = round($half_all_count_days/60/60/24);
@@ -293,27 +294,31 @@ class RecruitModelRequesthr extends JModelAdmin
 
     public function findPreviousRequest ($employee_id, $id, $start_date, $type_id) {
 
-//        echo $employee_id; die;
+        //echo $employee_id; die;
 
-        $db = JFactory::getDbo();
-        $query = $db->getQuery(true);
-        $query->select(array('id', 'public_date', 'estimate_date'));
-        $query->from('#__recruit_requests');
-        $query->where('employee_id = '.$employee_id);
-        //$query->where('start_date <= \''.$start_date.'\'');
-        //$query->where('estimate_date >= \''.$start_date.'\'');
-        $query->where('type_id = \''.$type_id.'\'');
+        $row = array();
+        if($employee_id && $type_id) {
 
-        //echo $query->__toString(); die;
+            $db = JFactory::getDbo();
+            $query = $db->getQuery(true);
+            $query->select(array('id', 'public_date', 'estimate_date'));
+            $query->from('#__recruit_requests');
+            $query->where('employee_id = ' . $employee_id);
+            //$query->where('start_date <= \''.$start_date.'\'');
+            //$query->where('estimate_date >= \''.$start_date.'\'');
+            $query->where('type_id = \'' . $type_id . '\'');
 
-        if($id) {
-            $query->where('id < '.$id);
+            //echo $query->__toString(); die;
+
+            if ($id) {
+                $query->where('id < ' . $id);
+            }
+
+            $query->order('id DESC ');
+            $query->setlimit(1);
+            $db->setQuery($query);
+            $row = $db->loadObject();
         }
-
-        $query->order('id DESC ');
-        $query->setlimit(1);
-        $db->setQuery($query);
-        $row = $db->loadObject();
 
 //        echo "<pre>";
 //        print_r($row); die;

@@ -52,10 +52,15 @@ jQuery( document ).ready(function() {
     jQuery(".interpreter_type").on('change', function(ret) {
         var int_type = ret.target.value;
 
+        jQuery(".container1").html('');
+
         switch (int_type) {
             case '0':
-                jQuery.post( "index.php?option=com_recruit&task=requestvr.loadform&inttype="+int_type , function(response) {
-                    console.log('responce: ', response);
+                jQuery.post( "index.php?option=com_recruit&task=requestvr.loadform&form=translatorwritten", function(response) {
+                    //console.log('responce: ', response);
+
+                    jQuery(".container1").html(response);
+
                 });
             break;
             case '1':
