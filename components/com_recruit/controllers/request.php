@@ -104,6 +104,18 @@ class RecruitControllerRequest extends JControllerForm
 
         $result = $db->execute();
 
+        $query = $db->getQuery(true);
+
+        $conditions = array(
+            $db->quoteName('request_id') . ' IN ('.$cids.')'
+        );
+
+        $query->delete($db->quoteName('#__recruit_translatorslice'));
+        $query->where($conditions);
+        $db->setQuery($query);
+
+        $result = $db->execute();
+
 
         if ($result) {
             $msg = "Записть успешно удалена";

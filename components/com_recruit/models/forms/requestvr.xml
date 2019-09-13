@@ -72,6 +72,16 @@
 			   class="superuser"
 		/>
 
+		<field name="interpreter_type" type="list" default="" required="true" label="тип переводчика" description="" class="interpreter_type">
+			<option value="">Выберите опцию</option>
+			<option value="0">письменный</option>
+			<option value="1">устный</option>
+			<option value="2">верстальщик</option>
+		</field>
+
+
+		<field name="contaiter1" type="note" label=" " description=" " class="container1" close="" />
+
 		<field name="description"
 			   type="textarea"
 			   label="описание задачи"
@@ -87,15 +97,10 @@
 			<option value="1">высокая</option>
 		</field>
 
-		<field name="interpreter_type" type="list" default="" required="true" label="тип переводчика" description="" class="interpreter_type">
-			<option value="">Выберите опцию</option>
-			<option value="0">письменный</option>
-			<option value="1">устный</option>
-			<option value="2">верстальщик</option>
-		</field>
 
 
-		<field name="contaiter1" type="note" label=" " description=" " class="container1" close="" />
+
+
 
 		<field name="manual"
 			   type="checkbox"
