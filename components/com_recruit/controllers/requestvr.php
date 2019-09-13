@@ -35,9 +35,6 @@ class RecruitControllerRequestvr extends JControllerForm
         $model = $this->getModel('requesthr');
 
 
-
-
-
         $isSuperUser = JFactory::getUser()->authorise('core.admin');
         if(!$data['created_by']) {
             $data['created_by'] = JFactory::getUser()->id;
@@ -64,7 +61,6 @@ class RecruitControllerRequestvr extends JControllerForm
         }
 
 
-
         /*
         include_once(JPATH_ADMINISTRATOR . "/components/com_jevents/jevents.defines.php");
 
@@ -87,8 +83,10 @@ class RecruitControllerRequestvr extends JControllerForm
         }
         */
 
+
         // Now update the loaded data to the database via a function in the model
         $upditem	= $model->updItem($data);
+
 
         if(!$isSuperUser) {
             $user = JFactory::getUser(928);
@@ -98,7 +96,7 @@ class RecruitControllerRequestvr extends JControllerForm
             $model->_mail( $body, 'Запрос на размещение заявки', $recipient);
         }
 
-        if($isSuperUser && isset($data['employee_id'])) {
+        if($isSuperUser && isset($data['employee_id']) && $data['employee_id']) {
 
 
             $user = JFactory::getUser($data['created_by']);
@@ -114,6 +112,33 @@ class RecruitControllerRequestvr extends JControllerForm
 
 
         }
+
+//        echo "<pre>";
+//        print_r($data); die;
+
+        if(isset($data['interpreter_type']) && $data['interpreter_type']) {
+
+            $additionForm = '';
+            switch ($data['interpreter_type']) {
+                case 0:
+                    $additionForm = 'translatorwritten';
+                    break;
+                case 1:
+                    $additionForm = 'translatorspoken';
+                    break;
+                case 2:
+                    $additionForm = 'translatorslice';
+                    break;
+
+            }
+
+            $model->saveAdditionForm($upditem->id, $additionForm);
+
+
+        }
+
+
+
 
         // check if ok and display appropriate message.  This can also have a redirect if desired.
         if ($upditem) {
@@ -233,7 +258,7 @@ class RecruitControllerRequestvr extends JControllerForm
 
         $db = JFactory::getDbo();
         $query = $db->getQuery(true);
-        $query->select(array('name'));
+        $query->select(array('*'));
         $query->from('#__recruit_employee');
         $query->where('id = '.$employee_id);
 
@@ -245,26 +270,20 @@ class RecruitControllerRequestvr extends JControllerForm
 
     public function loadform () {
 
+
         $form = JRequest::getVar('form');
+
+        //echo $form; die;
+
+        $id = JRequest::getInt('id');
 
         $view = $this->getView( 'requestvr', 'html' );
         $model	= $this->getModel('requestvr');
 
-        $xml = $model->loadAdditionFormData($form);
+        $xml = $model->loadAdditionFormData($form, $id);
 
 
-//        echo "<pre>";
-//        print_r($xml);
-//
-//
-//        die;
-
-
-//        echo "<pre>";
-//        print_r($form);
-//        die;
-
-        $view->showAdditionForm($form, $xml);
+        $view->showAdditionForm($xml);
 
         exit;
     }

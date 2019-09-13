@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset name="details"
+	>
+
+		<field
+				name="translatorspoken[language_pair]"
+				type="text"
+				label="Языковая пара"
+				description="Языковая пара"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+		/>
+
+		<field
+				name="translatorspoken[theme]"
+				type="text"
+				label="Тематика"
+				description="Тематика"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+		/>
+
+		<field
+				name="translatorspoken[type]"
+				type="text"
+				label="Тип устного перевода"
+				description="Тип устного перевода"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+		/>
+
+
+		<field
+				name="translatorspoken[count]"
+				type="text"
+				label="Количество переводчиков"
+				description="Количество переводчиков"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+		/>
+
+		<field
+				name="translatorspoken[theme]"
+				type="text"
+				label="Тематика"
+				description="Тематика"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+		/>
+
+		<field
+				name="translatorspoken[matherial]"
+				type="text"
+				label="Наличие материала для подготовки переводчика"
+				description="Наличие материала для подготовки переводчика"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+		/>
+
+		<field
+				name="translatorspoken[level]"
+				type="text"
+				label="Уровень мероприятия (необходимость сертификатов/дипломов)"
+				description="Уровень мероприятия (необходимость сертификатов/дипломов)"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+		/>
+
+		<field
+				name="translatorspoken[dates]"
+				type="text"
+				label="Дата(ы)"
+				description="Дата(ы)"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+		/>
+
+		<field
+				name="translatorspoken[time]"
+				type="text"
+				label="Время проведения мероприятия (для переводчика)"
+				description="Время проведения мероприятия (для переводчика)"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+		/>
+
+
+		<field
+				name="translatorspoken[location]"
+				type="text"
+				label="Страна, город, возможность поиска в другом городе той же страны"
+				description="Страна, город, возможность поиска в другом городе той же страны"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+		/>
+
+		<field
+				name="translatorspoken[request_or_approved_order]"
+				type="text"
+				label="Запрос или утвержденный заказ?"
+				description="Запрос или утвержденный заказ?"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+		/>
+
+		<field
+				name="translatorspoken[request_id]"
+				type="hidden"
+		/>
+
+
+	</fieldset>
+</form>

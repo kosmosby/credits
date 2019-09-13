@@ -48,30 +48,45 @@ jQuery( document ).ready(function() {
         jQuery('.superuser').parents('.control-group').hide();
      }
 
-
     jQuery(".interpreter_type").on('change', function(ret) {
         var int_type = ret.target.value;
 
-        jQuery(".container1").html('');
-
-        switch (int_type) {
-            case '0':
-                jQuery.post( "index.php?option=com_recruit&task=requestvr.loadform&form=translatorwritten", function(response) {
-                    //console.log('responce: ', response);
-
-                    jQuery(".container1").html(response);
-
-                });
-            break;
-            case '1':
-
-            break;
-
-            case '2':
-
-            break;
-            default:
-        }
+        showAdditionForm(int_type);
     });
 
+    var interpreter_type_val = jQuery("#jform_interpreter_type").val();
+
+    //alert(interpreter_type_val);
+
+    showAdditionForm(interpreter_type_val);
+
 });
+
+function showAdditionForm(int_type) {
+
+    jQuery(".container1").html('');
+
+    var id = jQuery("#jform_id").val();
+
+    switch (int_type) {
+        case '0':
+            jQuery.post( "index.php?option=com_recruit&task=requestvr.loadform&form=translatorwritten&id="+id, function(response) {
+                jQuery(".container1").html(response);
+
+            });
+            break;
+        case '1':
+            jQuery.post( "index.php?option=com_recruit&task=requestvr.loadform&form=translatorspoken&id="+id, function(response) {
+                jQuery(".container1").html(response);
+
+            });
+            break;
+        case '2':
+            jQuery.post( "index.php?option=com_recruit&task=requestvr.loadform&form=translatorslice&id="+id, function(response) {
+                jQuery(".container1").html(response);
+
+            });
+            break;
+        default:
+    }
+}

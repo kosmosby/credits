@@ -87,7 +87,7 @@ class RecruitViewRequestvr extends JViewLegacy
         return $this->toolbar;
     }
 
-    function showAdditionForm($tpl, $xml) {
+    function showAdditionForm($xml) {
 
 
         $this->additionForm = $xml;
@@ -97,7 +97,7 @@ class RecruitViewRequestvr extends JViewLegacy
 //        die;
 
         // Display the view
-        parent::display($tpl);
+        parent::display('translatorwritten');
     }
 
 }

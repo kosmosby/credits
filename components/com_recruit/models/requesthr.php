@@ -495,5 +495,35 @@ class RecruitModelRequesthr extends JModelAdmin
         return $row;
     }
 
+    public function saveAdditionForm($request_id, $additionFormName) {
+
+        $data = JRequest::getVar($additionFormName, array(), 'post', 'array');
+
+        //echo $request_id; die;
+
+        if(isset($request_id) && $request_id && count($data) && $additionFormName) {
+
+            $row = JTable::getInstance($additionFormName, 'RecruitTable');
+
+            $data['id'] = $row->getId($request_id);
+            $data['request_id'] = $request_id;
+
+//            echo "<pre>";
+//            print_r($data); die;
+
+            if(!$row->bind($data))
+            {
+                JError::raiseError(500, $row->getError() );
+                return false;
+            }
+            if(!$row->store()){
+                JError::raiseError(500, $row->getError() );
+                return false;
+            }
+        }
+
+    }
+
+    //public function getIdForAdditionFormRecord
 
 }

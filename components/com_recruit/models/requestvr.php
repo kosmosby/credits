@@ -137,9 +137,11 @@ class RecruitModelRequestvr extends JModelAdmin
             array()
         );
 
+
         if (empty($data))
         {
             $data = $this->getItem();
+
         }
 
         return $data;
@@ -348,11 +350,33 @@ class RecruitModelRequestvr extends JModelAdmin
         return $row;
     }
 
-    public function loadAdditionFormData($tpl) {
-
+    public function loadAdditionFormData($tpl, $id) {
 
         $additionForm = new JForm($tpl);
         $additionForm->loadFile(JPATH_ROOT.'/components/com_recruit/models/forms/'.$tpl.'.xml');
+
+        $db = JFactory::getDbo();
+        $query = $db->getQuery(true);
+        $query->select(array('*'));
+        $query->from('#__recruit_'.$tpl);
+        $query->where('request_id = '.$id);
+
+        $db->setQuery($query);
+        $row = $db->loadAssoc();
+
+//        echo "<pre>";
+//        print_r($additionForm); die;
+
+        if(count($row)) {
+            foreach ($row as $k => $v) {
+                $additionForm->setValue($tpl.'[' . $k . ']', '', $v);
+            }
+        }
+
+        //$additionForm->setValue('translatorwritten[language_pair]','','Языковая пара');
+        //$additionForm->setFields($row);
+//        echo "<pre>";
+//        print_r($additionForm); die;
 
 
         return $additionForm;
