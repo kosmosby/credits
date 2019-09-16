@@ -56,7 +56,7 @@ class RecruitViewCals extends JViewLegacy
 //		$this->requests = $model->getRequests();
 
 //		echo "<pre>";
-//		print_r($this->items); die;
+//		print_r($this->months); die;
 
         //$this->items	= $model->getAdditionPaymentInfo($this->items);
 

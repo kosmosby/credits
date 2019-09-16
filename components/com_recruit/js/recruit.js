@@ -24,8 +24,8 @@ jQuery( document ).ready(function() {
             return false;
         });
         return false;
-    });
 
+    });
 
      var view = jQuery('#view').html();
 
@@ -59,6 +59,10 @@ jQuery( document ).ready(function() {
     //alert(interpreter_type_val);
 
     showAdditionForm(interpreter_type_val);
+
+
+
+
 
 });
 

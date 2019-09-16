@@ -25,6 +25,8 @@ $employeeOptions=$employees->getOptions();
 $listOrder     = $this->escape($this->filter_order);
 $listDirn      = $this->escape($this->filter_order_Dir);
 
+
+JHtml::script(Juri::base() . 'components/com_recruit/js/calendar.js');
 ?>
 <style type="text/css">
     #toolbar-new {
@@ -99,8 +101,8 @@ $listDirn      = $this->escape($this->filter_order_Dir);
     </div>
 
 	
-<div style="width: 100%; overflow-x: scroll;">
-<div style="width: 4100px;" >
+<div style="width: 100%; overflow-x: scroll;" id="main_calendar_container">
+<div style="width: 4100px;" id="calendar_container" >
 
     <table class="table table-striped table-hover" id="credits_table">
         <thead>
@@ -120,7 +122,7 @@ $listDirn      = $this->escape($this->filter_order_Dir);
 						<?php 
 						echo "<div>";
 							for($y=1;$y<=$v;$y++) {
-								echo "<div style='float: left; border: 1px solid #ddd; width: 15px;'>".$y."</div>";								
+								echo "<div style='float: left; border: 1px solid #ddd; width: 15px;' id='".strtotime($y ." ".$k)."'>".$y."</div>";
 							}	
 						echo "</div>"		
 						?>
@@ -242,6 +244,8 @@ $listDirn      = $this->escape($this->filter_order_Dir);
     <?php echo JHtml::_('form.token'); ?>
 </form>
 </div>
+
+<div style="display: none;" id="todays_date"><?php echo strtotime(date("j F, Y"));?></div>
 
 
 <!--<button type="button" class="btn btn-success">Создать</button>-->
