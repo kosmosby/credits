@@ -116,7 +116,7 @@ class RecruitControllerRequestvr extends JControllerForm
 //        echo "<pre>";
 //        print_r($data); die;
 
-        if(isset($data['interpreter_type']) && $data['interpreter_type']) {
+        if(isset($data['interpreter_type']) ) {
 
             $additionForm = '';
             switch ($data['interpreter_type']) {

@@ -61,7 +61,6 @@ class RecruitModelCals extends JModelList
         );
         $query->from('#__recruit_requests AS a');
 
-
         // Filter company
         $type= $db->escape($this->getState('filter.type'));
         if (!empty($type)) {
@@ -80,6 +79,12 @@ class RecruitModelCals extends JModelList
         {
             $like = $db->quote('%' . $search . '%');
             $query->where('a.name LIKE ' . $like);
+        }
+
+        $isSuperUser = JFactory::getUser()->authorise('core.admin');
+        $user_id = JFactory::getUser()->id;
+        if(!$isSuperUser) {
+            $query->where('(a.created_by='.$user_id.')');
         }
 
         // Filter by published state

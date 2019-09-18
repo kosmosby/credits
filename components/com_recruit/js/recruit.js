@@ -72,25 +72,33 @@ function showAdditionForm(int_type) {
 
     var id = jQuery("#jform_id").val();
 
+    var $ = jQuery.noConflict();
+    $.blockUI.defaults.message = "Пожалуйста подождите...";
+    // update the block message
+    $.blockUI();
+    $.blockUI.defaults.message = "Please be patient...";
+
     switch (int_type) {
         case '0':
             jQuery.post( "index.php?option=com_recruit&task=requestvr.loadform&form=translatorwritten&id="+id, function(response) {
                 jQuery(".container1").html(response);
-
+                $.unblockUI();
             });
             break;
         case '1':
             jQuery.post( "index.php?option=com_recruit&task=requestvr.loadform&form=translatorspoken&id="+id, function(response) {
                 jQuery(".container1").html(response);
-
+                $.unblockUI();
             });
             break;
         case '2':
             jQuery.post( "index.php?option=com_recruit&task=requestvr.loadform&form=translatorslice&id="+id, function(response) {
                 jQuery(".container1").html(response);
-
+                $.unblockUI();
             });
             break;
         default:
+            $.unblockUI();
+
     }
 }

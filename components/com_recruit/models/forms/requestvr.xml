@@ -82,14 +82,14 @@
 
 		<field name="contaiter1" type="note" label=" " description=" " class="container1" close="" />
 
-		<field name="description"
-			   type="textarea"
-			   label="описание задачи"
-			   description="описание задачи"
-			   required="true"
-			   rows="10"
-			   cols="5"
-		/>
+		<!--<field name="description"-->
+			   <!--type="textarea"-->
+			   <!--label="описание задачи"-->
+			   <!--description="описание задачи"-->
+			   <!--required="true"-->
+			   <!--rows="10"-->
+			   <!--cols="5"-->
+		<!--/>-->
 
 		<field name="priority" type="list" default="" required="true" label="приоритетность" description="">
 			<option value="">Выберите опцию</option>
