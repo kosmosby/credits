@@ -81,11 +81,11 @@ class RecruitModelCals extends JModelList
             $query->where('a.name LIKE ' . $like);
         }
 
-        $isSuperUser = JFactory::getUser()->authorise('core.admin');
-        $user_id = JFactory::getUser()->id;
-        if(!$isSuperUser) {
-            $query->where('(a.created_by='.$user_id.')');
-        }
+//        $isSuperUser = JFactory::getUser()->authorise('core.admin');
+//        $user_id = JFactory::getUser()->id;
+//        if(!$isSuperUser) {
+//            $query->where('(a.created_by='.$user_id.')');
+//        }
 
         // Filter by published state
 //        $published = $this->getState('filter.published');
