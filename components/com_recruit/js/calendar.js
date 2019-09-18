@@ -9,7 +9,7 @@ jQuery( document ).ready(function() {
 
     console.log('offset =', offset.left);
 
-   jQuery('#main_calendar_container').scrollLeft(offset.left - 720);
+   jQuery('#main_calendar_container').scrollLeft(offset.left - 1120);
 
     //console.log('todays_date =', offset);
 

@@ -107,10 +107,8 @@ JHtml::script(Juri::base() . 'components/com_recruit/js/calendar.js');
     <table class="table table-striped table-hover" id="credits_table">
         <thead>
         <tr>
-            <th style="border-left: 1px solid #ddd;" width="10px">
-                №
-            </th>
-            <th width="280px;">
+
+            <th width="280px" style="border-left: 1px solid #ddd;">
                 Название вакансии
             </th>
 			
@@ -132,21 +130,15 @@ JHtml::script(Juri::base() . 'components/com_recruit/js/calendar.js');
         </tr>
         </thead>
 		
-        <tfoot>
-            <td colspan="9" style="border-top: 1px solid #ddd; border-right: 0px; background: none;">
-                <?php echo $this->pagination->getListFooter(); ?>
-            </td>
-        </tfoot>
+
 		
 		
         <tbody>
         <?php if (!empty($this->items)) : ?>
             <?php foreach ($this->items as $i => $row) :?>
                 <tr>
-                    <td style="border-left: 1px solid #ddd;">
-						<?php echo $this->pagination->getRowOffset($i); ?>
-					</td>
-                    <td> 
+
+                    <td style="position: absolute; background-color: white; border-left: 1px solid #ddd;">
 						<?php
 
                         switch ($row->type_id) {
@@ -243,6 +235,13 @@ JHtml::script(Juri::base() . 'components/com_recruit/js/calendar.js');
     <input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>"/>
     <?php echo JHtml::_('form.token'); ?>
 </form>
+</div>
+
+
+<div>
+
+    <?php echo $this->pagination->getListFooter(); ?>
+
 </div>
 
 <div style="display: none;" id="todays_date"><?php echo strtotime(date("j F, Y"));?></div>
