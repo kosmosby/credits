@@ -15,7 +15,7 @@ JHtml::_('behavior.formvalidation');
 JHtml::_('formbehavior.chosen', 'select');
 
 
-JHtml::script(Juri::base() . 'components/com_recruit/js/jQuery.blockUI.js');
+JHtml::script(Juri::base() . 'components/com_recruit/js/jquery.blockUI.js');
 JHtml::script(Juri::base() . 'components/com_recruit/js/recruit.js');
 ?>
 
