@@ -76,7 +76,6 @@ function showAdditionForm(int_type) {
     $.blockUI.defaults.message = "Пожалуйста подождите...";
     // update the block message
     $.blockUI();
-    $.blockUI.defaults.message = "Please be patient...";
 
     switch (int_type) {
         case '0':
