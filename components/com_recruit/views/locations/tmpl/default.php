@@ -102,11 +102,15 @@ $listDirn      = $this->escape($this->filter_order_Dir);
             <th>
                 Название
             </th>
+            <th>
+                Дополнительные дни
+            </th>
+
         </tr>
         </thead>
         <tfoot>
         <tr>
-            <td colspan="14" style="border-top: 1px solid #ddd; border-right: 0px; background: none;">
+            <td colspan="15" style="border-top: 1px solid #ddd; border-right: 0px; background: none;">
                 <?php echo $this->pagination->getListFooter(); ?>
             </td>
         </tr>
@@ -114,7 +118,7 @@ $listDirn      = $this->escape($this->filter_order_Dir);
         <tbody>
         <?php if (!empty($this->items)) : ?>
             <?php foreach ($this->items as $i => $row) :
-                $link = JRoute::_('index.php?option=com_recruit&task=theme.edit&id=' . $row->id);
+                $link = JRoute::_('index.php?option=com_recruit&task=location.edit&id=' . $row->id);
                 ?>
                 <tr>
                     <td style="border-left: 1px solid #ddd;"><?php echo $this->pagination->getRowOffset($i); ?></td>
@@ -125,6 +129,9 @@ $listDirn      = $this->escape($this->filter_order_Dir);
                         <a href="<?php echo $link; ?>" title="Редактировать">
                             <?php echo $row->name; ?>
                         </a>
+                    </td>
+                    <td>
+                            <?php echo $row->addition_days; ?>
                     </td>
                 </tr>
             <?php endforeach; ?>

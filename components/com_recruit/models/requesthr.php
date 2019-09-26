@@ -195,7 +195,6 @@ class RecruitModelRequesthr extends JModelAdmin
                 $query->from('#__recruit_norms');
                 $query->where('typeemployee_id = '.$jform_typeemployee_id);
 
-                //echo $query->__toString(); die;
 
                 $db->setQuery($query);
                 $norm = $db->loadResult();
@@ -229,14 +228,10 @@ class RecruitModelRequesthr extends JModelAdmin
                 $db->setQuery($query);
                 $point = $db->loadResult();
 
-                //$index = $jform_count_employee - 1;
-                //echo $point; die;
-
                 $index = round((($jform_count_employee-1)*$point)/2);
 
-                //echo round($index); die;
                 $days = 3 + $point  + $index;
-//                echo $start_date; die;
+
 
                 $estimate_date = date("Y-m-d", strtotime($public_date.'+'.$days.' weekdays'));
             break;

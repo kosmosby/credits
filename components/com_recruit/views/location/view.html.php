@@ -15,7 +15,7 @@ defined('_JEXEC') or die('Restricted access');
  *
  * @since  0.0.1
  */
-class RecruitViewNorm extends JViewLegacy
+class RecruitViewLocation extends JViewLegacy
 {
 	/**
 	 * Display the Hello World view
@@ -58,17 +58,17 @@ class RecruitViewNorm extends JViewLegacy
 
         if ($isNew)
         {
-            $title = "Создание новой записи";
+            $title = "Создание нового места";
         }
         else
         {
-            $title = "Редактирование записи";
+            $title = "Редактирование места";
         }
 
         $document->setTitle($title);
 
-        JToolBarHelper::cancel('norm.cancel','Вернуться');
-        JToolbarHelper::addNew('norm.submit','Сохранить');
+        JToolBarHelper::cancel('location.cancel','Вернуться');
+        JToolbarHelper::addNew('location.submit','Сохранить');
 
 
         return $this->toolbar;

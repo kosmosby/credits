@@ -10,12 +10,13 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
+
 /**
  * HTML View class for the HelloWorld Component
  *
  * @since  0.0.1
  */
-class RecruitViewNorm extends JViewLegacy
+class RecruitViewLocations extends JViewLegacy
 {
 	/**
 	 * Display the Hello World view
@@ -26,13 +27,26 @@ class RecruitViewNorm extends JViewLegacy
 	 */
 	function display($tpl = null)
 	{
-        // Get the Data
-        $this->item = $this->get('Item');
 
-        $this->form = $this->get('Form');
+        // Get application
+        $app = JFactory::getApplication();
+        $context = "location.list.admin.location";
 
+        // Get data from the model
+        $this->items			= $this->get('Items');
+        $this->pagination		= $this->get('Pagination');
+        $this->state			= $this->get('State');
+        $this->filter_order 	= $app->getUserStateFromRequest($context.'filter_order', 'filter_order', 'name', 'cmd');
+        $this->filter_order_Dir = $app->getUserStateFromRequest($context.'filter_order_Dir', 'filter_order_Dir', 'asc', 'cmd');
+        //$this->filterForm    	= $this->get('FilterForm');
+        $this->activeFilters 	= $this->get('ActiveFilters');
 
+        // Set the toolbar
+        //$input->set('hidemainmenu', true);
         $this->toolbar = $this->addToolbar();
+
+        $model	= $this->getModel('locations');
+        //$this->items	= $model->getAdditionPaymentInfo($this->items);
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors')))
@@ -44,6 +58,8 @@ class RecruitViewNorm extends JViewLegacy
 
 		// Display the view
 		parent::display($tpl);
+
+
 	}
 
     protected function addToolBar()
@@ -52,24 +68,8 @@ class RecruitViewNorm extends JViewLegacy
 
         $this->toolbar = JToolbar::getInstance();
 
-        $document = JFactory::getDocument();
-
-        $isNew = ($this->item->id == 0);
-
-        if ($isNew)
-        {
-            $title = "Создание новой записи";
-        }
-        else
-        {
-            $title = "Редактирование записи";
-        }
-
-        $document->setTitle($title);
-
-        JToolBarHelper::cancel('norm.cancel','Вернуться');
-        JToolbarHelper::addNew('norm.submit','Сохранить');
-
+        JToolbarHelper::addNew('location.add','Создать месторасположение');
+        JToolBarHelper::deleteList('', 'location.delete', 'Удалить');
 
         return $this->toolbar;
     }
