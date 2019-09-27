@@ -127,6 +127,18 @@
 		/>
 
 		<field
+				name="translatorspoken[locationoptions]"
+				type="sql"
+				default="10"
+				label="Месторасположение"
+				query="SELECT id AS value, name as `translatorspoken[locationoptions]` FROM #__recruit_locations"
+				required="true"
+		>
+		<option value="">Выберите опцию</option>
+		</field>
+
+
+		<field
 				name="translatorspoken[request_id]"
 				type="hidden"
 		/>

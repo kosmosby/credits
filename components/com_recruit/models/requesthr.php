@@ -230,10 +230,15 @@ class RecruitModelRequesthr extends JModelAdmin
 
                 $index = round((($jform_count_employee-1)*$point)/2);
 
-                $days = 3 + $point  + $index;
-
+                if($this->ifTranslationSpoken()) {
+                    $days = $this->translationSpokenDays($point, $index, $level_id);
+                }
+                else {
+                    $days = 3 + $point + $index;
+                }
 
                 $estimate_date = date("Y-m-d", strtotime($public_date.'+'.$days.' weekdays'));
+
             break;
 
             default:
@@ -246,6 +251,69 @@ class RecruitModelRequesthr extends JModelAdmin
 
 
         return $arr;
+    }
+
+    public function translationSpokenDays($point, $index, $level_id) {
+
+        $data = JRequest::getVar('translatorspoken', array(), 'post', 'array');
+
+        $additionDays = $this->translationSpokenAdditionDays($data['locationoptions']);
+
+        $additionPoints = $this->traslationSpokenAdditionPoints($level_id);
+
+        $days = $additionDays + $point + $index + $additionPoints;
+
+        return $days;
+    }
+
+    public function traslationSpokenAdditionPoints($id) {
+
+        if($id) {
+            $db = JFactory::getDbo();
+            $query = $db->getQuery(true);
+            $query->select(array('	addition_points'));
+            $query->from('#__recruit_levels');
+            $query->where('id = ' . $id);
+            $db->setQuery($query);
+            $row = $db->loadResult();
+
+            return $row;
+        }
+        else {
+            return 0;
+        }
+
+    }
+
+    public function translationSpokenAdditionDays($id) {
+
+        if($id) {
+            $db = JFactory::getDbo();
+            $query = $db->getQuery(true);
+            $query->select(array('addition_days'));
+            $query->from('#__recruit_locations');
+            $query->where('id = ' . $id);
+            $db->setQuery($query);
+            $row = $db->loadResult();
+
+            return $row;
+        }
+        else {
+            return 0;
+        }
+
+    }
+
+    public function ifTranslationSpoken() {
+
+        $data = JRequest::getVar('translatorspoken', array(), 'post', 'array');
+
+        if (count($data)) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     public function ifRearrangeRequest ($id, $employee_id) {

@@ -111,11 +111,14 @@ $listDirn      = $this->escape($this->filter_order_Dir);
             <th>
                 Баллы
             </th>
+            <th>
+                Доп. баллы для устные пер-ков
+            </th>
         </tr>
         </thead>
         <tfoot>
         <tr>
-            <td colspan="14" style="border-top: 1px solid #ddd; border-right: 0px; background: none;">
+            <td colspan="15" style="border-top: 1px solid #ddd; border-right: 0px; background: none;">
                 <?php echo $this->pagination->getListFooter(); ?>
             </td>
         </tr>
@@ -143,6 +146,9 @@ $listDirn      = $this->escape($this->filter_order_Dir);
                     </td>
                     <td>
                         <?php echo $row->point; ?>
+                    </td>
+                    <td>
+                        <?php echo $row->addition_points; ?>
                     </td>
                 </tr>
             <?php endforeach; ?>

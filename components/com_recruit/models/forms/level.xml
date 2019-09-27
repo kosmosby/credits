@@ -49,5 +49,17 @@
 				required="true"
 				default=""
 				/>
+
+		<field
+				name="addition_points"
+				type="text"
+				label="Дополнительные баллы для устных переводчиков"
+				description="Дополнительные баллы для устных переводчиков"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+		/>
+
 	</fieldset>
 </form>
