@@ -72,7 +72,7 @@ class RecruitViewThemes extends JViewLegacy
         $this->toolbar = JToolbar::getInstance();
 
         JToolbarHelper::addNew('theme.add','Создать тематику');
-        JToolBarHelper::deleteList('', 'theme.delete', 'Удалить');
+        JToolBarHelper::deleteList('', 'themes.delete', 'Удалить');
 
         return $this->toolbar;
     }

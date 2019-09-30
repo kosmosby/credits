@@ -69,7 +69,7 @@ class RecruitViewLocations extends JViewLegacy
         $this->toolbar = JToolbar::getInstance();
 
         JToolbarHelper::addNew('location.add','Создать месторасположение');
-        JToolBarHelper::deleteList('', 'location.delete', 'Удалить');
+        JToolBarHelper::deleteList('', 'locations.delete', 'Удалить');
 
         return $this->toolbar;
     }

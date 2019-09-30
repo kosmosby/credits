@@ -20,6 +20,34 @@ class RecruitControllerThemes extends JControllerAdmin
 		return $model;
 	}
 
+    public function delete() {
 
+        $mainframe = JFactory::getApplication();
+
+        $cids = implode(',', $_REQUEST['cid']);
+
+        $db = JFactory::getDbo();
+        $query = $db->getQuery(true);
+
+        $conditions = array(
+            $db->quoteName('id') . ' IN ('.$cids.')  ',
+        );
+
+        $query->delete('#__recruit_themes');
+        $query->where($conditions);
+
+        //echo($query->__toString()); die;
+        $db->setQuery($query);
+        $result = $db->execute();
+
+
+        if ($result) {
+            $msg = "Записть успешно удалена";
+        } else {
+            echo "Произошла ошибка во время сохранения записи";
+        }
+        $mainframe->Redirect('index.php?option=com_recruit&view=themes',$msg);
+
+    }
 
 }
