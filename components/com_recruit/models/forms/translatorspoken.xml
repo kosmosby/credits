@@ -35,6 +35,17 @@
 				required="true"
 				default=""
 		/>
+		
+		<field name="translatorspoken[type]" 
+			type="list" 
+			default="" 
+			required="true" 
+			label="Тип устного перевода" description="Тип устного перевода">
+		  <option value="">Выберите опцию</option>
+		  <option value="синхрон">синхрон</option>
+		  <option value="последовательный перевод">последовательный перевод</option>
+		  <option value="шушутаж">шушутаж</option>
+		</field>
 
 
 		<field
