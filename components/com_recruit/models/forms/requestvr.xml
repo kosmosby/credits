@@ -121,6 +121,14 @@
 			   class="superuser"
 		/>
 
+		<field name="information"
+			   type="textarea"
+			   label="дополнительная информация"
+			   description="дополнительная информация"
+			   rows="10"
+			   cols="5"
+		/>
+
 		<field
 				name="evid"
 				type="hidden"

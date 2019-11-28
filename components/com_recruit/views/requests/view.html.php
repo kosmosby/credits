@@ -51,6 +51,9 @@ list.admin.request";
         JModelLegacy::addIncludePath(JPATH_ROOT.'/components/com_recruit/models', 'RecruitModel');
         $levels_model = JModelLegacy::getInstance('requestvr', 'RecruitModel', array('ignore_request' => true));
 
+//        echo "<pre>";
+//        print_r($this->items); die;
+
         $this->items = $levels_model->LevelsById($this->items);
 
         $user = JFactory::getUser();

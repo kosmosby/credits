@@ -192,7 +192,9 @@ $listDirn      = $this->escape($this->filter_order_Dir);
                                     echo $row->typeemployee_name;
                                     break;
                                 case 2:
-                                    echo $row->languages.' - '.$row->theme_name;
+                                    if(isset($row->languages) && $row->languages) {
+                                        echo $row->languages . ' - ' . $row->theme_name;
+                                    }
                                 break;
                             }
 
