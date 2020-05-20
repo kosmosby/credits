@@ -145,6 +145,10 @@ class RecruitModelRequesthr extends JModelAdmin
     {
         $row = JTable::getInstance('Requests', 'RecruitTable');
 
+
+//        echo "<pre>";
+//        print_r($data); die;
+
         if(!$row->bind($data))
         {
             JError::raiseError(500, $row->getError() );
@@ -155,6 +159,9 @@ class RecruitModelRequesthr extends JModelAdmin
             return false;
         }
 
+
+//        echo "<pre>";
+//        print_r($row); die;
         return $row;
 
     }
@@ -178,7 +185,12 @@ class RecruitModelRequesthr extends JModelAdmin
             case 1:
                 $prev_date = $this->findPreviousRequest($jform_employee_id, $id, $start_date, $type_id);
 
-                if(count($prev_date)) {
+
+
+                if(count((array)$prev_date)) {
+
+
+
                     $half_all_count_days = (strtotime($prev_date->estimate_date) - strtotime($prev_date->public_date))/2;
                     $count_days = round($half_all_count_days/60/60/24);
 
@@ -189,6 +201,9 @@ class RecruitModelRequesthr extends JModelAdmin
                         $public_date = date("Y-m-d", $start_date_seconds);
                     }
                 }
+
+//                echo "<pre>";
+//                print_r(count((array)$prev_date)); die;
 
                 $query = $db->getQuery(true);
                 $query->select(array('norm'));
@@ -421,13 +436,19 @@ class RecruitModelRequesthr extends JModelAdmin
 
     }
 
+
     public function _bodyRequestCreation($data) {
 
 
         $str = "Запрос от ".JFactory::getUser()->name."<br/><br />";
 
         $str .= "название вакансии: ".$data->name."<br/>";
-        $str .= "тип заявки: ".$this->getTypebyId($data->type_id)."<br/>";
+
+
+        if(isset($data->type_id) && $data->type_id) {
+            $str .= "тип заявки: " . $this->getTypebyId($data->type_id) . "<br/>";
+        }
+
 
         if($data->employee_id) {
             $str .= "исполнитель: " . $this->getEmployeeName($data->employee_id) . "<br/>";
@@ -442,10 +463,14 @@ class RecruitModelRequesthr extends JModelAdmin
             $str .= "тип сотрудника: " . $this->getTypeEmployebyId($data->typeemployee_id) . "<br/>";
         }
 
+
+
         $str .= "количество специалистов: ".$data->count."<br/>";
         $str .= "описание задачи: ".$data->description."<br/>";
         $str .= "приоритетность: ";
         $str .= (!$data->priority)?"нормальная<br/>":"высокая<br/>";
+
+
 
         if($data->type_id == 2) {
             $str .= "тип переводчика: ".$this->getTypeInterpreterbyId($data->interpreter_type)."<br/>";
@@ -456,12 +481,15 @@ class RecruitModelRequesthr extends JModelAdmin
             $str .= "дата окончания заявки: ".$data->estimate_date."<br/>";
         }
 
+
         if(!$data->employee_id) {
             $uri =JURI::base();
             $type=($data->type_id==1)?"requesthr":"requestvr";
             $uri .= 'index.php?option=com_recruit&view=' . $type . '&layout=edit&id=' . $data->id;
             $str .= "ссылка на заявку: <a href='" . $uri . "' target='_blank'>" . $uri . "</a>";
         }
+
+
 //        echo "<pre>";
 //        print_r($str); die;
 
@@ -584,6 +612,74 @@ class RecruitModelRequesthr extends JModelAdmin
                 return false;
             }
         }
+
+    }
+
+
+    public function agreement($data) {
+
+//        echo "<pre>";
+//        print_r($data); die;
+
+        $string = $this->_bodyRequestCreation($data);
+//        die;
+//        echo $string;
+
+
+        if($data->type_id == 1) {
+
+            $this->send_agreement($string, $data);
+        }
+
+
+    }
+
+    public function send_agreement($body, $data) {
+
+        $app = &JFactory::getApplication();
+        $live_url = JFactory::getURI();
+        $params = JComponentHelper::getParams('com_recruit');
+
+
+        $body1 = $body;
+        $uri1 = $live_url. '&task=requesthr.agreement&id='.$data->id.'&field1=status_division_head&field2=date_division_head&value=1';
+        $body1 .= "<br />утвердить заявку: <a href='" . $uri1 . "' target='_blank'>утверждаю</a>";
+
+        $email1 = $params->get('division_head_email');
+        $this->_mail( $body1, 'согласование заявки', $email1);
+
+
+        $body2 = $body;
+        $uri2 = $live_url. '&task=requesthr.agreement&id='.$data->id.'&field1=status_fin_director&field2=date_fin_director&value=1';
+        $body2 .= "<br />утвердить заявку: <a href='" . $uri2 . "' target='_blank'>утверждаю</a>";
+
+        $email2 = $params->get('fin_director_email');
+        $this->_mail( $body2, 'согласование заявки', $email2);
+
+
+        $body3 = $body;
+        $uri3 = $live_url. '&task=requesthr.agreement&id='.$data->id.'&field1=status_chief_accountant&field2=date_chief_accountant&value=1';
+        $body3 .= "<br />утвердить заявку: <a href='" . $uri3 . "' target='_blank'>утверждаю</a>";
+
+        $email3 = $params->get('chief_accountant_email');
+        $this->_mail( $body3, 'согласование заявки', $email3);
+
+
+        $body4 = $body;
+        $uri4 = $live_url. '&task=requesthr.agreement&id='.$data->id.'&field1=status_general_director&field2=date_general_director&value=1';
+        $body4 .= "<br />утвердить заявку: <a href='" . $uri4 . "' target='_blank'>утверждаю</a>";
+
+        $email4 = $params->get('general_director_email');
+        $this->_mail( $body4, 'согласование заявки', $email4);
+
+
+        $body5 = $body;
+        $uri5 = $live_url. '&task=requesthr.agreement&id='.$data->id.'&field1=status_vendor_management&field2=date_vendor_management&value=1';
+        $body5 .= "<br />утвердить заявку: <a href='" . $uri5 . "' target='_blank'>утверждаю</a>";
+
+        $email5 = $params->get('vendor_management_email');
+        $this->_mail( $body5, 'согласование заявки', $email5);
+
 
     }
 

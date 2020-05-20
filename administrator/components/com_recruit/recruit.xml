@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="3.2.0" method="upgrade">
 
-	<name>COM_RECRUIT</name>
+	<name>com_recruit</name>
 	<!-- The following elements are optional and free of formatting constraints -->
 	<creationDate>July 2019</creationDate>
 	<author>Yura Lapytsko</author>

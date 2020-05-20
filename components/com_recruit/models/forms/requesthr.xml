@@ -14,10 +14,31 @@
 		/>
 
 		<field
+				name="type_id"
+				type="sql"
+				default=""
+				label="тип заявки"
+				query="SELECT id AS value, name AS type_id  FROM #__recruit_types"
+				required="true"
+		/>
+
+		<field name="priority" type="list" default="" required="true" label="Приоритетность" description="Приоритетность">
+			<option value="">Выберите опцию</option>
+			<option value="0">нормальная</option>
+			<option value="1">высокая</option>
+		</field>
+
+
+		<field name="note1" type="note" label="Общая информация" />
+
+
+
+
+		<field
 				name="name"
 				type="text"
-				label="название вакансии"
-				description="название вакансии"
+				label="Позиция"
+				description="Позиция"
 				size="40"
 				class="inputbox"
 				required="true"
@@ -25,11 +46,356 @@
 		/>
 
 		<field
-				name="type_id"
-				type="sql"
+				name="department"
+				type="text"
+				label="Подразделение"
+				description="Подразделение"
+				size="40"
+				class="inputbox"
+				required="true"
 				default=""
-				label="тип заявки"
-				query="SELECT id AS value, name AS type_id  FROM #__recruit_types"
+		/>
+		<field
+				name="department_head"
+				type="text"
+				label="Руководитель подразделения"
+				description="Руководитель подразделения"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+		/>
+
+		<field
+				name="subordinates"
+				type="text"
+				label="Подчиненные"
+				description="есть ли подчиненные, количество, должности"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+		/>
+
+		<field
+				name="location"
+				type="text"
+				label="Локация (регион)"
+				description="Локация (регион)"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+		/>
+
+		<field name="office_remote"
+				type="list"
+				label="Офис/удаленно"
+				description="Офис/удаленно"
+				required="true"
+				default="">
+		<option value="">Выберите опцию</option>
+		<option value="Офис">Офис</option>
+		<option value="Удаленно">Удаленно</option>
+		</field>
+
+		<field
+				name="vacancy_type"
+				type="list"
+				label="Тип вакансии"
+				description="новая вакансия или замена сотрудника"
+				required="true"
+				default="">
+			<option value="">Выберите опцию</option>
+			<option value="новая вакансия">новая вакансия</option>
+			<option value="замена сотрудника">замена сотрудника</option>
+		</field>
+
+		<field
+				name="reason_open"
+				type="text"
+				label="Причина открытия вакансии"
+				description="Причина открытия вакансии"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""/>
+
+
+		<field
+				name="available_staff_list"
+				type="text"
+				label="Наличие вакансии в штатном расписании"
+				description="форма найма сотрудника"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+		/>
+
+		<field name="estimate_date"
+			   type="calendar"
+			   label="Предположительная дата выхода на работу"
+			   class="superuser"
+		/>
+
+		<field
+				name="count"
+				type="integer"
+				label="Количество сотрудников"
+				description="Количество сотрудников"
+				required="true"
+				default=""
+				first="1" last="10" step="1"
+		/>
+
+
+		<field name="note2" type="note" label="Профиль кандидата" />
+
+		<field
+				name="education"
+				type="text"
+				label="Образование"
+				description="Образование"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+				rows="10"
+				cols="50"
+		/>
+
+		<field
+				name="experience"
+				type="text"
+				label="Опыт работы"
+				description="Опыт работы"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+				rows="10"
+				cols="50"
+		/>
+
+		<field name="сompetencies"
+			   type="textarea"
+			   label="Профессиональные навыки/компетенции"
+			   description="Профессиональные навыки/компетенции"
+			   required="true"
+			   rows="10"
+			   cols="5"
+		/>
+
+		<field
+				name="foreign_languages"
+				type="text"
+				label="Иностранные языки"
+				description="Иностранные языки"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+				rows="10"
+				cols="50"
+		/>
+
+		<field
+				name="special_software"
+				type="text"
+				label="Знание специализированного ПО"
+				description="Знание специализированного ПО"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+				rows="10"
+				cols="50"
+		/>
+
+		<field name="note3" type="note" label="Основные обязанности" />
+
+		<field name="information"
+			   type="textarea"
+			   label=""
+			   description=""
+			   rows="10"
+			   cols="5"
+			   required="true"
+		/>
+
+
+		<field name="note4" type="note" label="Особые факторы работы (командировки, переработки, переезд)" />
+
+		<field name="description"
+			   type="textarea"
+			   label=""
+			   description=""
+			   rows="10"
+			   cols="5"
+		/>
+
+		<field name="note5" type="note" label="Компенсация" />
+
+		<field
+				name="probationary_salary"
+				type="text"
+				label="заработная плата на испытательный срок"
+				description="заработная плата на испытательный срок"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+				rows="10"
+				cols="50"
+		/>
+
+		<field
+				name="salary"
+				type="text"
+				label="заработная плата постоянная"
+				description="заработная плата постоянная"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+				rows="10"
+				cols="50"
+		/>
+
+
+		<field
+				name="bonuses_interest"
+				type="text"
+				label="бонусы/проценты"
+				description="как строится бонусная система, как часто выплачиваются бонусы, какие возможны суммы"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+				rows="10"
+				cols="50"
+		/>
+
+		<field type="spacer" name="myspacer1" label="Согласование" hr="true"/>
+		<field name="note6" type="note" label="Согласование" />
+
+
+
+
+		<field
+				name="status_division_head"
+				type="checkbox"
+				label="Руководитель подразделения"
+				description="Руководитель подразделения"
+				size="40"
+				class="inputbox"
+				default=""
+				rows="10"
+				cols="50"
+				
+		/>
+
+		<field name="date_division_head"
+			   type="calendar"
+			   label="Дата"
+			   class="superuser"
+		/>
+		<field type="spacer"  hr="true" />
+
+
+
+		<field
+				name="status_fin_director"
+				type="checkbox"
+				label="Финансовый директор"
+				description="Финансовый директор"
+				size="40"
+				class="inputbox"
+				default=""
+				rows="10"
+				cols="50"
+		/>
+
+		<field name="date_fin_director"
+			   type="calendar"
+			   label="Дата"
+			   class="superuser"
+		/>
+
+		<field type="spacer"  hr="true" />
+
+
+
+		<field
+				name="status_chief_accountant"
+				type="checkbox"
+				label="Главный бухгалтер"
+				description="Главный бухгалтер"
+				size="40"
+				class="inputbox"
+				default=""
+				rows="10"
+				cols="50"
+		/>
+
+		<field name="date_chief_accountant"
+			   type="calendar"
+			   label="Дата"
+			   class="superuser"
+		/>
+
+		<field type="spacer"  hr="true" />
+
+
+
+		<field
+				name="status_general_director"
+				type="checkbox"
+				label="Генеральный директор"
+				description="Генеральный директор"
+				size="40"
+				class="inputbox"
+				default=""
+				rows="10"
+				cols="50"
+		/>
+
+		<field name="date_general_director"
+			   type="calendar"
+			   label="Дата"
+			   class="superuser"
+		/>
+
+		<field type="spacer"  hr="true" />
+
+
+		<field
+				name="status_vendor_management"
+				type="checkbox"
+				label="Руководитель подразделения вендор менеджмента"
+				description="Руководитель подразделения вендор менеджмента"
+				size="40"
+				class="inputbox"
+				default=""
+				rows="10"
+				cols="50"
+		/>
+
+		<field name="date_vendor_management"
+			   type="calendar"
+			   label="Дата"
+			   class="superuser"
+		/>
+
+		<field type="spacer" name="myspacer2"  hr="true"/>
+
+		<field
+				name="typeemployee_id"
+				type="sql"
+				default="10"
+				label="Позиция"
+				query="SELECT id AS value, name AS typeemployee_id  FROM #__recruit_typeemployee"
 				required="true"
 		/>
 
@@ -41,29 +407,9 @@
 				query="SELECT id AS value, name AS employee_id  FROM #__recruit_employee"
 				header="Выберите опцию"
 				class="superuser"
-		/>
-
-		<field
-				name="typeemployee_id"
-				type="sql"
-				default="10"
-				label="тип сотрудника"
-				query="SELECT id AS value, name AS typeemployee_id  FROM #__recruit_typeemployee"
 				required="true"
 		/>
 
-		<field
-				name="count"
-				type="text"
-				label="количество специалистов"
-				description="количество специалистов"
-				size="40"
-				class="inputbox"
-				required="true"
-				default=""
-				rows="10"
-				cols="50"
-		/>
 
 		<field name="start_date"
 			   type="calendar"
@@ -72,32 +418,11 @@
 			   class="superuser"
 		/>
 
-		<field name="description"
-			   type="textarea"
-			   label="описание задачи"
-			   description="описание задачи"
-			   required="true"
-			   rows="10"
-			   cols="5"
-		/>
 
-		<field name="priority" type="list" default="" required="true" label="приоритетность" description="">
-			<option value="">Выберите опцию</option>
-			<option value="0">нормальная</option>
-			<option value="1">высокая</option>
-		</field>
 
-		<field
-				name="salary"
-				type="text"
-				label="заработная плата"
-				description="заработная плата"
-				size="40"
-				class="superuser"
-				default=""
-				rows="10"
-				cols="50"
-		/>
+
+
+
 
 		<field name="manual"
 			   type="checkbox"
@@ -113,19 +438,9 @@
 			   class="superuser"
 		/>
 
-		<field name="estimate_date"
-			   type="calendar"
-			   label="расчетная дата"
-			   class="superuser"
-		/>
 
-		<field name="information"
-			   type="textarea"
-			   label="дополнительная информация"
-			   description="дополнительная информация"
-			   rows="10"
-			   cols="5"
-		/>
+
+
 
 		<field
 				name="evid"

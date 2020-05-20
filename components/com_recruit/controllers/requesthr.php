@@ -96,14 +96,23 @@ class RecruitControllerRequesthr extends JControllerForm
             }
         }
 
+
+        //echo $isSuperUser; die;
         if(!isset($data['manual']) && $isSuperUser) {
 
             $return = $model->estimate($data['type_id'], $data['employee_id'], $data['typeemployee_id'], $data['count'], $data['start_date'], $data['id'], $data['level_id']);
+
+//            echo "<pre>";
+//            print_r($return); die;
+
 
             $data['estimate_date'] = $return['estimate_date'];
             $data['public_date'] = $return['public_date'];
 
             $data['manual'] = 0;
+
+//            echo "<pre>";
+//            print_r($data); die;
         }
 
 
@@ -133,6 +142,9 @@ class RecruitControllerRequesthr extends JControllerForm
         $upditem	= $model->updItem($data);
 
 
+//        echo "<pre>";
+//        print_r($upditem); die;
+
         // check if ok and display appropriate message.  This can also have a redirect if desired.
         if ($upditem) {
 
@@ -148,14 +160,25 @@ class RecruitControllerRequesthr extends JControllerForm
                 $user = JFactory::getUser($data['created_by']);
                 $recipient_created_by=$user->get('email');
 
+
                 $user = JFactory::getUser($model->getEmployeeUser_id($data['employee_id']));
                 $recipient_assign_to=$user->get('email');
+
+//                echo "<pre>";
+//                print_r($user); die;
 
                 $recipient = array( $recipient_created_by, $recipient_assign_to);
 
                 $body = $model->_bodyRequestCreation($upditem);
                 $model->_mail( $body, 'Присвоение исполнителя на заявку', $recipient);
+
+
+
+                $model->agreement($upditem);
             }
+
+
+
 
             $msg = "Записть успешно сохранена";
         } else {
@@ -297,6 +320,45 @@ class RecruitControllerRequesthr extends JControllerForm
         $rows = $db->loadObjectList();
 
         return $rows;
+    }
+
+    public function agreement() {
+
+        $mainframe = JFactory::getApplication();
+
+        $id = JRequest::getInt('id');
+        $field1 = JRequest::getString('field1');
+        $field2 = JRequest::getString('field2');
+        $value = JRequest::getInt('value');
+
+        $db = JFactory::getDbo();
+        $query = $db->getQuery(true);
+
+        $conditions = array(
+            $db->quoteName('id') . ' = '.$id
+        );
+
+        $fields = array(
+            $db->quoteName($field1) . ' = '.$value,
+            $db->quoteName($field2) . ' = NOW()'
+        );
+
+        $query->update('#__recruit_requests');
+        $query->set($fields);
+        $query->where($conditions);
+
+        //echo($query->__toString()); die;
+        $db->setQuery($query);
+        $result = $db->execute();
+
+        if($result) {
+            $msg = "Заявка успешно согласована";
+        } else {
+            $msg =  "Произошла ошибка во время согласования заявки";
+        }
+
+        $mainframe->Redirect('index.php?option=com_recruit&view=requests',$msg);
+
     }
 
 }

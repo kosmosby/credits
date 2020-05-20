@@ -2,18 +2,108 @@
 <config>
 	<fieldset
 		name="name"
-		label="COM_HELLOWORLD_CONFIG_GREETING_SETTINGS_LABEL"
-		description="COM_HELLOWORLD_CONFIG_GREETING_SETTINGS_DESC"
+		label="Настройки электронной почты"
+		description="Настройки электронной почты руководителей"
 	>
 		<field
-			name="show_category"
-			type="radio"
-			label="COM_HELLOWORLD_HELLOWORLD_FIELD_SHOW_CATEGORY_LABEL"
-			description="COM_HELLOWORLD_HELLOWORLD_FIELD_SHOW_CATEGORY_DESC"
-			default="0"
-		>
-			<option value="0">JHIDE</option>
-			<option value="1">JSHOW</option>
-		</field>
+				name="division_head"
+				type="text"
+				label="Руководитель подразделения"
+				description="Руководитель подразделения"
+				size="40"
+				class="inputbox"
+				default=""
+				rows="10"
+				cols="50"
+		/>
+
+		<field name="division_head_email" type="email"
+			   label="Электронная почта руководителя подразделения"
+			   description="Электронная почта руководителя подразделения"
+			   required="true"
+			   size="30"
+			   class="inputbox"
+			   validate="email" />
+
+		<field
+				name="fin_director"
+				type="text"
+				label="Финансовый директор"
+				description="Финансовый директор"
+				size="40"
+				class="inputbox"
+				default=""
+				rows="10"
+				cols="50"
+		/>
+
+		<field name="fin_director_email" type="email"
+			   label="Электронная почта финансового директора"
+			   description="Электронная почта финансового директора"
+			   required="true"
+			   size="30"
+			   class="inputbox"
+			   validate="email" />
+
+		<field
+				name="chief_accountant"
+				type="text"
+				label="Главный бухгалтер"
+				description="Главный бухгалтер"
+				size="40"
+				class="inputbox"
+				default=""
+				rows="10"
+				cols="50"
+		/>
+
+		<field name="chief_accountant_email" type="email"
+			   label="Электронная почта главного бухгалтера"
+			   description="Электронная почта главного бухгалтера"
+			   required="true"
+			   size="30"
+			   class="inputbox"
+			   validate="email" />
+
+		<field
+				name="general_director"
+				type="text"
+				label="Генеральный директор"
+				description="Генеральный директор"
+				size="40"
+				class="inputbox"
+				default=""
+				rows="10"
+				cols="50"
+		/>
+
+		<field name="general_director_email" type="email"
+			   label="Электронная почта генерального директора"
+			   description="Электронная почта генерального директора"
+			   required="true"
+			   size="30"
+			   class="inputbox"
+			   validate="email" />
+
+		<field
+				name="vendor_management"
+				type="text"
+				label="Руководитель подразделения вендор менеджмента"
+				description="Руководитель подразделения вендор менеджмента"
+				size="40"
+				class="inputbox"
+				default=""
+				rows="10"
+				cols="50"
+		/>
+
+		<field name="vendor_management_email" type="email"
+			   label="Электронная почта вендор менеджера"
+			   description="Электронная почта вендор менеджера"
+			   required="true"
+			   size="30"
+			   class="inputbox"
+			   validate="email" />
+
 	</fieldset>
 </config>
