@@ -86,6 +86,9 @@ class RecruitControllerRequesthr extends JControllerForm
         $isSuperUser = JFactory::getUser()->authorise('core.admin');
 
 
+
+
+
         if(!$data['created_by']) {
             $data['created_by'] = JFactory::getUser()->id;
         }
@@ -138,6 +141,17 @@ class RecruitControllerRequesthr extends JControllerForm
         }
     */
 
+        if(!$isSuperUser) {
+            $user = JFactory::getUser();
+            $created_by = JFactory::getUser($data['created_by']);
+
+            if ($user->id != 928 && $user->id != $created_by) {
+                $msg = "У вас нет прав на изменение этой заявки";
+                $mainframe->Redirect('index.php?option=com_recruit&view=requests', $msg);
+                return;
+            }
+        }
+
         // Now update the loaded data to the database via a function in the model
         $upditem	= $model->updItem($data);
 
@@ -149,6 +163,17 @@ class RecruitControllerRequesthr extends JControllerForm
         if ($upditem) {
 
             if(!$isSuperUser) {
+
+                $user = JFactory::getUser();
+                $created_by = JFactory::getUser($data['created_by']);
+
+                if($user->id != 928 && $user->id != $created_by) {
+                    $msg = "У вас нет прав на изменение этой заявки";
+                    $mainframe->Redirect('index.php?option=com_recruit&view=requests',$msg);
+                    exit();
+                }
+
+
                 $user = JFactory::getUser(928);
                 $recipient=$user->get('email');
 

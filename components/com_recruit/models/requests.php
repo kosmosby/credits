@@ -79,11 +79,13 @@ class RecruitModelRequests extends JModelList
             $query->where('b.name LIKE ' . $like);
         }
 
+        /*
         $isSuperUser = JFactory::getUser()->authorise('core.admin');
         if(!$isSuperUser) {
             $created_by = JFactory::getUser()->id;
             $query->where('a.created_by = ' . $created_by);
         }
+        */
 
         // Filter by published state
 //        $published = $this->getState('filter.published');
