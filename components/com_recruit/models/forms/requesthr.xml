@@ -280,21 +280,32 @@
 		<field type="spacer" name="myspacer1" label="Согласование" hr="true"/>
 		<field name="note6" type="note" label="Согласование" />
 
-
-
-
 		<field
-				name="status_division_head"
-				type="checkbox"
+				name="division_head"
+				type="text"
 				label="Руководитель подразделения"
 				description="Руководитель подразделения"
 				size="40"
 				class="inputbox"
+				required="true"
 				default=""
 				rows="10"
 				cols="50"
-				
 		/>
+
+
+		<field
+				name="status_division_head"
+				type="list"
+				label="Руководитель подразделения"
+				description="Руководитель подразделения"
+				class="inputbox"
+				default="">
+				<option value="">Выберите опцию</option>
+				<option value="1">одобрено</option>
+				<option value="2">уточняется</option>
+				<option value="3">отклонено</option>
+		</field>
 
 		<field name="date_division_head"
 			   type="calendar"
@@ -303,19 +314,31 @@
 		/>
 		<field type="spacer"  hr="true" />
 
-
-
 		<field
-				name="status_fin_director"
-				type="checkbox"
+				name="fin_director"
+				type="text"
 				label="Финансовый директор"
 				description="Финансовый директор"
 				size="40"
 				class="inputbox"
+				required="true"
 				default=""
 				rows="10"
 				cols="50"
 		/>
+
+		<field
+				name="status_fin_director"
+				type="list"
+				label="Финансовый директор"
+				description="Финансовый директор"
+				class="inputbox"
+				default="">
+				<option value="">Выберите опцию</option>
+				<option value="1">одобрено</option>
+				<option value="2">уточняется</option>
+				<option value="3">отклонено</option>
+		</field>
 
 		<field name="date_fin_director"
 			   type="calendar"
@@ -325,19 +348,31 @@
 
 		<field type="spacer"  hr="true" />
 
-
-
 		<field
-				name="status_chief_accountant"
-				type="checkbox"
+				name="chief_accountant"
+				type="text"
 				label="Главный бухгалтер"
 				description="Главный бухгалтер"
 				size="40"
 				class="inputbox"
+				required="true"
 				default=""
 				rows="10"
 				cols="50"
 		/>
+
+		<field
+				name="status_chief_accountant"
+				type="list"
+				label="Главный бухгалтер"
+				description="Главный бухгалтер"
+				class="inputbox"
+				default="">
+				<option value="">Выберите опцию</option>
+				<option value="1">одобрено</option>
+				<option value="2">уточняется</option>
+				<option value="3">отклонено</option>
+		</field>
 
 		<field name="date_chief_accountant"
 			   type="calendar"
@@ -347,19 +382,31 @@
 
 		<field type="spacer"  hr="true" />
 
-
-
 		<field
-				name="status_general_director"
-				type="checkbox"
+				name="general_director"
+				type="text"
 				label="Генеральный директор"
 				description="Генеральный директор"
 				size="40"
 				class="inputbox"
+				required="true"
 				default=""
 				rows="10"
 				cols="50"
 		/>
+
+		<field
+				name="status_general_director"
+				type="list"
+				label="Генеральный директор"
+				description="Генеральный директор"
+				class="inputbox"
+				default="">
+				<option value="">Выберите опцию</option>
+				<option value="1">одобрено</option>
+				<option value="2">уточняется</option>
+				<option value="3">отклонено</option>
+		</field>
 
 		<field name="date_general_director"
 			   type="calendar"
@@ -369,18 +416,31 @@
 
 		<field type="spacer"  hr="true" />
 
-
 		<field
-				name="status_vendor_management"
-				type="checkbox"
+				name="vendor_management"
+				type="text"
 				label="Руководитель подразделения вендор менеджмента"
 				description="Руководитель подразделения вендор менеджмента"
 				size="40"
 				class="inputbox"
+				required="true"
 				default=""
 				rows="10"
 				cols="50"
 		/>
+
+		<field
+				name="status_vendor_management"
+				type="list"
+				label="Руководитель подразделения вендор менеджмента"
+				description="Руководитель подразделения вендор менеджмента"
+				class="inputbox"
+				default="">
+				<option value="">Выберите опцию</option>
+				<option value="1">одобрено</option>
+				<option value="2">уточняется</option>
+				<option value="3">отклонено</option>
+		</field>
 
 		<field name="date_vendor_management"
 			   type="calendar"
