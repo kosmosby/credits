@@ -297,8 +297,8 @@
 		<field
 				name="status_division_head"
 				type="list"
-				label="Руководитель подразделения"
-				description="Руководитель подразделения"
+				label="Статус"
+				description="Статус"
 				class="inputbox"
 				default="">
 				<option value="">Выберите опцию</option>
@@ -330,8 +330,8 @@
 		<field
 				name="status_fin_director"
 				type="list"
-				label="Финансовый директор"
-				description="Финансовый директор"
+				label="Статус"
+				description="Статус"
 				class="inputbox"
 				default="">
 				<option value="">Выберите опцию</option>
@@ -364,8 +364,8 @@
 		<field
 				name="status_chief_accountant"
 				type="list"
-				label="Главный бухгалтер"
-				description="Главный бухгалтер"
+				label="Статус"
+				description="Статус"
 				class="inputbox"
 				default="">
 				<option value="">Выберите опцию</option>
@@ -398,8 +398,8 @@
 		<field
 				name="status_general_director"
 				type="list"
-				label="Генеральный директор"
-				description="Генеральный директор"
+				label="Статус"
+				description="Статус"
 				class="inputbox"
 				default="">
 				<option value="">Выберите опцию</option>
@@ -432,8 +432,8 @@
 		<field
 				name="status_vendor_management"
 				type="list"
-				label="Руководитель подразделения вендор менеджмента"
-				description="Руководитель подразделения вендор менеджмента"
+				label="Статус"
+				description="Статус"
 				class="inputbox"
 				default="">
 				<option value="">Выберите опцию</option>
