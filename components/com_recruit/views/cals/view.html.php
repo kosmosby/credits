@@ -53,6 +53,14 @@ class RecruitViewCals extends JViewLegacy
 		$model->showCal();
 		
 		$this->months = $model->getMonths();
+
+        $startDate = $model->get_first_request();
+        $endDate = $model->get_last_request();
+		$this->number_months = $model->nb_mois($startDate,$endDate);
+
+//		echo "<pre>";
+//		print_r($this->months); die;
+
 //		$this->requests = $model->getRequests();
 
 //		echo "<pre>";

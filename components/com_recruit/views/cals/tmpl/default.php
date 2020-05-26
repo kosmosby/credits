@@ -102,7 +102,9 @@ JHtml::script(Juri::base() . 'components/com_recruit/js/calendar.js');
 
 	
 <div style="width: 100%; overflow-x: scroll;" id="main_calendar_container">
-<div style="width: 4100px;" id="calendar_container" >
+
+
+<div style="width: <?php echo $this->number_months*550;?>px;" id="calendar_container" >
 
     <table class="table table-striped table-hover" id="credits_table">
         <thead>

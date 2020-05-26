@@ -210,8 +210,31 @@ class RecruitModelCals extends JModelList
 	}
 	
 	public function getMonths() {
-		
-		$months = array();
+
+        $startDate = $this->get_first_request();
+        $endDate = $this->get_last_request();
+
+
+        //echo $startDate; die;
+        $number_months = $this->nb_mois($startDate,$endDate);
+
+        //echo $number_months; die;
+
+        $months = array();
+        for($i=0;$i<$number_months;$i++) {
+
+            $key = date("F, Y",strtotime($startDate." + ".$i." month"));
+            $value = cal_days_in_month(CAL_GREGORIAN, date("m",strtotime($startDate." +".$i." month")), date("Y",strtotime($startDate." +".$i." month")));
+
+            $months[$key] = $value;
+        }
+
+
+//        echo "<pre>";
+//        print_r($months); die;
+
+
+		/*
 		for($i=-1;$i<6;$i++) {
 			
 			$key = date("F, Y",strtotime("now ".$i." month"));			
@@ -219,10 +242,54 @@ class RecruitModelCals extends JModelList
 			
 			$months[$key] = $value;	
 		}
+		*/
+
 		
 		return $months;
 	}
-	
+
+	public function get_first_request() {
+        $db = JFactory::getDbo();
+        $query = $db->getQuery(true);
+
+        $query
+            ->select(array('public_date'))
+            ->from($db->quoteName('#__recruit_requests'))
+            ->where('archive = 0 AND estimate_date != 0 ')
+            ->order($db->quoteName('public_date') . ' ASC')
+            ->setLimit('1');
+
+        //echo $query->__toString(); die;
+
+        // Reset the query using our newly populated query object.
+        $db->setQuery($query);
+
+        // Load the results as a list of stdClass objects (see later for more options on retrieving data).
+        $row = $db->loadResult();
+
+        return $row;
+    }
+
+    public function get_last_request() {
+        $db = JFactory::getDbo();
+        $query = $db->getQuery(true);
+
+        $query
+            ->select(array('estimate_date'))
+            ->from($db->quoteName('#__recruit_requests'))
+            ->where('archive = 0 AND estimate_date != 0')
+            ->order($db->quoteName('estimate_date') . ' DESC')
+            ->setLimit('1');
+
+
+        // Reset the query using our newly populated query object.
+        $db->setQuery($query);
+
+        // Load the results as a list of stdClass objects (see later for more options on retrieving data).
+        $row = $db->loadResult();
+
+        return $row;
+    }
 	
 	public function getRequests() {
 		
@@ -247,7 +314,24 @@ class RecruitModelCals extends JModelList
 		$results = $db->loadObjectList();
 		
 		return $results;
-	} 
+	}
+
+    public function nb_mois($date1, $date2)
+    {
+        $begin = new DateTime( $date1 );
+        $end = new DateTime( $date2 );
+        $end = $end->modify( '+1 month' );
+
+        $interval = DateInterval::createFromDateString('1 month');
+
+        $period = new DatePeriod($begin, $interval, $end);
+        $counter = 0;
+        foreach($period as $dt) {
+            $counter++;
+        }
+
+        return $counter;
+    }
 
 
 }
