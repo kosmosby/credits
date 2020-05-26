@@ -81,7 +81,7 @@ class RecruitModelCals extends JModelList
             $query->where('a.name LIKE ' . $like);
         }
 
-        $query->where('a.archive = 0');
+        $query->where('a.archive = 0 AND estimate_date != 0');
 
 //        $isSuperUser = JFactory::getUser()->authorise('core.admin');
 //        $user_id = JFactory::getUser()->id;
