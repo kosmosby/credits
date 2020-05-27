@@ -645,6 +645,13 @@ class RecruitModelRequesthr extends JModelAdmin
         $uri1 = $live_url. '&task=requesthr.agreement&id='.$data->id.'&field1=status_division_head&field2=date_division_head&value=1';
         $body1 .= "<br />утвердить заявку: <a href='" . $uri1 . "' target='_blank'>утверждаю</a>";
 
+        $uri11 = $live_url. '&task=requesthr.agreement&id='.$data->id.'&field1=status_division_head&field2=date_division_head&value=2';
+        $body1 .= "<br />уточнить заявку: <a href='" . $uri11 . "' target='_blank'>уточнить</a>";
+
+        $uri111 = $live_url. '&task=requesthr.agreement&id='.$data->id.'&field1=status_division_head&field2=date_division_head&value=3';
+        $body1 .= "<br />отклонить заявку: <a href='" . $uri111 . "' target='_blank'>отклонить</a>";
+
+
         $email1 = $params->get('division_head_email');
         $this->_mail( $body1, 'согласование заявки', $email1);
 
@@ -652,6 +659,13 @@ class RecruitModelRequesthr extends JModelAdmin
         $body2 = $body;
         $uri2 = $live_url. '&task=requesthr.agreement&id='.$data->id.'&field1=status_fin_director&field2=date_fin_director&value=1';
         $body2 .= "<br />утвердить заявку: <a href='" . $uri2 . "' target='_blank'>утверждаю</a>";
+
+        $uri22 = $live_url. '&task=requesthr.agreement&id='.$data->id.'&field1=status_fin_director&field2=date_fin_director&value=2';
+        $body2 .= "<br />уточнить заявку: <a href='" . $uri22 . "' target='_blank'>уточнить</a>";
+
+        $uri222 = $live_url. '&task=requesthr.agreement&id='.$data->id.'&field1=status_fin_director&field2=date_fin_director&value=3';
+        $body2 .= "<br />отклонить заявку: <a href='" . $uri222 . "' target='_blank'>отклонить</a>";
+
 
         $email2 = $params->get('fin_director_email');
         $this->_mail( $body2, 'согласование заявки', $email2);
@@ -661,6 +675,13 @@ class RecruitModelRequesthr extends JModelAdmin
         $uri3 = $live_url. '&task=requesthr.agreement&id='.$data->id.'&field1=status_chief_accountant&field2=date_chief_accountant&value=1';
         $body3 .= "<br />утвердить заявку: <a href='" . $uri3 . "' target='_blank'>утверждаю</a>";
 
+        $uri33 = $live_url. '&task=requesthr.agreement&id='.$data->id.'&field1=status_chief_accountant&field2=date_chief_accountant&value=2';
+        $body3 .= "<br />уточнить заявку: <a href='" . $uri33 . "' target='_blank'>уточнить</a>";
+
+        $uri333 = $live_url. '&task=requesthr.agreement&id='.$data->id.'&field1=status_chief_accountant&field2=date_chief_accountant&value=3';
+        $body3 .= "<br />отклонить заявку: <a href='" . $uri333 . "' target='_blank'>отклонить</a>";
+
+
         $email3 = $params->get('chief_accountant_email');
         $this->_mail( $body3, 'согласование заявки', $email3);
 
@@ -669,6 +690,13 @@ class RecruitModelRequesthr extends JModelAdmin
         $uri4 = $live_url. '&task=requesthr.agreement&id='.$data->id.'&field1=status_general_director&field2=date_general_director&value=1';
         $body4 .= "<br />утвердить заявку: <a href='" . $uri4 . "' target='_blank'>утверждаю</a>";
 
+        $uri44 = $live_url. '&task=requesthr.agreement&id='.$data->id.'&field1=status_general_director&field2=date_general_director&value=2';
+        $body4 .= "<br />уточнить заявку: <a href='" . $uri44 . "' target='_blank'>уточнить</a>";
+
+        $uri444 = $live_url. '&task=requesthr.agreement&id='.$data->id.'&field1=status_general_director&field2=date_general_director&value=3';
+        $body4 .= "<br />отклонить заявку: <a href='" . $uri444 . "' target='_blank'>отклонить</a>";
+
+
         $email4 = $params->get('general_director_email');
         $this->_mail( $body4, 'согласование заявки', $email4);
 
@@ -676,6 +704,13 @@ class RecruitModelRequesthr extends JModelAdmin
         $body5 = $body;
         $uri5 = $live_url. '&task=requesthr.agreement&id='.$data->id.'&field1=status_vendor_management&field2=date_vendor_management&value=1';
         $body5 .= "<br />утвердить заявку: <a href='" . $uri5 . "' target='_blank'>утверждаю</a>";
+
+        $uri55 = $live_url. '&task=requesthr.agreement&id='.$data->id.'&field1=status_vendor_management&field2=date_vendor_management&value=2';
+        $body5 .= "<br />уточнить заявку: <a href='" . $uri55 . "' target='_blank'>уточнить</a>";
+
+        $uri555 = $live_url. '&task=requesthr.agreement&id='.$data->id.'&field1=status_vendor_management&field2=date_vendor_management&value=3';
+        $body5 .= "<br />отклонить заявку: <a href='" . $uri555 . "' target='_blank'>отклонить</a>";
+
 
         $email5 = $params->get('vendor_management_email');
         $this->_mail( $body5, 'согласование заявки', $email5);

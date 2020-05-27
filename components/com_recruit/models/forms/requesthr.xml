@@ -2,31 +2,36 @@
 <form>
 	<fieldset name="details"
 	>
-		<field
-				name="id"
-				type="hidden"
-				/>
+
 
 		<field
-				name="level_id"
-				type="hidden"
-				default="0"
-		/>
-
-		<field
-				name="type_id"
+				name="typeemployee_id"
 				type="sql"
-				default=""
-				label="тип заявки"
-				query="SELECT id AS value, name AS type_id  FROM #__recruit_types"
+				default="10"
+				label="Позиция"
+				query="SELECT id AS value, name AS typeemployee_id  FROM #__recruit_typeemployee"
 				required="true"
 		/>
 
-		<field name="priority" type="list" default="" required="true" label="Приоритетность" description="Приоритетность">
-			<option value="">Выберите опцию</option>
-			<option value="0">нормальная</option>
-			<option value="1">высокая</option>
-		</field>
+		<field
+				name="employee_id"
+				type="sql"
+				default=""
+				label="ФИО сотрудника"
+				query="SELECT id AS value, name AS employee_id  FROM #__recruit_employee"
+				header="Выберите опцию"
+				class="superuser"
+				required="true"
+		/>
+
+
+		<field name="start_date"
+			   type="calendar"
+			   default="NOW"
+			   label="Дата открытия"
+			   class="superuser"
+		/>
+
 
 
 		<field name="note1" type="note" label="Общая информация" />
@@ -37,8 +42,8 @@
 		<field
 				name="name"
 				type="text"
-				label="Позиция"
-				description="Позиция"
+				label="Название"
+				description="Название"
 				size="40"
 				class="inputbox"
 				required="true"
@@ -276,6 +281,13 @@
 				rows="10"
 				cols="50"
 		/>
+		<field type="spacer" name="myspacer0"  hr="true"/>
+
+		<field name="priority" type="list" default="" required="true" label="Приоритетность" description="Приоритетность">
+			<option value="">Выберите опцию</option>
+			<option value="0">нормальная</option>
+			<option value="1">высокая</option>
+		</field>
 
 		<field type="spacer" name="myspacer1" label="Согласование" hr="true"/>
 		<field name="note6" type="note" label="Согласование" />
@@ -450,33 +462,8 @@
 
 		<field type="spacer" name="myspacer2"  hr="true"/>
 
-		<field
-				name="typeemployee_id"
-				type="sql"
-				default="10"
-				label="Позиция"
-				query="SELECT id AS value, name AS typeemployee_id  FROM #__recruit_typeemployee"
-				required="true"
-		/>
-
-		<field
-				name="employee_id"
-				type="sql"
-				default=""
-				label="ФИО сотрудника"
-				query="SELECT id AS value, name AS employee_id  FROM #__recruit_employee"
-				header="Выберите опцию"
-				class="superuser"
-				required="true"
-		/>
 
 
-		<field name="start_date"
-			   type="calendar"
-			   default="NOW"
-			   label="дата открытия"
-			   class="superuser"
-		/>
 
 
 
@@ -511,6 +498,34 @@
 				name="created_by"
 				type="hidden"
 		/>
+
+
+		<field
+				name="id"
+				type="hidden"
+		/>
+		<field
+				name="type_id"
+				type="hidden"
+				default="1"
+		/>
+
+
+		<field
+				name="level_id"
+				type="hidden"
+				default="0"
+		/>
+
+		<!--		<field-->
+		<!--				name="type_id"-->
+		<!--				type="sql"-->
+		<!--				default=""-->
+		<!--				label="тип заявки"-->
+		<!--				query="SELECT id AS value, name AS type_id  FROM #__recruit_types"-->
+		<!--				required="true"-->
+		<!--				class="request_type"-->
+		<!--		/>-->
 
 
 	</fieldset>

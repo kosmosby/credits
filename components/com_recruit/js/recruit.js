@@ -62,8 +62,6 @@ jQuery( document ).ready(function() {
 
 
 
-
-
 });
 
 function showAdditionForm(int_type) {
