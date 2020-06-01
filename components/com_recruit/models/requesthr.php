@@ -439,36 +439,55 @@ class RecruitModelRequesthr extends JModelAdmin
 
     public function _bodyRequestCreation($data) {
 
+        $str = '';
 
-        $str = "Запрос от ".JFactory::getUser()->name."<br/><br />";
-
-        $str .= "название вакансии: ".$data->name."<br/>";
-
+        $str .= "Запрос от ".JFactory::getUser()->name."<br/><br />";
 
         if(isset($data->type_id) && $data->type_id) {
             $str .= "тип заявки: " . $this->getTypebyId($data->type_id) . "<br/>";
         }
 
-
+//        if($data->type_id == 1) {
+            $str .= "позиция: " . $this->getTypeEmployebyId($data->typeemployee_id) . "<br/>";
+//        }
         if($data->employee_id) {
             $str .= "исполнитель: " . $this->getEmployeeName($data->employee_id) . "<br/>";
         }
 
-        if($data->type_id == 2) {
-            $obj = $this->getLevelbyId($data->level_id);
-            $str .= "уровень сложности: ".$obj->languages." - ".$obj->theme_name."<br/>";
+        if($data->start_date != '0000-00-00') {
+            $str .= "дата открытия: ".$data->start_date."<br/>";
         }
+        $str .= "Название: ".$data->name."<br/>";
+        $str .= "Подразделение: ".$data->department."<br/>";
+        $str .= "Руководитель подразделения: ".$data->department_head."<br/>";
+        $str .= "Подчиненные: ".$data->subordinates."<br/>";
+        $str .= "Локация (регион): ".$data->location."<br/>";
+        $str .= "Офис/удаленно: ".$data->office_remote."<br/>";
+        $str .= "Тип вакансии: ".$data->vacancy_type."<br/>";
+        $str .= "Причина открытия вакансии: ".$data->reason_open."<br/>";
+        $str .= "Наличие вакансии в штатном расписании: ".$data->available_staff_list."<br/>";
+        $str .= "Предположительная дата выхода на работу: ".$data->estimate_date."<br/>";
+        $str .= "Количество сотрудников: ".$data->count."<br/>";
+        $str .= "Образование : ".$data->education."<br/>";
+        $str .= "Опыт работы: ".$data->experience."<br/>";
+        $str .= "Профессиональные навыки/компетенции: ".$data->сompetencies."<br/>";
 
-        if($data->type_id == 1) {
-            $str .= "тип сотрудника: " . $this->getTypeEmployebyId($data->typeemployee_id) . "<br/>";
-        }
-
-
-
-        $str .= "количество специалистов: ".$data->count."<br/>";
-        $str .= "описание задачи: ".$data->description."<br/>";
+        $str .= "Иностранные языки: ".$data->foreign_languages."<br/>";
+        $str .= "Знание специализированного ПО: ".$data->special_software."<br/>";
+        $str .= "Основные обязанности: ".$data->information."<br/>";
+        $str .= "Особые факторы работы (командировки, переработки, переезд): ".$data->description."<br/>";
+        $str .= "заработная плата на испытательный срок: ".$data->probationary_salary."<br/>";
+        $str .= "заработная плата постоянная: ".$data->salary."<br/>";
+        $str .= "бонусы/проценты: ".$data->bonuses_interest."<br/>";
         $str .= "приоритетность: ";
         $str .= (!$data->priority)?"нормальная<br/>":"высокая<br/>";
+
+
+
+
+//        $str .= "описание задачи: ".$data->description."<br/>";
+        //$str .= "приоритетность: ";
+        //$str .= (!$data->priority)?"нормальная<br/>":"высокая<br/>";
 
 
 
@@ -476,10 +495,10 @@ class RecruitModelRequesthr extends JModelAdmin
             $str .= "тип переводчика: ".$this->getTypeInterpreterbyId($data->interpreter_type)."<br/>";
         }
 
-        if($data->start_date != '0000-00-00' && $data->estimate_date != '0000-00-00') {
-            $str .= "дата размещения заявки: ".$data->start_date."<br/>";
-            $str .= "дата окончания заявки: ".$data->estimate_date."<br/>";
-        }
+//        if($data->start_date != '0000-00-00' && $data->estimate_date != '0000-00-00') {
+//            $str .= "дата размещения заявки: ".$data->start_date."<br/>";
+//            $str .= "дата окончания заявки: ".$data->estimate_date."<br/>";
+//        }
 
 
         if(!$data->employee_id) {
@@ -494,6 +513,45 @@ class RecruitModelRequesthr extends JModelAdmin
 //        print_r($str); die;
 
         return $str;
+    }
+
+    public function getFullForm($loadData) {
+
+//        echo "<pre>";
+//        print_r($loadData);
+//        echo "</pre>";
+//        die;
+        // Get the form.
+        $form = $this->loadForm(
+            'com_recruit.requesthr',
+            'requesthr',
+            array(
+                'control' => 'jform',
+                'load_data' => $loadData
+            )
+        );
+
+        $str = '';
+        foreach ($form->getFieldsets() as $name => $fieldset) {
+            foreach ($form->getFieldset($name) as $field) {
+
+//                echo "<pre>";
+//                print_r($field->value); die;
+                $str .= $field->label . " : " . $field->value . "<br/>";
+            }
+        }
+
+
+//            echo "<pre>";
+//            print_r($str);
+//            echo "</pre>";
+//
+//        die;
+
+//        echo "<pre>";
+//        print_r($loadData); die;
+
+
     }
 
     public function getLevelbyId($id) {
