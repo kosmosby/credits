@@ -710,7 +710,13 @@ class RecruitModelRequesthr extends JModelAdmin
         $body1 .= "<br />отклонить заявку: <a href='" . $uri111 . "' target='_blank'>отклонить</a>";
 
 
-        $email1 = $params->get('division_head_email');
+        $division_head_email = $this->get_divisiton_head_email($data);
+
+        $email1 = $division_head_email;//change it
+
+        //echo $email1; die;
+
+
         $this->_mail( $body1, 'согласование заявки', $email1);
 
 
@@ -773,6 +779,21 @@ class RecruitModelRequesthr extends JModelAdmin
         $email5 = $params->get('vendor_management_email');
         $this->_mail( $body5, 'согласование заявки', $email5);
 
+
+    }
+
+    public function get_divisiton_head_email($data) {
+
+        $db = JFactory::getDbo();
+        $query = $db->getQuery(true);
+        $query->select(array('email'));
+        $query->from('#__recruit_units');
+        $query->where('id = '.$data->department);
+
+        $db->setQuery($query);
+        $row = $db->loadResult();
+
+        return $row;
 
     }
 

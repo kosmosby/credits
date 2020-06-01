@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset name="details"
+	>
+		<field
+				name="id"
+				type="hidden"
+				/>
+		<field
+				name="name"
+				type="text"
+				label="Название подразделения"
+				description="Название подразделения"
+				size="40"
+				class="inputbox"
+				required="true"
+				default=""
+				/>
+		<field name="email" type="email"
+			   label="Адрес руководителя подразделения"
+			   description="Адрес руководителя подразделения"
+			   required="true"
+			   size="30"
+			   class="inputbox"
+			   validate="email" />
+	</fieldset>
+</form>
