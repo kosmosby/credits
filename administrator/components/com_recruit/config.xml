@@ -88,8 +88,8 @@
 		<field
 				name="vendor_management"
 				type="text"
-				label="Руководитель подразделения вендор менеджмента"
-				description="Руководитель подразделения вендор менеджмента"
+				label="Директор департамента по работе с персоналом"
+				description="Директор департамента по работе с персоналом"
 				size="40"
 				class="inputbox"
 				default=""
@@ -98,8 +98,8 @@
 		/>
 
 		<field name="vendor_management_email" type="email"
-			   label="Электронная почта вендор менеджера"
-			   description="Электронная почта вендор менеджера"
+			   label="Электронная почта директора департамента по работе с персоналом"
+			   description="Электронная почта директора департамента по работе с персоналом"
 			   required="true"
 			   size="30"
 			   class="inputbox"

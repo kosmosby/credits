@@ -431,8 +431,8 @@
 		<field
 				name="vendor_management"
 				type="text"
-				label="Руководитель подразделения вендор менеджмента"
-				description="Руководитель подразделения вендор менеджмента"
+				label="Директор департамента по работе с персоналом"
+				description="Директор департамента по работе с персоналом"
 				size="40"
 				class="inputbox"
 				required="true"
