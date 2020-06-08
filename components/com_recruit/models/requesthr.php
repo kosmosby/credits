@@ -458,7 +458,7 @@ class RecruitModelRequesthr extends JModelAdmin
             $str .= "дата открытия: ".$data->start_date."<br/>";
         }
         $str .= "Название: ".$data->name."<br/>";
-        $str .= "Подразделение: ".$data->department."<br/>";
+        $str .= "Подразделение: ".$this->getDepartment($data->department)."<br/>";
         $str .= "Руководитель подразделения: ".$data->department_head."<br/>";
         $str .= "Подчиненные: ".$data->subordinates."<br/>";
         $str .= "Локация (регион): ".$data->location."<br/>";
@@ -643,6 +643,19 @@ class RecruitModelRequesthr extends JModelAdmin
 
         return $row;
     }
+    public function getDepartment($id) {
+
+        $db = JFactory::getDbo();
+        $query = $db->getQuery(true);
+        $query->select(array('name'));
+        $query->from('#__recruit_units');
+        $query->where('id = '.$id);
+
+        $db->setQuery($query);
+        $row = $db->loadResult();
+
+        return $row;
+    }
 
     public function saveAdditionForm($request_id, $additionFormName) {
 
@@ -744,6 +757,9 @@ class RecruitModelRequesthr extends JModelAdmin
 
         $uri333 = $live_url. '&task=requesthr.agreement&id='.$data->id.'&field1=status_chief_accountant&field2=date_chief_accountant&value=3';
         $body3 .= "<br />отклонить заявку: <a href='" . $uri333 . "' target='_blank'>отклонить</a>";
+
+        $uri3333 = $live_url. '&task=requesthr.agreement&id='.$data->id.'&field1=status_chief_accountant&field2=date_chief_accountant&value=4';
+        $body3 .= "<br />ознакомлен: <a href='" . $uri3333 . "' target='_blank'>ознакомлен</a>";
 
 
         $email3 = $params->get('chief_accountant_email');

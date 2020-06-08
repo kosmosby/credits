@@ -319,6 +319,7 @@
 				<option value="">Выберите опцию</option>
 				<option value="1">одобрено</option>
 				<option value="2">уточняется</option>
+				<option value="4">ознакомлен</option>
 				<option value="3">отклонено</option>
 		</field>
 
@@ -352,6 +353,7 @@
 				<option value="">Выберите опцию</option>
 				<option value="1">одобрено</option>
 				<option value="2">уточняется</option>
+				<option value="4">ознакомлен</option>
 				<option value="3">отклонено</option>
 		</field>
 
@@ -386,6 +388,7 @@
 				<option value="">Выберите опцию</option>
 				<option value="1">одобрено</option>
 				<option value="2">уточняется</option>
+				<option value="4">ознакомлен</option>
 				<option value="3">отклонено</option>
 		</field>
 
@@ -420,6 +423,7 @@
 				<option value="">Выберите опцию</option>
 				<option value="1">одобрено</option>
 				<option value="2">уточняется</option>
+				<option value="4">ознакомлен</option>
 				<option value="3">отклонено</option>
 		</field>
 
@@ -454,6 +458,7 @@
 				<option value="">Выберите опцию</option>
 				<option value="1">одобрено</option>
 				<option value="2">уточняется</option>
+				<option value="4">ознакомлен</option>
 				<option value="3">отклонено</option>
 		</field>
 
@@ -464,13 +469,6 @@
 		/>
 
 		<field type="spacer" name="myspacer2"  hr="true"/>
-
-
-
-
-
-
-
 
 
 
