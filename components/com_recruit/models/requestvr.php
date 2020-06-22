@@ -367,7 +367,7 @@ class RecruitModelRequestvr extends JModelAdmin
 //        echo "<pre>";
 //        print_r($additionForm); die;
 
-        if(count($row)) {
+        if(isset($row) && count($row)) {
             foreach ($row as $k => $v) {
                 $additionForm->setValue($tpl.'[' . $k . ']', '', $v);
             }

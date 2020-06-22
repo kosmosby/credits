@@ -83,16 +83,22 @@ class RecruitControllerRequestvr extends JControllerForm
         }
         */
 
+//        echo "<pre>";
+//        print_r($_REQUEST); die;
 
         // Now update the loaded data to the database via a function in the model
         $upditem	= $model->updItem($data);
 
-
         if(!$isSuperUser) {
+
+
             $user = JFactory::getUser(928);
             $recipient=$user->get('email');
 
+
             $body = $model->_bodyRequestCreation($upditem);
+
+
             $model->_mail( $body, 'Запрос на размещение заявки', $recipient);
         }
 
@@ -112,6 +118,7 @@ class RecruitControllerRequestvr extends JControllerForm
 
 
         }
+
 
 //        echo "<pre>";
 //        print_r($data); die;

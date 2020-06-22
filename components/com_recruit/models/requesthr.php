@@ -439,6 +439,9 @@ class RecruitModelRequesthr extends JModelAdmin
 
     public function _bodyRequestCreation($data) {
 
+
+
+
         $str = '';
 
         $str .= "Запрос от ".JFactory::getUser()->name."<br/><br />";
@@ -447,9 +450,9 @@ class RecruitModelRequesthr extends JModelAdmin
             $str .= "тип заявки: " . $this->getTypebyId($data->type_id) . "<br/>";
         }
 
-//        if($data->type_id == 1) {
+        if($data->type_id == 1) {
             $str .= "позиция: " . $this->getTypeEmployebyId($data->typeemployee_id) . "<br/>";
-//        }
+        }
         if($data->employee_id) {
             $str .= "исполнитель: " . $this->getEmployeeName($data->employee_id) . "<br/>";
         }
@@ -458,31 +461,34 @@ class RecruitModelRequesthr extends JModelAdmin
             $str .= "дата открытия: ".$data->start_date."<br/>";
         }
         $str .= "Название: ".$data->name."<br/>";
-        $str .= "Подразделение: ".$this->getDepartment($data->department)."<br/>";
-        $str .= "Руководитель подразделения: ".$data->department_head."<br/>";
-        $str .= "Подчиненные: ".$data->subordinates."<br/>";
-        $str .= "Локация (регион): ".$data->location."<br/>";
-        $str .= "Офис/удаленно: ".$data->office_remote."<br/>";
-        $str .= "Тип вакансии: ".$data->vacancy_type."<br/>";
-        $str .= "Причина открытия вакансии: ".$data->reason_open."<br/>";
-        $str .= "Наличие вакансии в штатном расписании: ".$data->available_staff_list."<br/>";
-        $str .= "Предположительная дата выхода на работу: ".$data->estimate_date."<br/>";
-        $str .= "Количество сотрудников: ".$data->count."<br/>";
-        $str .= "Образование : ".$data->education."<br/>";
-        $str .= "Опыт работы: ".$data->experience."<br/>";
-        $str .= "Профессиональные навыки/компетенции: ".$data->сompetencies."<br/>";
-
-        $str .= "Иностранные языки: ".$data->foreign_languages."<br/>";
-        $str .= "Знание специализированного ПО: ".$data->special_software."<br/>";
-        $str .= "Основные обязанности: ".$data->information."<br/>";
-        $str .= "Особые факторы работы (командировки, переработки, переезд): ".$data->description."<br/>";
-        $str .= "заработная плата на испытательный срок: ".$data->probationary_salary."<br/>";
-        $str .= "заработная плата постоянная: ".$data->salary."<br/>";
-        $str .= "бонусы/проценты: ".$data->bonuses_interest."<br/>";
-        $str .= "приоритетность: ";
-        $str .= (!$data->priority)?"нормальная<br/>":"высокая<br/>";
 
 
+        if($data->type_id == 1) {
+            $str .= "Подразделение: " . $this->getDepartment($data->department) . "<br/>";
+            $str .= "Руководитель подразделения: " . $data->department_head . "<br/>";
+            $str .= "Подчиненные: " . $data->subordinates . "<br/>";
+            $str .= "Локация (регион): " . $data->location . "<br/>";
+            $str .= "Офис/удаленно: " . $data->office_remote . "<br/>";
+            $str .= "Тип вакансии: " . $data->vacancy_type . "<br/>";
+            $str .= "Причина открытия вакансии: " . $data->reason_open . "<br/>";
+            $str .= "Наличие вакансии в штатном расписании: " . $data->available_staff_list . "<br/>";
+            $str .= "Предположительная дата выхода на работу: " . $data->estimate_date . "<br/>";
+            $str .= "Количество сотрудников: " . $data->count . "<br/>";
+            $str .= "Образование : " . $data->education . "<br/>";
+            $str .= "Опыт работы: " . $data->experience . "<br/>";
+            $str .= "Профессиональные навыки/компетенции: " . $data->сompetencies . "<br/>";
+
+            $str .= "Иностранные языки: " . $data->foreign_languages . "<br/>";
+            $str .= "Знание специализированного ПО: " . $data->special_software . "<br/>";
+            $str .= "Основные обязанности: " . $data->information . "<br/>";
+            $str .= "Особые факторы работы (командировки, переработки, переезд): " . $data->description . "<br/>";
+            $str .= "заработная плата на испытательный срок: " . $data->probationary_salary . "<br/>";
+            $str .= "заработная плата постоянная: " . $data->salary . "<br/>";
+            $str .= "бонусы/проценты: " . $data->bonuses_interest . "<br/>";
+        }
+
+            $str .= "приоритетность: ";
+            $str .= (!$data->priority) ? "нормальная<br/>" : "высокая<br/>";
 
 
 //        $str .= "описание задачи: ".$data->description."<br/>";
