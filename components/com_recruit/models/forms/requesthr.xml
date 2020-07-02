@@ -24,7 +24,6 @@
 				query="SELECT id AS value, name AS employee_id  FROM #__recruit_employee"
 				header="Выберите опцию"
 				class="superuser"
-				required="true"
 		/>
 
 
