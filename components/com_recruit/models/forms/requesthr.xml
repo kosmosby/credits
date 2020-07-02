@@ -4,9 +4,6 @@
 	>
 
 
-
-
-
 		<field
 				name="typeemployee_id"
 				type="sql"

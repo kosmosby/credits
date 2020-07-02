@@ -143,9 +143,15 @@ class RecruitControllerRequesthr extends JControllerForm
 
         if(!$isSuperUser) {
             $user = JFactory::getUser();
-            $created_by = JFactory::getUser($data['created_by']);
 
-            if ($user->id != 928 && $user->id != $created_by) {
+//            //echo $data['created_by']; die;
+            $created_by = JFactory::getUser($data['created_by']);
+            //echo $created_by->id; die;
+
+
+//            echo $created_by->id; die;
+
+            if ($user->id != 928 && $user->id != $created_by->id) {
                 $msg = "У вас нет прав на изменение этой заявки";
                 $mainframe->Redirect('index.php?option=com_recruit&view=requests', $msg);
                 return;
@@ -167,7 +173,7 @@ class RecruitControllerRequesthr extends JControllerForm
                 $user = JFactory::getUser();
                 $created_by = JFactory::getUser($data['created_by']);
 
-                if($user->id != 928 && $user->id != $created_by) {
+                if($user->id != 928 && $user->id != $created_by->id) {
                     $msg = "У вас нет прав на изменение этой заявки";
                     $mainframe->Redirect('index.php?option=com_recruit&view=requests',$msg);
                     exit();
