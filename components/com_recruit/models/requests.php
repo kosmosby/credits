@@ -74,8 +74,12 @@ class RecruitModelRequests extends JModelList
 
         $isSuperUser = JFactory::getUser()->authorise('core.admin');
         if(!$isSuperUser) {
+            $employee_id = $this->getEmployeeIdByUserId();
             //$query->where('a.type_id = 1');
-            $query->where('a.id NOT IN (SELECT id FROM #__recruit_requests WHERE archive = 0 AND type_id = 1 AND created_by != '.$user->id.')');
+            $query->where('a.id NOT IN (SELECT id FROM #__recruit_requests WHERE archive = 0 AND type_id = 1 AND created_by != '.$user->id.' )');
+            if($employee_id) {
+                $query->where('a.id NOT IN (SELECT id FROM #__recruit_requests WHERE archive = 0 AND type_id = 1 AND employee_id !=' . $employee_id . ')');
+            }
         }
 
         //$query->order('a.id DESC');
@@ -119,6 +123,24 @@ class RecruitModelRequests extends JModelList
         return $query;
     }
 
+    public function getEmployeeIdByUserId() {
+        $user = JFactory::getUser();
+
+
+        $db = JFactory::getDbo();
+
+        $query = $db->getQuery(true);
+        $query->select('id');
+        $query->from('#__recruit_employee');
+        $query->where('user_id = '.$user->id);
+        $db->setQuery($query);
+        $row = $db->loadResult();
+
+        //echo $query->__toString(); die;
+
+
+        return $row;
+    }
 
 //    public function getAdditionPaymentInfo($rows) {
 //
