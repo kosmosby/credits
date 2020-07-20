@@ -48,6 +48,7 @@ class RecruitModelCals extends JModelList
     protected function getListQuery()
     {
 
+        $user = JFactory::getUser();
         // Initialize variables.
         $db    = JFactory::getDbo();
         $query = $db->getQuery(true);
@@ -82,6 +83,20 @@ class RecruitModelCals extends JModelList
         }
 
         $query->where('a.archive = 0 AND estimate_date != 0');
+
+        $isSuperUser = JFactory::getUser()->authorise('core.admin');
+        if(!$isSuperUser) {
+            JModelLegacy::addIncludePath(JPATH_ROOT.'/components/com_recruit/models', 'RecruitModel');
+            $requests_model = JModelLegacy::getInstance('requests', 'RecruitModel', array('ignore_request' => true));
+
+            $employee_id = $requests_model->getEmployeeIdByUserId();
+            //$query->where('a.type_id = 1');
+            $query->where('a.id NOT IN (SELECT id FROM #__recruit_requests WHERE archive = 0 AND type_id = 1 AND created_by != '.$user->id.' )');
+            if($employee_id) {
+                $query->where('a.id NOT IN (SELECT id FROM #__recruit_requests WHERE archive = 0 AND type_id = 1 AND employee_id !=' . $employee_id . ')');
+            }
+        }
+
 
 //        $isSuperUser = JFactory::getUser()->authorise('core.admin');
 //        $user_id = JFactory::getUser()->id;
