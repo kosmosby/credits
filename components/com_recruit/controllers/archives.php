@@ -26,6 +26,9 @@ class RecruitControllerArchives extends JControllerAdmin
 
         $cids = implode(',', $_REQUEST['cid']);
 
+
+
+
         $db = JFactory::getDbo();
         $query = $db->getQuery(true);
 
@@ -53,6 +56,8 @@ class RecruitControllerArchives extends JControllerAdmin
 
         $mainframe->Redirect('index.php?option=com_recruit&view=archives',$msg);
     }
+
+
 
 
 

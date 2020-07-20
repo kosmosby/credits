@@ -23,6 +23,8 @@ class RecruitControllerRequesthr extends JControllerForm
 
         $cids = implode(',', $_REQUEST['cid']);
 
+        //$this->ifAllowArchive($cids);
+
         $db = JFactory::getDbo();
         $query = $db->getQuery(true);
 
@@ -61,6 +63,7 @@ class RecruitControllerRequesthr extends JControllerForm
 
         $mainframe->Redirect('index.php?option=com_recruit&view=requests',$msg);
     }
+
 
 
     public function submit()

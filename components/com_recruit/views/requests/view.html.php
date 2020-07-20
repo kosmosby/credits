@@ -57,6 +57,14 @@ list.admin.request";
         $this->items = $levels_model->LevelsById($this->items);
 
         $user = JFactory::getUser();
+
+        //archive permissions
+        $this->user_id = $user->id;
+        $isSuperUser = JFactory::getUser()->authorise('core.admin');
+        $this->isSuperUser = $isSuperUser;
+        //
+
+
         $status = $user->guest;
         $mainframe = JFactory::getApplication();
         if($status == 1){
@@ -90,8 +98,8 @@ list.admin.request";
 
         $isSuperUser = JFactory::getUser()->authorise('core.admin');
 
+        JToolbarHelper::archiveList('requesthr.archive', 'В архив');
         if($isSuperUser) {
-            JToolbarHelper::archiveList('requesthr.archive', 'В архив');
             JToolBarHelper::deleteList('', 'request.delete', 'Удалить');
         }
 

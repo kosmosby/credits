@@ -168,7 +168,12 @@ $listDirn      = $this->escape($this->filter_order_Dir);
                 <tr >
                     <td style="border-left: 1px solid #ddd; <?php echo ($highPriority)?'background-color: mistyrose;':'';?>" ><?php echo $this->pagination->getRowOffset($i); ?></td>
                     <td <?php echo ($highPriority)?'style="background-color: mistyrose;"':'';?>>
-                        <?php echo JHtml::_('grid.id', $i, $row->id); ?>
+                        <?php
+                            if($this->isSuperUser || ($this->user_id == $row->created_by)) {
+                            //echo $row->created_by; die;
+                            echo JHtml::_('grid.id', $i, $row->id);
+                            }
+                        ?>
                     </td>
                     <td <?php echo ($highPriority)?'style="background-color: mistyrose;"':'';?>>
                         <a href="<?php echo $link; ?>" title="Редактировать">

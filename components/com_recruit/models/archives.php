@@ -60,8 +60,9 @@ class RecruitModelArchives extends JModelList
             )
         );
 
-        $query->from('#__recruit_employee as b, #__recruit_types as c, #__recruit_requests AS a LEFT JOIN #__recruit_typeemployee as d ON a.typeemployee_id = d.id WHERE a.employee_id = b.id AND a.type_id = c.id AND a.archive = 1');
+        $query->from('#__recruit_types as c, #__recruit_requests AS a LEFT JOIN #__recruit_typeemployee as d ON a.typeemployee_id = d.id LEFT JOIN #__recruit_employee as b ON a.employee_id = b.id WHERE a.type_id = c.id AND a.archive = 1');
 
+        $query->group('a.id');
         $query->order('a.id DESC');
         // Filter: like / search
         $search = $this->getState('filter.search');
@@ -71,6 +72,8 @@ class RecruitModelArchives extends JModelList
             $like = $db->quote('%' . $search . '%');
             $query->where('b.name LIKE ' . $like);
         }
+
+        //echo $query->__toString(); die;
 
         // Filter by published state
 //        $published = $this->getState('filter.published');
