@@ -48,6 +48,9 @@ class RecruitModelRequests extends JModelList
     protected function getListQuery()
     {
 
+
+        $user = JFactory::getUser();
+
         // Initialize variables.
         $db    = JFactory::getDbo();
         $query = $db->getQuery(true);
@@ -68,6 +71,12 @@ class RecruitModelRequests extends JModelList
                          
         $query->where('a.type_id = c.id');
         $query->where('a.archive = 0');
+
+        $isSuperUser = JFactory::getUser()->authorise('core.admin');
+        if(!$isSuperUser) {
+            //$query->where('a.type_id = 1');
+            $query->where('a.id NOT IN (SELECT id FROM #__recruit_requests WHERE archive = 0 AND type_id = 1 AND created_by != '.$user->id.')');
+        }
 
         //$query->order('a.id DESC');
         // Filter: like / search

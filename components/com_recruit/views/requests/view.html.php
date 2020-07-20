@@ -56,6 +56,8 @@ list.admin.request";
 
         $this->items = $levels_model->LevelsById($this->items);
 
+
+
         $user = JFactory::getUser();
 
         //archive permissions
